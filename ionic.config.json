@@ -1,0 +1,7 @@
+{
+  "name": "vitale-provider",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
