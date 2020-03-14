@@ -1,0 +1,30 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>history</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <ion-row>
+            <ion-col>Title</ion-col>
+            <ion-col>Status</ion-col>
+            <ion-col>Date</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of historyData">
+            <ion-col routerLink="/request-details/{{item.id}}">{{item.name}}</ion-col>
+
+            <ion-col *ngIf="item.status ==2">
+                <ion-button size="small" color="warning">Waiting</ion-button>
+            </ion-col>
+            <ion-col *ngIf="item.status ==3">
+                <ion-button size="small" color="success">In progress</ion-button>
+            </ion-col>
+            <ion-col *ngIf="item.status ==6">
+                <ion-button size="small" color="secondary">Finished</ion-button>
+            </ion-col>
+
+            <ion-col routerLink="/request-details/{{item.id}}">{{item.start_time| date: 'y-MM-d'}}</ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

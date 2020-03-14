@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>medical board Info</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-item>
+        <ion-label position="floating">Registration number</ion-label>
+        <ion-input type="text" min="6" max="20" [(ngModel)]="MedicalBoard.medical_registration_number"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label color="primary">Registration Date</ion-label>
+        <ion-datetime min="1989-06-04" max="2020-12-01" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"
+                      placeholder="Select Date"
+                      [(ngModel)]="MedicalBoard.registration_date"></ion-datetime>
+
+    </ion-item>
+    <ion-item>
+        <ion-label color="primary">Graduation date</ion-label>
+        <ion-datetime min="1989-06-04" max="2020-12-01" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"
+                      placeholder="Select Date"
+                      [(ngModel)]="MedicalBoard.graduation_date"></ion-datetime>
+
+    </ion-item>
+
+    <ion-item>
+        <ion-label color="primary">Specialties</ion-label>
+        <ionic-selectable
+                [(ngModel)]="MedicalBoard.medical_field_id"
+                [items]="specialtiesList"
+                itemValueField="id"
+                itemTextField="name"
+                [canSearch]="true"
+                (onChange)="portChange($event)">
+        </ionic-selectable>
+    </ion-item>
+
+
+    <ion-item>
+        <ion-label position="floating">Years of Experience</ion-label>
+        <ion-input type="number" [(ngModel)]="MedicalBoard.years_of_experience"></ion-input>
+    </ion-item>
+    <br>
+
+    <ion-label color="secondary">Other Information</ion-label>
+    <ion-item>
+        <ion-label color="tertiary" position="floating">Address</ion-label>
+        <ion-input type="text" [(ngModel)]="MedicalBoard.address"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label color="tertiary">Date of birth</ion-label>
+        <ion-datetime min="1960-06-04" max="2005-12-01" displayFormat="YYYY-MM-DD" pickerFormat="YYYY MM DD"
+                      placeholder="Select Date"
+                      [(ngModel)]="MedicalBoard.birth_of_date"></ion-datetime>
+    </ion-item>
+
+    <ion-button expand="block"  (click)="medicalBsaveData()">SAVE</ion-button>
+</ion-content>

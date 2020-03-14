@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Register - Users</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <br>
+    <ion-list class="ion-padding-horizontal ion-text-center">
+        <div>
+            <img src="assets/images/vitle.png" width="25%">
+        </div>
+        <h2 color="light" ion-text>
+
+        </h2>
+    </ion-list>
+
+    <ion-card>
+        <ion-card-content>
+            <ion-item>
+                <ion-label position="floating">Name</ion-label>
+                <ion-input type="text" min="6" max="20" [(ngModel)]="registerData.name"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Phone</ion-label>
+                <ion-input type="text" min="6" max="20" [(ngModel)]="registerData.phone"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input type="password" min="6" max="20" [(ngModel)]="registerData.password"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label position="floating">Re-Password</ion-label>
+                <ion-input type="password" min="6" max="20" [(ngModel)]="registerData.password_check"></ion-input>
+            </ion-item>
+
+            <ion-button expand="block" (click)="userRegister()">تسجيل الدخول</ion-button>
+
+        </ion-card-content>
+
+
+        <p style="text-align: center;margin: 15%;">do yo have a account?<a href="login"><b>Login Now</b></a></p>
+
+    </ion-card>
+</ion-content>

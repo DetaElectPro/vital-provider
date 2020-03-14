@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Home
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-card>
+        <ion-card-content>
+            <ion-grid>
+                <ion-row>
+                    <ion-col>
+                        <div routerLink="/requests">
+                            <ion-badge color="primary">
+                                <ion-icon name="newspaper-sharp"></ion-icon>
+                            </ion-badge>
+                            <p>Requests</p>
+                        </div>
+                    </ion-col>
+                    <ion-col>
+                        <div routerLink="/history">
+                            <ion-badge color="primary">
+                                <ion-icon name="book-sharp"></ion-icon>
+                            </ion-badge>
+                            <p>History</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <div routerLink="/ambulance">
+                            <ion-badge color="primary">
+                                <ion-icon src="assets/icon/ambulance.svg"></ion-icon>
+                            </ion-badge>
+                            <p>Ambulance</p>
+                        </div>
+                    </ion-col>
+
+                    <ion-col>
+                        <div routerLink="/tabs/wallet">
+                            <ion-badge color="primary">
+                                <ion-icon name="wallet"></ion-icon>
+                            </ion-badge>
+                            <p>Wallet</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+
+                <ion-row>
+                    <ion-col>
+                        <div routerLink="/tabs/wallet">
+                            <ion-badge color="primary">
+                                <ion-icon name="pulse"></ion-icon>
+                            </ion-badge>
+                            <p>Icu Serves</p>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </ion-card-content>
+    </ion-card>
+
+    <div *ngIf="userInfo?.status == 2">
+        <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
+        <ion-button expand="block" color="danger" (click)="openBrow()">upload cv</ion-button>
+    </div>
+    <div *ngIf="userInfo?.status == 1">
+        <p class="ion-text-center">Please complete the profile</p>
+        <ion-button expand="block" color="danger">Please complete the Medical profile</ion-button>
+    </div>
+
+    <!--  <app-explore-container name="Tab 1 page"></app-explore-container>-->
+</ion-content>
