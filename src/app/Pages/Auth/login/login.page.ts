@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../Service/auth.service';
 import {Router} from '@angular/router';
-import {Storage} from '@ionic/storage';
+// import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-login',
@@ -15,7 +15,7 @@ export class LoginPage implements OnInit {
     constructor(
         private authServe: AuthService,
         private router: Router,
-        private storage: Storage
+        // private storage: Storage
     ) {
     }
 

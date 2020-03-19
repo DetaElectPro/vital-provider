@@ -22,7 +22,7 @@ export class RegisterPage implements OnInit {
         this.authServe.registerServes(this.registerData)
             .then(data => {
                 this.result = data;
-                console.log(data);
+                // console.log(data);
                 if (this.registerData.error) {
                     alert('error data');
                 } else {

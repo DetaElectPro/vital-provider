@@ -8,8 +8,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class WalletService {
 
     // Url = 'http://localhost:8000/api/';
-    Url = 'http://192.168.2.3:8000/api/';
-    private myHeaders: any;
+    Url = 'http://192.168.2.4:8000/api/';
+    myHeaders: any;
     token = `Bearer ${localStorage.getItem('token')}`;
 
     constructor(

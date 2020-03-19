@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {RequestsService} from '../../Service/requests.service';
-import {Requests} from '../../Models/requests';
+import {RequestsService} from '../../../Service/requests.service';
+import {Requests} from '../../../Models/requests';
 import {IonInfiniteScroll} from '@ionic/angular';
 
 @Component({

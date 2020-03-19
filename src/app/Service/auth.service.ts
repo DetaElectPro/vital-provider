@@ -4,7 +4,7 @@ import {Platform} from '@ionic/angular';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 
-const TOKEN_KEY = 'auth-token';
+const TOKEN_KEY = 'token';
 
 @Injectable({
     providedIn: 'root'
@@ -15,10 +15,10 @@ export class AuthService {
     user: any;
     // url = 'https://medical.detatech.xyz/api/';
     // url = 'http://localhost:8000/api/';
-    url = 'http://192.168.2.3:8000//api/';
+    url = 'http://192.168.2.4:8000/api/';
 
 
-    authenticationState = new BehaviorSubject(null);
+    authenticationState = new BehaviorSubject(false);
     private myHeaders: any;
     token2 = `Bearer ${localStorage.getItem('token')}`;
 
@@ -41,6 +41,7 @@ export class AuthService {
         return new Promise((resolve, reject) => {
             this.storage.get(TOKEN_KEY)
                 .then(res => {
+                    console.log('res: ', res);
                     if (res) {
                         this.authenticationState.next(true);
                     } else {
@@ -86,6 +87,7 @@ export class AuthService {
                     this.token = res;
                     this.user = res;
                     this.token = this.token.token;
+                    console.log('token', this.token);
                     this.storage.set(TOKEN_KEY, this.token).then(() => {
                         this.authenticationState.next(true);
                     });

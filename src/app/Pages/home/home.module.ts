@@ -5,7 +5,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {HomePage} from './home.page';
 import {ExploreContainerComponentModule} from '../../explore-container/explore-container.module';
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx'; //add
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
     imports: [

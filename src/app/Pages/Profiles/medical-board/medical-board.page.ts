@@ -4,6 +4,7 @@ import {LoadingController} from '@ionic/angular';
 import {AuthService} from '../../../Service/auth.service';
 import {IonicSelectableComponent} from 'ionic-selectable';
 import {formatDate} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-medical-board',
@@ -26,9 +27,11 @@ export class MedicalBoardPage implements OnInit {
     private dataResult: any;
     // specialtiesList: SpecialiesOptaion[];
     specialtiesList: any;
+    private errorMessage: any;
 
 
     constructor(
+        private router: Router,
         private loadingController: LoadingController,
         private medicalServ: AuthService
     ) {
@@ -48,9 +51,17 @@ export class MedicalBoardPage implements OnInit {
         this.medicalServ.medicalBoardService(this.MedicalBoard)
             .then(data => {
                 console.log('data: ', this.dataResult = data);
+                if (this.dataResult.success) {
+                    this.router.navigate(['/']);
+                } else {
+                    alert('error try again');
+                }
             })
             .catch(err => {
                 console.log(err);
+                this.errorMessage = err;
+                this.errorMessage = this.errorMessage.error;
+                alert(this.errorMessage.message);
             });
     }
 

@@ -9,7 +9,7 @@ const routes: Routes = [
     },
     {
         path: 'requests',
-        loadChildren: () => import('./Pages/requests/requests.module').then(m => m.RequestsPageModule)
+        loadChildren: () => import('./Pages/Request/requests/requests.module').then(m => m.RequestsPageModule)
     },
     {
         path: 'history',
@@ -17,7 +17,7 @@ const routes: Routes = [
     },
     {
         path: 'request-details/:id',
-        loadChildren: () => import('./Pages/request-details/request-details.module').then(m => m.RequestDetailsPageModule)
+        loadChildren: () => import('./Pages/Request/request-details/request-details.module').then(m => m.RequestDetailsPageModule)
     },
     {
         path: 'login',

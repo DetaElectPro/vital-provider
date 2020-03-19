@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {LoadingController, AlertController} from '@ionic/angular';
-import {RequestsService} from '../../Service/requests.service';
-import {Requests} from '../../Models/requests';
+import {RequestsService} from '../../../Service/requests.service';
+import {Requests} from '../../../Models/requests';
 
 @Component({
     selector: 'app-request-details',
