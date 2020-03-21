@@ -51,17 +51,23 @@ const routes: Routes = [
         path: 'emergency-history',
         loadChildren: () => import('./Pages/emergency/history/history.module').then(m => m.HistoryPageModule)
     },
+    {
+        path: 'new-request',
+        loadChildren: () => import('./Pages/Request/new-request/new-request.module').then(m => m.NewRequestPageModule)
+    },
+    {
+        path: 'map',
+        loadChildren: () => import('./Pages/map/map.module').then(m => m.MapPageModule)
+    },
   {
-    path: 'new-request',
-    loadChildren: () => import('./Pages/Request/new-request/new-request.module').then( m => m.NewRequestPageModule)
+    path: 'doctore',
+    loadChildren: () => import('./doctore/doctore.module').then( m => m.DoctorePageModule)
   },
   {
-    path: 'map',
-    loadChildren: () => import('./Pages/map/map.module').then( m => m.MapPageModule)
-  },  {
-    path: 'doctor-view',
-    loadChildren: () => import('./Pages/request/doctor-view/doctor-view.module').then( m => m.DoctorViewPageModule)
+    path: 'account',
+    loadChildren: () => import('./my-account/my-account.module').then( m => m.MyAccountPageModule)
   }
+
 
 
 ];

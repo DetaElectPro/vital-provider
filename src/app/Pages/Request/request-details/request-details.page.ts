@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AlertController, LoadingController, ModalController} from '@ionic/angular';
 import {RequestsService} from '../../../Service/requests.service';
 import {Requests} from '../../../Models/requests';
-import {DoctorViewPage} from "../doctor-view/doctor-view.page";
+import {DoctorePage} from '../../../doctore/doctore.page';
 
 @Component({
     selector: 'app-request-details',
@@ -37,19 +37,7 @@ export class RequestDetailsPage implements OnInit {
         status: 0,
         address: ''
     };
-    // request: Requests = {
-    //     address: '',
-    //     created_at: '',
-    //     end_time: '',
-    //     number_of_hour: 0,
-    //     id: 0,
-    //     price: 0,
-    //     specialties: {id: 0, medical: {id: 0, name: ''}, name: ''},
-    //     start_time: '',
-    //     status: 0,
-    //     doctor: {active: 0, id: 0, image: '', name: '', phone: '', status: 0},
-    //     name
-    // };
+
     private acceptRes: any;
     private dataReturned: any;
 
@@ -183,7 +171,7 @@ export class RequestDetailsPage implements OnInit {
 
     async openProfile() {
         const modal = await this.modalController.create({
-            component: DoctorViewPage,
+            component: DoctorePage,
             componentProps: {
                 doctor: this.request.accept_request.doctor,
                 // paramTitle: 'Test Title'

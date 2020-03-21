@@ -48,16 +48,16 @@
     <ion-card>
         <div *ngIf="request.status == 2">
 
-        <ion-card-title>Info</ion-card-title>
-        <ion-card-subtitle>The request was created by:</ion-card-subtitle>
-        <ion-card-content>
-            <h1>Name: {{request.accept_request.doctor.name}}</h1>
-            <h1>Phone: {{request.accept_request.doctor.phone}}</h1>
-            <ion-button (click)="openProfile()" expand="block">
-                <ion-icon name="person-circle-outline"></ion-icon>
-                full CV
-            </ion-button>
-        </ion-card-content>
+            <ion-card-title>Info</ion-card-title>
+            <ion-card-subtitle>The request was created by:</ion-card-subtitle>
+            <ion-card-content>
+                <h1>Name: {{request.accept_request.doctor.name}}</h1>
+                <h1>Phone: {{request.accept_request.doctor.phone}}</h1>
+                <ion-button (click)="openProfile()" expand="block">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                    full CV
+                </ion-button>
+            </ion-card-content>
         </div>
         <div *ngIf="request.status == 1">
             no update for now
@@ -65,18 +65,18 @@
     </ion-card>
 
     <ion-footer class="ion-text-center ion-align-items-center">
-<!--        <div *ngIf="request.status == 1">-->
-<!--            <ion-button (click)="requestConfirm()" expand="block">-->
-<!--                <ion-icon name="thumbs-up"></ion-icon>-->
-<!--                <div>Accept</div>-->
-<!--            </ion-button>-->
-<!--        </div>-->
         <div *ngIf="request.status == 2">
-            <ion-button (click)="acceptRequest()" color="danger" expand="block">
+            <ion-button (click)="requestConfirm()" expand="block">
                 <ion-icon name="thumbs-up"></ion-icon>
-                <div>Cancel</div>
+                <div>Accept Doctor</div>
             </ion-button>
         </div>
+
+
+        <ion-button (click)="requestCancel()" color="danger" expand="block">
+            <ion-icon name="thumbs-down"></ion-icon>
+            <div>Cancel Request</div>
+        </ion-button>
 
     </ion-footer>
 
