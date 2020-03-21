@@ -9,7 +9,7 @@ import {Storage} from '@ionic/storage';
 export class RequestsService {
     // Url = 'https://medical.detatech.xyz/api/';
     // Url = 'http://localhost:8000/api/';
-    Url = 'http://192.168.2.4:8000/api/';
+    Url = 'http://192.168.2.7:8000/api/';
     private myHeaders: any;
     token = `Bearer ${localStorage.getItem('token')}`;
 
@@ -50,6 +50,13 @@ export class RequestsService {
         return this.http.get(`${this.Url}request_specialists/${id}`, this.myHeaders);
     }
 
+    /**
+     * Return Create Requests as observable
+     */
+    public createRequest(data): Observable<any> {
+        return this.http.post(`${this.Url}request_specialists`, data, this.myHeaders);
+    }
+
 
     /**
      * Search request by title
@@ -63,7 +70,7 @@ export class RequestsService {
      * Show my History request
      */
     public requestSpecialistsHistory(): Observable<any> {
-        return this.http.get(`${this.Url}request_specialists_doctor_history`, this.myHeaders);
+        return this.http.get(`${this.Url}request_specialists_admin_history`, this.myHeaders);
     }
 
     public userAcceptRequestSpecialists(id) {

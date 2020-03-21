@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
-
-
-import { RequestDetailsPage } from './request-details.page';
+import { NewRequestPage } from './new-request.page';
+import {IonicSelectableModule} from 'ionic-selectable';
 import {RouterModule} from '@angular/router';
 import {ExploreContainerComponentModule} from '../../../explore-container/explore-container.module';
 
@@ -14,9 +13,12 @@ import {ExploreContainerComponentModule} from '../../../explore-container/explor
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild([{path: '', component: RequestDetailsPage}]),
+    IonicSelectableModule,
+    ReactiveFormsModule,
+    RouterModule.forChild([{path: '', component: NewRequestPage}]),
     ExploreContainerComponentModule
+
   ],
-  declarations: [RequestDetailsPage]
+  declarations: [NewRequestPage]
 })
-export class RequestDetailsPageModule {}
+export class NewRequestPageModule {}

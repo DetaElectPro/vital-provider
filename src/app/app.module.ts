@@ -11,6 +11,8 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
 import {IonicSelectableModule} from 'ionic-selectable';
+import {MapPageModule} from './Pages/map/map.module';
+import {DoctorViewPageModule} from './Pages/Request/doctor-view/doctor-view.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +22,8 @@ import {IonicSelectableModule} from 'ionic-selectable';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
+    MapPageModule,
+    DoctorViewPageModule,
     IonicSelectableModule],
   providers: [
     StatusBar,
@@ -29,5 +33,6 @@ import {IonicSelectableModule} from 'ionic-selectable';
   ],
   bootstrap: [AppComponent]
 })
+
 export class AppModule {
 }

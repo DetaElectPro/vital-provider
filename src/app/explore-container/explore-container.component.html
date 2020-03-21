@@ -1,4 +1,14 @@
-<div id="container">
-  <strong>{{ name }}</strong>
-  <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-</div>
+<!-- Scrollable Segment -->
+<ion-segment color="secondary" scrollable value="{{name}}" (ionChange)="segmentChanged($event)" value="{{name}}">
+  <ion-segment-button value="new">
+    <ion-icon name="add-circle-outline"></ion-icon>
+    <ion-label>new</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="requests">
+    <ion-icon name="newspaper-sharp"></ion-icon>
+    <ion-label>requests</ion-label>
+  </ion-segment-button>
+<!--  <ion-segment-button value="details">-->
+<!--    <ion-icon name="pin"></ion-icon>-->
+<!--  </ion-segment-button>-->
+</ion-segment>

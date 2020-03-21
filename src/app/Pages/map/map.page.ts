@@ -1,37 +1,44 @@
 import {Component, OnInit} from '@angular/core';
+import {ModalController} from '@ionic/angular';
 import {Map, tileLayer, marker} from 'leaflet';
 import 'leaflet/dist/images/marker-shadow.png';
 import 'leaflet/dist/images/marker-icon-2x.png';
-import {RequestsService} from '../../Service/requests.service';
 
 @Component({
-    selector: 'app-ambulance',
-    templateUrl: './ambulance.page.html',
-    styleUrls: ['./ambulance.page.scss'],
+    selector: 'app-map',
+    templateUrl: './map.page.html',
+    styleUrls: ['./map.page.scss'],
 })
-export class AmbulancePage implements OnInit {
+export class MapPage implements OnInit {
 
     map: Map;
     myLatLng: any;
     newMarker: any;
-    locData = {name: '', address: '', lat: 0.0, lng: 0.0};
-    private data: any;
-    private Error: any;
-
-    constructor(private requesServ: RequestsService) {
+    locData = {address: '', lat: 0.0, lng: 0.0};
+    constructor(
+        private modalController: ModalController,
+        // private navParams: NavParams
+    ) {
     }
 
     ngOnInit() {
+        // console.table(this.navParams);
+        // this.modelId = this.navParams.data.paramID;
+        // this.modalTitle = this.navParams.data.paramTitle;
     }
 
-    ionViewDidEnter() {
-        this.leafletMap();
+    async closeModal() {
+        await this.modalController.dismiss(this.locData);
     }
 
-    leafletMap() {
+    async ionViewDidEnter() {
+        await this.leafletMap();
+    }
+
+     leafletMap() {
         // In setView add latLng and zoom
         this.map = new Map('mapId').setView([15.59, 32.54], 10);
-        tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+        tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'DetaTech',
         }).addTo(this.map);
         this.newMarker = marker([15.59, 32.54], {
@@ -56,15 +63,4 @@ export class AmbulancePage implements OnInit {
         this.map.remove();
     }
 
-    sendRequest() {
-        this.requesServ.ambulanceRequest(this.locData)
-            .subscribe(response => {
-                    console.log('res: ', this.data = response);
-                }
-                , error => {
-                    console.log('error: ', this.Error = error);
-                }
-            );
-        console.log(this.locData);
-    }
 }

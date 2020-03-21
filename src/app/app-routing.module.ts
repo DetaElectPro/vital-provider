@@ -7,13 +7,17 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./Pages/tabs/tabs.module').then(m => m.TabsPageModule), canActivate: [AuthGuard]
     },
+    // {
+    //     path: 'requests',
+    //     loadChildren: () => import('./Pages/request/request-tabs/request-tabs.module').then(m => m.RequestTabsPageModule)
+    // },
     {
         path: 'requests',
-        loadChildren: () => import('./Pages/Request/requests/requests.module').then(m => m.RequestsPageModule)
+        loadChildren: () => import('./Pages/request/requests/requests.module').then(m => m.RequestsPageModule)
     },
     {
         path: 'history',
-        loadChildren: () => import('./Pages/history/history.module').then(m => m.HistoryPageModule)
+        loadChildren: () => import('./Pages/Request/history/history.module').then(m => m.HistoryPageModule)
     },
     {
         path: 'request-details/:id',
@@ -46,7 +50,20 @@ const routes: Routes = [
     {
         path: 'emergency-history',
         loadChildren: () => import('./Pages/emergency/history/history.module').then(m => m.HistoryPageModule)
-    }
+    },
+  {
+    path: 'new-request',
+    loadChildren: () => import('./Pages/Request/new-request/new-request.module').then( m => m.NewRequestPageModule)
+  },
+  {
+    path: 'map',
+    loadChildren: () => import('./Pages/map/map.module').then( m => m.MapPageModule)
+  },  {
+    path: 'doctor-view',
+    loadChildren: () => import('./Pages/request/doctor-view/doctor-view.module').then( m => m.DoctorViewPageModule)
+  }
+
+
 ];
 
 @NgModule({

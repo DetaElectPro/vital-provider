@@ -5,42 +5,74 @@
 </ion-header>
 
 <ion-content>
+    <app-explore-container name="details"></app-explore-container>
     <ion-card>
         <ion-card-header>
-            <ion-card-title>Hospital: {{request.name}}</ion-card-title>
+            <!--            <ion-card-title>Hospital: {{request.name}}</ion-card-title>-->
+            <ion-grid>
+                <ion-row>
+                    <ion-col>Hospital</ion-col>
+                    <ion-col>Status</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col>
+                        <ion-card-title>{{request.name}}</ion-card-title>
+                    </ion-col>
+                    <ion-col *ngIf="request.status ==1">
+                        <ion-button color="tertiary" size="small">new</ion-button>
+                    </ion-col>
+                    <ion-col *ngIf="request.status ==2">
+                        <ion-button color="warning" size="small">Waiting</ion-button>
+                    </ion-col>
+                    <ion-col *ngIf="request.status ==3">
+                        <ion-button color="success" size="small">In progress</ion-button>
+                    </ion-col>
+                    <ion-col *ngIf="request.status ==6">
+                        <ion-button color="secondary" size="small">Finished</ion-button>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
         </ion-card-header>
         <ion-card-content>
             <ion-avatar slot="start">
                 <img src="assets/images/2.jpg">
             </ion-avatar>
             <p>order #: {{request.id}}</p>
-            <h2>We Need: {{request.specialties.medical.name}}</h2>
+            <h2>you Need: {{request.specialties.medical.name}}</h2>
             <h3>Specialized in: {{request.specialties.name}}</h3>
-            <p>Address: {{request.address}}</p>
             <p>start at: {{request.start_time}}</p>
-            <p>end at: {{request.end_time}}</p>
             <p>work hours: {{request.number_of_hour}}</p>
         </ion-card-content>
     </ion-card>
 
     <ion-card>
+        <div *ngIf="request.status == 2">
+
         <ion-card-title>Info</ion-card-title>
         <ion-card-subtitle>The request was created by:</ion-card-subtitle>
         <ion-card-content>
-            <h1>Name: {{request.user.name}}</h1>
-            <h1>Phone: {{request.user.phone}}</h1>
+            <h1>Name: {{request.accept_request.doctor.name}}</h1>
+            <h1>Phone: {{request.accept_request.doctor.phone}}</h1>
+            <ion-button (click)="openProfile()" expand="block">
+                <ion-icon name="person-circle-outline"></ion-icon>
+                full CV
+            </ion-button>
         </ion-card-content>
+        </div>
+        <div *ngIf="request.status == 1">
+            no update for now
+        </div>
     </ion-card>
 
     <ion-footer class="ion-text-center ion-align-items-center">
-        <div *ngIf="request.status == 1">
-            <ion-button expand="block" (click)="requestConfirm()">
-                <ion-icon name="thumbs-up"></ion-icon>
-                <div>Accept</div>
-            </ion-button>
-        </div>
+<!--        <div *ngIf="request.status == 1">-->
+<!--            <ion-button (click)="requestConfirm()" expand="block">-->
+<!--                <ion-icon name="thumbs-up"></ion-icon>-->
+<!--                <div>Accept</div>-->
+<!--            </ion-button>-->
+<!--        </div>-->
         <div *ngIf="request.status == 2">
-            <ion-button color="danger" expand="block" (click)="acceptRequest()">
+            <ion-button (click)="acceptRequest()" color="danger" expand="block">
                 <ion-icon name="thumbs-up"></ion-icon>
                 <div>Cancel</div>
             </ion-button>

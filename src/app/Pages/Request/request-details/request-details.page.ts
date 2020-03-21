@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {LoadingController, AlertController} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController} from '@ionic/angular';
 import {RequestsService} from '../../../Service/requests.service';
 import {Requests} from '../../../Models/requests';
+import {DoctorViewPage} from "../doctor-view/doctor-view.page";
 
 @Component({
     selector: 'app-request-details',
@@ -16,25 +17,48 @@ export class RequestDetailsPage implements OnInit {
     result: any;
     requestId: number;
     request: Requests = {
-        address: '',
+        accept_request: {
+            doctor: {active: 0, id: 0, image: '', name: '', phone: '', status: 0},
+            doctor_id: 0,
+            id: 0,
+            note: '',
+            rating: 0,
+            recommendation: '',
+            request_id: 0,
+        },
         created_at: '',
         end_time: '',
-        number_of_hour: '',
         id: 0,
+        name: '',
+        number_of_hour: 0,
         price: 0,
         specialties: {id: 0, medical: {id: 0, name: ''}, name: ''},
         start_time: '',
         status: 0,
-        user: {active: 0, email: null, id: 0, image: '', name: '', phone: '', status: 0},
-        name
+        address: ''
     };
+    // request: Requests = {
+    //     address: '',
+    //     created_at: '',
+    //     end_time: '',
+    //     number_of_hour: 0,
+    //     id: 0,
+    //     price: 0,
+    //     specialties: {id: 0, medical: {id: 0, name: ''}, name: ''},
+    //     start_time: '',
+    //     status: 0,
+    //     doctor: {active: 0, id: 0, image: '', name: '', phone: '', status: 0},
+    //     name
+    // };
     private acceptRes: any;
+    private dataReturned: any;
 
     constructor(
         private activeRoute: ActivatedRoute,
         private presentAlertConfirm: AlertController,
         private loadingController: LoadingController,
         public router: Router,
+        private modalController: ModalController,
         public route: ActivatedRoute,
         private requestServe: RequestsService
     ) {
@@ -58,7 +82,7 @@ export class RequestDetailsPage implements OnInit {
             await this.requestServe.getRequestById(this.requestId)
                 .subscribe(res => {
                     this.result = res;
-                    this.request = this.result.data;
+                    console.log(this.request = this.result.data);
                     loading.dismiss();
                 }, err => {
                     console.log(err);
@@ -157,29 +181,22 @@ export class RequestDetailsPage implements OnInit {
     }
 
 
-    // ionViewDidEnter() {
-    //     this.map = new Map('mapId3').setView([15.35663, 32.1109], 16);
-    //
-    //     tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    //         attribution: 'edupala.com'
-    //     }).addTo(this.map);
-    //
-    //     // fetch('./assets/data.json').then(res => res.json())
-    //     //     .then(json => {
-    //     //         this.propertyList = json.properties;
-    //     this.leafletMap();
-    //     // });
-    // }
-    //
-    // leafletMap() {
-    //     for (const property of this.propertyList) {
-    //         marker([property.lat, property.long]).addTo(this.map)
-    //             .bindPopup(property.city)
-    //             .openPopup();
-    //     }
-    // }
-    //
-    // ionViewWillLeave() {
-    //     this.map.remove();
-    // }
+    async openProfile() {
+        const modal = await this.modalController.create({
+            component: DoctorViewPage,
+            componentProps: {
+                doctor: this.request.accept_request.doctor,
+                // paramTitle: 'Test Title'
+            }
+        });
+
+        modal.onDidDismiss().then((dataReturned) => {
+            if (dataReturned !== null) {
+                this.dataReturned = dataReturned.data;
+                console.log(`Modal Sent Data : ${dataReturned}`);
+            }
+        });
+
+        return await modal.present();
+    }
 }

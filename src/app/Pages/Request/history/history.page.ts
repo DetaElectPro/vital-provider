@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {RequestsService} from '../../Service/requests.service';
-import {History} from '../../Models/history';
+import {RequestsService} from '../../../Service/requests.service';
+import {History} from '../../../Models/history';
 
 @Component({
     selector: 'app-history',

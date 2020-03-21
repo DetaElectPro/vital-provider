@@ -5,13 +5,9 @@
 </ion-header>
 
 <ion-content>
-    <ion-searchbar showCancelButton="focus" animated (ionChange)="searchRequests()"></ion-searchbar>
+      <app-explore-container name="requests"></app-explore-container>
 
     <ion-list>
-        <!--        <ion-list-header>-->
-        <!--            Recent Conversations-->
-        <!--        </ion-list-header>-->
-
         <ion-item *ngFor="let item of requestsData" routerLink="/request-details/{{item.id}}">
             <ion-avatar slot="start">
                 <img src="assets/images/1.jpg">
