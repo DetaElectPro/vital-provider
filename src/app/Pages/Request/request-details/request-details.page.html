@@ -5,6 +5,15 @@
 </ion-header>
 
 <ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+
     <app-explore-container name="details"></app-explore-container>
     <ion-card>
         <ion-card-header>
@@ -34,9 +43,9 @@
             </ion-grid>
         </ion-card-header>
         <ion-card-content>
-<!--            <ion-avatar slot="start">-->
-<!--                <img src="assets/images/2.jpg">-->
-<!--            </ion-avatar>-->
+            <!--            <ion-avatar slot="start">-->
+            <!--                <img src="assets/images/2.jpg">-->
+            <!--            </ion-avatar>-->
             <p>order #: {{request.id}}</p>
             <h2>you Need: {{request.specialties.medical.name}}</h2>
             <h3>Specialized in: {{request.specialties.name}}</h3>
@@ -76,7 +85,7 @@
             </ion-button>
         </div>
         <div *ngIf="request.status == 3">
-            <ion-button  (click)="notifications($event)" expand="block">
+            <ion-button (click)="notifications($event)" expand="block">
                 <ion-icon name="checkmark-done-circle-outline"></ion-icon>
                 <div>Request Done</div>
             </ion-button>

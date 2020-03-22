@@ -4,7 +4,6 @@ import {AlertController, LoadingController, ModalController, PopoverController} 
 import {RequestsService} from '../../../Service/requests.service';
 import {Requests} from '../../../Models/requests';
 import {DoctorePage} from '../../../doctore/doctore.page';
-import {NotificationsComponent} from '../../../components/notifications/notifications.component';
 import {FinishRequestComponent} from "../../../components/finish-request/finish-request.component";
 
 @Component({
@@ -200,9 +199,25 @@ export class RequestDetailsPage implements OnInit {
         const popover = await this.popoverCtrl.create({
             component: FinishRequestComponent,
             event: ev,
+            componentProps: {id: this.requestId},
             animated: true,
-            showBackdrop: true
+            showBackdrop: true,
+
         });
+        popover.onDidDismiss()
+            .then((result) => {
+                console.log(result.data);
+                this.requestData();
+            });
         return await popover.present();
+    }
+
+    doRefresh(event) {
+        this.requestData();
+
+        setTimeout(() => {
+            console.log('Async operation has ended');
+            event.target.complete();
+        }, 2000);
     }
 }

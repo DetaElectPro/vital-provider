@@ -33,4 +33,12 @@ export class HistoryPage implements OnInit {
             )
         ;
     }
+
+    doRefresh(event) {
+        this.loadData();
+
+        setTimeout(() => {
+            event.target.complete();
+        }, 2000);
+    }
 }

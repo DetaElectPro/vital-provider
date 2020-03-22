@@ -20,11 +20,10 @@ import {DoctorePageModule} from './doctore/doctore.module';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {FinishRequestComponent} from './components/finish-request/finish-request.component';
 import {FormsModule} from '@angular/forms';
-import {RatingComponent} from './components/rating/rating.component';
 
 @NgModule({
-  declarations: [AppComponent, NotificationsComponent, FinishRequestComponent, RatingComponent],
-  entryComponents: [NotificationsComponent, FinishRequestComponent, RatingComponent],
+  declarations: [AppComponent, NotificationsComponent, FinishRequestComponent],
+  entryComponents: [NotificationsComponent, FinishRequestComponent],
   imports: [BrowserModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),

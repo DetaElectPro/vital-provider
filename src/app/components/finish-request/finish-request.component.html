@@ -1,16 +1,22 @@
 <ion-content>
-    <form #userForm="ngForm" (ngSubmit)="updateInfo()">
+    <ion-list>
         <ion-item>
-            <ion-label position="floating">Note: </ion-label>
-            <ion-input [(ngModel)]="requestDate.note" name="note" required
-                       type="text"></ion-input>
+            <ion-label position="floating">Note:</ion-label>
+            <ion-input [(ngModel)]="note" type="text"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label position="floating">Recommendation: </ion-label>
-            <ion-input [(ngModel)]="requestDate.recommendation" name="recommendation" required type="text"></ion-input>
+            <ion-label position="floating">Recommendation:</ion-label>
+            <ion-input [(ngModel)]="recommendation" type="text"></ion-input>
         </ion-item>
+        <ion-item>
+            <p>Rate: {{rating}}</p>
+            <ion-range [(ngModel)]="rating" color="danger" max="5" min="1" snaps step="1" value="1">
+                <ion-icon color="danger" name="star-outline" slot="start"></ion-icon>
+                <ion-icon color="warning" name="star-outline" slot="end"></ion-icon>
+            </ion-range>
+        </ion-item>
+    </ion-list>
 
-        <ion-button [disabled]="!userForm.form.valid" expand="full" type="submit">Update
-        </ion-button>
-    </form>
+    <ion-button (click)="updateInfo()" expand="full">Update
+    </ion-button>
 </ion-content>

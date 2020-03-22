@@ -82,8 +82,8 @@ export class RequestsService {
         return this.http.get(`${this.Url}cancelRequestByAdmin/${id}`, this.myHeaders);
     }
 
-    public acceptRequestByAdminAndDone(id) {
-        return this.http.get(`${this.Url}acceptRequestAndDone/${id}`, this.myHeaders);
+    public acceptRequestByAdminAndDone(id, data) {
+        return this.http.post(`${this.Url}acceptRequestAndDone/${id}`, data, this.myHeaders);
     }
 
     public ambulanceRequest(data) {
