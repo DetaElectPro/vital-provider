@@ -9,7 +9,7 @@ import {Storage} from '@ionic/storage';
 export class RequestsService {
     // Url = 'https://medical.detatech.xyz/api/';
     // Url = 'http://localhost:8000/api/';
-    Url = 'http://192.168.2.7:8000/api/';
+    Url = 'http://192.168.2.5:8000/api/';
     token = `Bearer ${localStorage.getItem('token')}`;
     private myHeaders: any;
 

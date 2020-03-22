@@ -12,7 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {MapPageModule} from './Pages/map/map.module';
-import {PdfViewerService} from './services/pdf-viewer.service';
+import {PdfViewerService} from './Service/pdf-viewer.service';
 import {FileOpener} from '@ionic-native/file-opener/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {FileTransfer} from '@ionic-native/file-transfer/ngx';
@@ -42,6 +42,7 @@ import {FormsModule} from '@angular/forms';
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
 
   ],
+  exports: [],
   bootstrap: [AppComponent]
 })
 

@@ -97,10 +97,6 @@ export class NewRequestPage implements OnInit {
         this.requestData.medical_id = event.value.medical_id;
     }
 
-    requestConfirm() {
-
-    }
-
     async PickLocation() {
         const modal = await this.modalController.create({
             component: MapPage,
@@ -154,5 +150,9 @@ export class NewRequestPage implements OnInit {
             position: 'middle'
         });
         toast.present();
+    }
+
+    goTo() {
+        this.router.navigate(['history']);
     }
 }

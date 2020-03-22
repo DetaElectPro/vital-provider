@@ -5,31 +5,32 @@
 </ion-header>
 
 <ion-content>
+    <app-emergency-tabs (click)="goTo()"></app-emergency-tabs>
 
     <ion-list>
         <ion-item>
             <ion-label></ion-label>
-            <ion-input [(ngModel)]="name"></ion-input>
+            <ion-input [(ngModel)]="requestData.name"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label></ion-label>
-            <ion-input [(ngModel)]="address"></ion-input>
+            <ion-input [(ngModel)]="requestData.address"></ion-input>
         </ion-item>
         <ion-item>
             <ion-label></ion-label>
-            <ion-input [(ngModel)]="price_per_day"></ion-input>
+            <ion-input [(ngModel)]="requestData.price_per_day"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label>Type</ion-label>
-            <ion-select [(ngModel)]="type" placeholder="Select One">
+            <ion-select [(ngModel)]="requestData.type" placeholder="Select One">
                 <ion-select-option value="f">ICu</ion-select-option>
                 <ion-select-option value="m">em</ion-select-option>
             </ion-select>
         </ion-item>
         <ion-item>
             <ion-label></ion-label>
-            <ion-input [(ngModel)]="available"></ion-input>
+            <ion-input [(ngModel)]="requestData.available"></ion-input>
         </ion-item>
     </ion-list>
 </ion-content>

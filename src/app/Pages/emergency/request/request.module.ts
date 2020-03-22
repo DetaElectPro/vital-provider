@@ -1,20 +1,24 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { RequestPageRoutingModule } from './request-routing.module';
 
-import { RequestPage } from './request.page';
+import {RequestPage} from './request.page';
+import {RouterModule} from '@angular/router';
+import {EmergencyTabsComponentModule} from '../../../components/emergency-tabs/emergency-tabs.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RequestPageRoutingModule
-  ],
-  declarations: [RequestPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild([{path: '', component: RequestPage}]),
+        EmergencyTabsComponentModule
+
+    ],
+    declarations: [RequestPage]
 })
-export class RequestPageModule {}
+export class RequestPageModule {
+}

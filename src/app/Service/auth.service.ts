@@ -15,7 +15,7 @@ export class AuthService {
     user: any;
     // url = 'https://medical.detatech.xyz/api/';
     // url = 'http://localhost:8000/api/';
-    url = 'http://192.168.2.7:8000/api/';
+    url = 'http://192.168.2.5:8000/api/';
 
 
     authenticationState = new BehaviorSubject(false);

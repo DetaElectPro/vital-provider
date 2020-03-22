@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { HistoryPageRoutingModule } from './history-routing.module';
 
 import { HistoryPage } from './history.page';
-import {ExploreContainerComponentModule} from '../../../explore-container/explore-container.module';
+import {ExploreContainerComponentModule} from '../../../components/explore-container/explore-container.module';
 
 @NgModule({
   imports: [

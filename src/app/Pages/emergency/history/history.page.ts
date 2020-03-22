@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-history',
@@ -6,8 +7,9 @@ import {Component, OnInit} from '@angular/core';
   styleUrls: ['./history.page.scss'],
 })
 export class HistoryPage implements OnInit {
+  historyData: any;
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   ngOnInit() {
@@ -24,5 +26,9 @@ export class HistoryPage implements OnInit {
 
   requestData() {
     console.log('00');
+  }
+
+  goTo() {
+    this.router.navigate(['/emergency-request']);
   }
 }

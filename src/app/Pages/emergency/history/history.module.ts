@@ -4,17 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HistoryPageRoutingModule } from './history-routing.module';
 
 import { HistoryPage } from './history.page';
+import {RouterModule} from '@angular/router';
+import {EmergencyTabsComponentModule} from '../../../components/emergency-tabs/emergency-tabs.module';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    HistoryPageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild([{path: '', component: HistoryPage}]),
+        EmergencyTabsComponentModule,
+    ],
   declarations: [HistoryPage]
 })
 export class HistoryPageModule {}

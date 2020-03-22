@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController, NavParams} from '@ionic/angular';
-import {PdfViewerService} from '../services/pdf-viewer.service';
+import {PdfViewerService} from '../Service/pdf-viewer.service';
 
 @Component({
   selector: 'app-doctore',

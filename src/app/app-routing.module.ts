@@ -59,15 +59,10 @@ const routes: Routes = [
         path: 'map',
         loadChildren: () => import('./Pages/map/map.module').then(m => m.MapPageModule)
     },
-  {
-    path: 'doctore',
-    loadChildren: () => import('./doctore/doctore.module').then( m => m.DoctorePageModule)
-  },
-  {
-    path: 'account',
-    loadChildren: () => import('./my-account/my-account.module').then( m => m.MyAccountPageModule)
-  }
-
+    {
+        path: 'doctore',
+        loadChildren: () => import('./doctore/doctore.module').then(m => m.DoctorePageModule)
+    }
 
 
 ];

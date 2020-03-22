@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { RequestDetailsPage } from './request-details.page';
 import {RouterModule} from '@angular/router';
-import {ExploreContainerComponentModule} from '../../../explore-container/explore-container.module';
+import {ExploreContainerComponentModule} from '../../../components/explore-container/explore-container.module';
 
 @NgModule({
   imports: [
