@@ -10,8 +10,8 @@ export class RequestsService {
     // Url = 'https://medical.detatech.xyz/api/';
     // Url = 'http://localhost:8000/api/';
     Url = 'http://192.168.2.7:8000/api/';
-    private myHeaders: any;
     token = `Bearer ${localStorage.getItem('token')}`;
+    private myHeaders: any;
 
     constructor(
         private http: HttpClient,
@@ -73,12 +73,17 @@ export class RequestsService {
         return this.http.get(`${this.Url}request_specialists_admin_history`, this.myHeaders);
     }
 
-    public userAcceptRequestSpecialists(id) {
-        return this.http.get(`${this.Url}acceptRequestByUser/${id}`, this.myHeaders);
+
+    public adminAcceptRequestSpecialists(id) {
+        return this.http.get(`${this.Url}acceptRequestByAdmin/${id}`, this.myHeaders);
     }
 
-    public cancelRequestByUser(id) {
-        return this.http.get(`${this.Url}cancelRequestByUser/${id}`, this.myHeaders);
+    public cancelRequestByAdmin(id) {
+        return this.http.get(`${this.Url}cancelRequestByAdmin/${id}`, this.myHeaders);
+    }
+
+    public acceptRequestByAdminAndDone(id) {
+        return this.http.get(`${this.Url}acceptRequestAndDone/${id}`, this.myHeaders);
     }
 
     public ambulanceRequest(data) {

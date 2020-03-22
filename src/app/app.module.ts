@@ -17,10 +17,14 @@ import {FileOpener} from '@ionic-native/file-opener/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {FileTransfer} from '@ionic-native/file-transfer/ngx';
 import {DoctorePageModule} from './doctore/doctore.module';
+import {NotificationsComponent} from './components/notifications/notifications.component';
+import {FinishRequestComponent} from './components/finish-request/finish-request.component';
+import {FormsModule} from '@angular/forms';
+import {RatingComponent} from './components/rating/rating.component';
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
+  declarations: [AppComponent, NotificationsComponent, FinishRequestComponent, RatingComponent],
+  entryComponents: [NotificationsComponent, FinishRequestComponent, RatingComponent],
   imports: [BrowserModule,
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
@@ -28,7 +32,7 @@ import {DoctorePageModule} from './doctore/doctore.module';
     HttpClientModule,
     MapPageModule,
     DoctorePageModule,
-    IonicSelectableModule],
+    IonicSelectableModule, FormsModule],
   providers: [
     StatusBar,
     SplashScreen,

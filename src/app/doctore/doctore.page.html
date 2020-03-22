@@ -38,12 +38,9 @@
                 Cv
             </ion-button>
             <ion-button color="secondary" expand="full" href="tel:{{doctorData.phone}}">Call</ion-button>
-
+                <ion-button (click)="closeModal()" expand="full">Close profile</ion-button>
         </div>
     </div>
 
-    <ion-footer>
-        <ion-button (click)="closeModal()">Close profile</ion-button>
-    </ion-footer>
 </ion-content>
 

@@ -1,0 +1,16 @@
+<ion-content>
+    <form #userForm="ngForm" (ngSubmit)="updateInfo()">
+        <ion-item>
+            <ion-label position="floating">Note: </ion-label>
+            <ion-input [(ngModel)]="requestDate.note" name="note" required
+                       type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Recommendation: </ion-label>
+            <ion-input [(ngModel)]="requestDate.recommendation" name="recommendation" required type="text"></ion-input>
+        </ion-item>
+
+        <ion-button [disabled]="!userForm.form.valid" expand="full" type="submit">Update
+        </ion-button>
+    </form>
+</ion-content>

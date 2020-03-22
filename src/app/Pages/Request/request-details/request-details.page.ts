@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AlertController, LoadingController, ModalController} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController, PopoverController} from '@ionic/angular';
 import {RequestsService} from '../../../Service/requests.service';
 import {Requests} from '../../../Models/requests';
 import {DoctorePage} from '../../../doctore/doctore.page';
+import {NotificationsComponent} from '../../../components/notifications/notifications.component';
+import {FinishRequestComponent} from "../../../components/finish-request/finish-request.component";
 
 @Component({
     selector: 'app-request-details',
@@ -48,7 +50,8 @@ export class RequestDetailsPage implements OnInit {
         public router: Router,
         private modalController: ModalController,
         public route: ActivatedRoute,
-        private requestServe: RequestsService
+        private requestServe: RequestsService,
+        public popoverCtrl: PopoverController
     ) {
         this.activeRoute.params.subscribe(
             params => {
@@ -82,7 +85,7 @@ export class RequestDetailsPage implements OnInit {
     }
 
     acceptRequest() {
-        this.requestServe.userAcceptRequestSpecialists(this.requestId)
+        this.requestServe.adminAcceptRequestSpecialists(this.requestId)
             .subscribe(res => {
                     console.log(this.acceptRes = res);
                     if (this.acceptRes.accept) {
@@ -100,7 +103,7 @@ export class RequestDetailsPage implements OnInit {
     }
 
     cancelRequest() {
-        this.requestServe.cancelRequestByUser(this.requestId)
+        this.requestServe.cancelRequestByAdmin(this.requestId)
             .subscribe(res => {
                     console.log(this.acceptRes = res);
                     if (this.acceptRes.accept) {
@@ -159,7 +162,7 @@ export class RequestDetailsPage implements OnInit {
                     text: 'Okay',
                     handler: () => {
                         console.log('Confirm Okay');
-                        this.acceptRequest();
+                        this.cancelRequest();
                     }
                 }
             ]
@@ -186,5 +189,20 @@ export class RequestDetailsPage implements OnInit {
         });
 
         return await modal.present();
+    }
+
+    requestDone() {
+
+    }
+
+
+    async notifications(ev: any) {
+        const popover = await this.popoverCtrl.create({
+            component: FinishRequestComponent,
+            event: ev,
+            animated: true,
+            showBackdrop: true
+        });
+        return await popover.present();
     }
 }

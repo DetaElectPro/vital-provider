@@ -34,9 +34,9 @@
             </ion-grid>
         </ion-card-header>
         <ion-card-content>
-            <ion-avatar slot="start">
-                <img src="assets/images/2.jpg">
-            </ion-avatar>
+<!--            <ion-avatar slot="start">-->
+<!--                <img src="assets/images/2.jpg">-->
+<!--            </ion-avatar>-->
             <p>order #: {{request.id}}</p>
             <h2>you Need: {{request.specialties.medical.name}}</h2>
             <h3>Specialized in: {{request.specialties.name}}</h3>
@@ -46,13 +46,17 @@
     </ion-card>
 
     <ion-card>
-        <div *ngIf="request.status == 2">
+        <div *ngIf="request.status == 2 || request.status == 3">
 
-            <ion-card-title>Info</ion-card-title>
-            <ion-card-subtitle>The request was created by:</ion-card-subtitle>
+            <!--            <ion-card-title>Info</ion-card-title>-->
+            <ion-card-subtitle>The request a Accept by:</ion-card-subtitle>
             <ion-card-content>
-                <h1>Name: {{request.accept_request.doctor.name}}</h1>
-                <h1>Phone: {{request.accept_request.doctor.phone}}</h1>
+                <h1>Doctor: {{request.accept_request.doctor.name}}</h1>
+                <ion-button block expand="block" href="tel:{{request.accept_request.doctor.phone}}">
+                    Phone:{{request.accept_request.doctor.phone}}
+                    <ion-icon name="call-outline"></ion-icon>
+                </ion-button>
+
                 <ion-button (click)="openProfile()" expand="block">
                     <ion-icon name="person-circle-outline"></ion-icon>
                     full CV
@@ -71,13 +75,20 @@
                 <div>Accept Doctor</div>
             </ion-button>
         </div>
+        <div *ngIf="request.status == 3">
+            <ion-button  (click)="notifications($event)" expand="block">
+                <ion-icon name="checkmark-done-circle-outline"></ion-icon>
+                <div>Request Done</div>
+            </ion-button>
+        </div>
 
+        <div *ngIf="request.status == 2 || request.status ==1">
 
-        <ion-button (click)="requestCancel()" color="danger" expand="block">
-            <ion-icon name="thumbs-down"></ion-icon>
-            <div>Cancel Request</div>
-        </ion-button>
-
+            <ion-button (click)="requestCancel()" color="danger" expand="block">
+                <ion-icon name="thumbs-down"></ion-icon>
+                <div>Cancel Request</div>
+            </ion-button>
+        </div>
     </ion-footer>
 
 </ion-content>
