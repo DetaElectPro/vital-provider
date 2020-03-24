@@ -41,9 +41,9 @@ export class NewRequestPage implements OnInit {
         years_of_experience: 0
     };
     specialtiesList: any;
-    private dataReturned: any;
-    private errorMessage: any;
-    private minDate: any;
+    dataReturned: any;
+    errorMessage: any;
+    minDate: any;
 
     constructor(
         public modalController: ModalController,

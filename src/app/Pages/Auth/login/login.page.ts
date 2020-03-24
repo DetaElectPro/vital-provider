@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../Service/auth.service';
 import {Router} from '@angular/router';
+
 // import {Storage} from '@ionic/storage';
 
 @Component({
@@ -26,7 +27,7 @@ export class LoginPage implements OnInit {
     userLogin() {
         this.authServe.loginServes(this.loginData)
             .then(data => {
-                this.usersData = data;
+                console.log('outPut: ', this.usersData = data);
                 if (this.usersData.error) {
                     alert('error data');
                 } else {

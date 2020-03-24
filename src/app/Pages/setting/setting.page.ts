@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
     styleUrls: ['setting.page.scss']
 })
 export class SettingPage implements OnInit {
-    private token: any;
+    token: any;
     image = '../assets/images/man.png';
     userInfo: any;
 

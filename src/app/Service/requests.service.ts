@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Storage} from '@ionic/storage';
 
 @Injectable({
     providedIn: 'root'
@@ -9,13 +8,12 @@ import {Storage} from '@ionic/storage';
 export class RequestsService {
     // Url = 'https://medical.detatech.xyz/api/';
     // Url = 'http://localhost:8000/api/';
-    Url = 'http://192.168.2.5:8000/api/';
+    Url = 'http://192.168.2.6:8000/api/';
     token = `Bearer ${localStorage.getItem('token')}`;
     private myHeaders: any;
 
     constructor(
         private http: HttpClient,
-        private storage: Storage,
     ) {
         this.myHeaders = {
             headers: new HttpHeaders()
@@ -86,8 +84,5 @@ export class RequestsService {
         return this.http.post(`${this.Url}acceptRequestAndDone/${id}`, data, this.myHeaders);
     }
 
-    public ambulanceRequest(data) {
-        return this.http.post(`${this.Url}cancelRequestByUser`, data, this.myHeaders);
-    }
 
 }

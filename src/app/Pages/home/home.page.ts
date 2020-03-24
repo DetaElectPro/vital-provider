@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
@@ -8,6 +8,8 @@ import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
     styleUrls: ['home.page.scss']
 })
 export class HomePage implements OnInit {
+    @ViewChild('slide', {static: false}) slide3: any;
+
     userInfo: any;
 
     constructor(
@@ -41,5 +43,20 @@ export class HomePage implements OnInit {
             error => {
                 console.log('error: ', error);
             });
+    }
+
+    // getdachbordData() {
+    //     this.data = [requests => {
+    //         title:'Requests'
+    //     }, '', '', 'Wallet', ''],
+    // }
+
+
+    slide_next() {
+        this.slide3.slideNext();
+    }
+
+    slide_prev() {
+        this.slide3.slidePrev();
     }
 }

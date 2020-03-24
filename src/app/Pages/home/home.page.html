@@ -1,76 +1,101 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
-        <ion-title>
-            Home
-        </ion-title>
-    </ion-toolbar>
-</ion-header>
+<ion-content class="skin.main_bg">
+    <div class="wrapper-slide">
+        <div class="wrapper-slide-pagination">
+            <ion-slides #slide autoplay="3000" class="height-auto" loop="true" pager="false" speed="1000">
+                <ion-slide>
+                    <img alt="" src="assets/img/home1.jpg">
+                </ion-slide>
 
-<ion-content [fullscreen]="true">
-    <ion-card>
-        <ion-card-content>
-            <ion-grid>
-                <ion-row>
-                    <ion-col>
-                        <div routerLink="/new-request">
-                            <ion-badge color="primary">
-                                <ion-icon name="newspaper-sharp"></ion-icon>
-                            </ion-badge>
-                            <p>Requests</p>
-                        </div>
-                    </ion-col>
-                    <ion-col>
-                        <div routerLink="/history">
-                            <ion-badge color="primary">
-                                <ion-icon name="book-sharp"></ion-icon>
-                            </ion-badge>
-                            <p>History</p>
-                        </div>
-                    </ion-col>
-                </ion-row>
+                <ion-slide>
+                    <img alt="" src="assets/img/home2.jpg">
+                </ion-slide>
 
-                <ion-row>
-                    <ion-col>
-                        <div routerLink="/ambulance">
-                            <ion-badge color="primary">
-                                <ion-icon src="assets/icon/ambulance.svg"></ion-icon>
-                            </ion-badge>
-                            <p>Ambulance</p>
-                        </div>
-                    </ion-col>
+                <ion-slide>
+                    <img alt="" src="assets/img/home3.jpg">
+                </ion-slide>
+            </ion-slides>
+            <div class="btn-pagination">
+                <ion-badge (click)="slide_next()" class="pull-right">
+                    <ion-icon name="arrow-forward-outline"></ion-icon>
+                </ion-badge>
+                <ion-badge (click)="slide_prev()" class="pull-left">
+                    <ion-icon name="arrow-back-outline"></ion-icon>
+                </ion-badge>
+            </div>
+        </div>
 
-                    <ion-col>
-                        <div routerLink="/tabs/wallet">
-                            <ion-badge color="primary">
-                                <ion-icon name="wallet"></ion-icon>
-                            </ion-badge>
-                            <p>Wallet</p>
-                        </div>
-                    </ion-col>
-                </ion-row>
+        <!--        <div class="ion-padding">-->
+        <!--            <div class="mgt-20 mgb-40">-->
+        <!--                <h6 class="uppercase fs-13 fw-500 text-grey-4">title</h6>-->
+        <!--                <ion-row class="mgt-10 mgb-20 mgl&#45;&#45;5 mgr&#45;&#45;5">-->
+        <!--                    <ion-col col-6>-->
+        <!--                        <div (click)="openPage()" class="shadow-2 white-opct-1 pd-15 text-center">-->
+        <!--                            <ion-icon class="fs-22 text-grey-5 mgt-10" name="call"></ion-icon>-->
+        <!--                            <h2 class="text-grey-5 fs-12 spacing-1 mg-5 uppercase fw-600 text-ellipsis">title</h2>-->
+        <!--                        </div>-->
+        <!--                    </ion-col>-->
+        <!--                </ion-row>-->
+        <!--            </div>-->
+        <!--        </div>-->
 
-                <ion-row>
-                    <ion-col>
-                        <div routerLink="/emergency-request">
-                            <ion-badge color="primary">
-                                <ion-icon name="pulse"></ion-icon>
-                            </ion-badge>
-                            <p>Icu Serves</p>
-                        </div>
-                    </ion-col>
-                </ion-row>
-            </ion-grid>
-        </ion-card-content>
+    </div>
+
+    <ion-card class="card-more-content bdra-5" routerLink="/new-request">
+        <div class="wrapper">
+            <div class="thumb">
+                <img src="assets/images/1.jpg"/>
+
+                <ion-card-content class="black-opct text-white">
+                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">Requests</ion-card-title>
+                    <span class="info-stt text-white inline-block"><ion-icon
+                            name="stats-chart-outline"></ion-icon>3 action</span>
+                </ion-card-content>
+            </div>
+        </div>
     </ion-card>
 
-    <div *ngIf="userInfo?.status == 2">
-        <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
-        <ion-button (click)="openBrow()" color="danger" expand="block">upload cv</ion-button>
-    </div>
-    <div *ngIf="userInfo?.status == 1">
-        <p class="ion-text-center">Please complete the profile</p>
-        <ion-button color="danger" expand="block">Please complete the Medical profile</ion-button>
-    </div>
 
-    <!--  <app-explore-container name="Tab 1 page"></app-explore-container>-->
+    <ion-card class="card-more-content bdra-5" routerLink="/history">
+        <div class="wrapper">
+            <div class="thumb">
+                <img src="assets/images/2.jpg"/>
+
+                <ion-card-content class="black-opct text-white">
+                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">History</ion-card-title>
+                    <span class="info-stt text-white inline-block"><ion-icon
+                            name="stats-chart-outline"></ion-icon>1 action</span>
+                </ion-card-content>
+            </div>
+        </div>
+    </ion-card>
+
+
+    <ion-card class="card-more-content bdra-5" routerLink="/ambulance">
+        <div class="wrapper">
+            <div class="thumb">
+                <img src="assets/images/am3.jpg"/>
+
+                <ion-card-content class="black-opct text-white">
+                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">Ambulance</ion-card-title>
+                    <span class="info-stt text-white inline-block"><ion-icon
+                            name="stats-chart-outline"></ion-icon>2 action</span>
+                </ion-card-content>
+            </div>
+        </div>
+    </ion-card>
+
+    <ion-card class="card-more-content bdra-5" routerLink="/emergency-request">
+        <div class="wrapper">
+            <div class="thumb">
+                <img src="assets/images/cover.png"/>
+
+                <ion-card-content class="black-opct text-white">
+                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">Icu Serves</ion-card-title>
+                    <span class="info-stt text-white inline-block"><ion-icon
+                            name="stats-chart-outline"></ion-icon>2 action</span>
+                </ion-card-content>
+            </div>
+        </div>
+    </ion-card>
+
 </ion-content>

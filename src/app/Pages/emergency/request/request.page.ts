@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AuthService} from '../../../Service/auth.service';
-import {RequestsService} from '../../../Service/requests.service';
 import {ToastController} from '@ionic/angular';
-import {EmergencyService} from "../../../Service/emergency.service";
+import {EmergencyService} from '../../../Service/emergency.service';
 
 @Component({
   selector: 'app-request',
@@ -12,7 +10,9 @@ import {EmergencyService} from "../../../Service/emergency.service";
 })
 export class RequestPage implements OnInit {
 
-  requestData = {name: '', address: '', price_per_day: 0, type: '', available: 0};
+  requestData = {
+    name: '', address: '', price_per_day: 0, type: '', available: 0, contact: ''
+  };
   private errorMessage: any;
   private requrstResult: any;
 
@@ -26,12 +26,12 @@ export class RequestPage implements OnInit {
 
   sendRequest() {
     console.log('send: ', this.requestData);
-    this.requestServ.(this.requestData)
+    this.emergencyServ.addEmergency(this.requestData)
         .subscribe(res => {
               console.log('response: ', this.requrstResult = res);
               if (this.requrstResult.success) {
                 this.presentToast(this.requrstResult.message);
-                this.router.navigate(['/history']);
+                this.router.navigate(['/emergency-history']);
               } else {
                 this.presentToast(this.requrstResult.message);
               }

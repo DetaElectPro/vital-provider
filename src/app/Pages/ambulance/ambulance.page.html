@@ -10,15 +10,15 @@
 
     <ion-list>
         <ion-item>
-            <ion-input type="text" placeholder="name" [(ngModel)]="locData.name"></ion-input>
+            <ion-input [(ngModel)]="locData.title" placeholder="name" type="text"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input type="text" placeholder="address" [(ngModel)]="locData.address"></ion-input>
+            <ion-input [(ngModel)]="locData.address" placeholder="address" type="text"></ion-input>
         </ion-item>
+        <p>Address: {{locData.address}}</p>
 
-        <ion-button expand="block" (click)="sendRequest()">
-            <ion-icon name="thumbs-up"></ion-icon>
-            <div>Accept</div>
+        <ion-button (click)="sendRequest()" expand="block">
+            Create Request
         </ion-button>
     </ion-list>
 

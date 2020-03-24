@@ -10,13 +10,13 @@
     <ion-card color="light" *ngIf="token">
         <ion-item>
             <ion-avatar slot="start">
-                <img src="{{userInfo.image}}"/>
+                <img src="{{userInfo?.image}}"/>
             </ion-avatar>
-            <ion-label>Name: {{userInfo.name}}</ion-label>
+            <ion-label>Name: {{userInfo?.name}}</ion-label>
         </ion-item>
         <ion-card-header>
 
-            <ion-card-subtitle>Phone: {{userInfo.phone}}</ion-card-subtitle>
+            <ion-card-subtitle>Phone: {{userInfo?.phone}}</ion-card-subtitle>
 
         </ion-card-header>
     </ion-card>

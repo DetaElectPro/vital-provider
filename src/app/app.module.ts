@@ -20,6 +20,7 @@ import {DoctorePageModule} from './doctore/doctore.module';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {FinishRequestComponent} from './components/finish-request/finish-request.component';
 import {FormsModule} from '@angular/forms';
+import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent, FinishRequestComponent],
@@ -35,6 +36,7 @@ import {FormsModule} from '@angular/forms';
   providers: [
     StatusBar,
     SplashScreen,
+    NativeGeocoder,
     FileTransfer,
     FileOpener,
     File,
@@ -45,6 +47,7 @@ import {FormsModule} from '@angular/forms';
   exports: [],
   bootstrap: [AppComponent]
 })
-
+// ionic capacitor run android --livereload --watch --prod  --external
 export class AppModule {
 }
+

@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {RequestsService} from '../../../Service/requests.service';
-import {History} from '../../../Models/history';
 import {Router} from '@angular/router';
 
 @Component({
@@ -11,24 +10,35 @@ import {Router} from '@angular/router';
 export class HistoryPage implements OnInit {
 
     // resultData: any;
-    historyData: History;
+    historyData: any;
     errorHand: any;
+    page: number;
+    perPage = 0;
+    totalData: number;
+    totalPage: number;
+    private result: any;
 
     constructor(
         private router: Router,
         private historyServ: RequestsService
     ) {
-        this.loadData();
 
     }
 
     ngOnInit() {
+        this.getHistory();
+
     }
 
-    loadData() {
+    getHistory() {
         this.historyServ.requestSpecialistsHistory()
             .subscribe(res => {
-                    console.log(this.historyData = res);
+                    this.result = res;
+                    this.perPage = this.result.per_page;
+                    this.page = this.result.current_page;
+                    this.totalData = this.result.total;
+                    this.totalPage = this.result.total_pages;
+                    this.historyData = this.result.data;
                 },
                 error =>
                     console.log('server: ', this.errorHand = error)
@@ -37,12 +47,35 @@ export class HistoryPage implements OnInit {
     }
 
     doRefresh(event) {
-        this.loadData();
+        this.getHistory();
 
         setTimeout(() => {
             event.target.complete();
         }, 2000);
     }
+
+
+    loadData(event) {
+        this.page = this.page + 1;
+        setTimeout(() => {
+            this.historyServ.getRequest(this.page)
+                .subscribe(
+                    res => {
+                        this.result = res;
+                        // this.requestsData = this.result.data;
+                        this.perPage = this.result.per_page;
+                        this.totalData = this.result.total;
+                        this.totalPage = this.result.total_pages;
+                        let Rlength = this.result.data.length;
+                        for (let i = 0; i < Rlength; i++) {
+                            this.historyData.push(this.result.data[i]);
+                        }
+                    }),
+                event.target.complete();
+        }, 1000);
+
+    }
+
 
     goTo() {
         this.router.navigate(['new-request']);

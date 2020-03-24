@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>history</ion-title>
+        <ion-title>Emergency History</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -17,27 +17,27 @@
 
     <ion-grid>
         <ion-row>
-            <ion-col>Title</ion-col>
-            <ion-col>Status</ion-col>
-            <ion-col>Date</ion-col>
+            <ion-col class="text-amber ion-text-center">Title</ion-col>
+            <ion-col class="text-amber ion-text-center">available</ion-col>
+            <ion-col class="text-amber ion-text-center">Date</ion-col>
         </ion-row>
         <ion-row *ngFor="let item of historyData">
-            <ion-col routerLink="/request-details/{{item.id}}">{{item.name}}</ion-col>
+            <ion-col class="text-blue ion-text-center" routerLink="/request-details/{{item.id}}">{{item.type}}</ion-col>
 
-            <ion-col *ngIf="item.status ==1">
-                <ion-button color="tertiary" size="small">new</ion-button>
-            </ion-col>
-            <ion-col *ngIf="item.status ==2">
-                <ion-button color="warning" size="small">Waiting</ion-button>
-            </ion-col>
-            <ion-col *ngIf="item.status ==3">
-                <ion-button color="success" size="small">In progress</ion-button>
-            </ion-col>
-            <ion-col *ngIf="item.status ==6">
-                <ion-button color="secondary" size="small">Finished</ion-button>
+            <ion-col class="text-amber ion-text-center">
+              {{item.available}}
             </ion-col>
 
-            <ion-col routerLink="/request-details/{{item.id}}">{{item.start_time| date: 'y-MM-d'}}</ion-col>
+
+            <ion-col class="text-blue-grey ion-text-center" routerLink="/request-details/{{item.id}}">{{item.created_at| date: 'y-MM-d'}}</ion-col>
         </ion-row>
     </ion-grid>
+
+
+    <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

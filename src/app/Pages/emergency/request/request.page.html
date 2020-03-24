@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>request</ion-title>
+        <ion-title>Emergency</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -9,28 +9,36 @@
 
     <ion-list>
         <ion-item>
-            <ion-label></ion-label>
+            <ion-label>Name:</ion-label>
             <ion-input [(ngModel)]="requestData.name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label></ion-label>
+            <ion-label>Address:</ion-label>
             <ion-input [(ngModel)]="requestData.address"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-label></ion-label>
-            <ion-input [(ngModel)]="requestData.price_per_day"></ion-input>
+            <ion-label>Contact:</ion-label>
+            <ion-input [(ngModel)]="requestData.contact"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Price per day</ion-label>
+            <ion-input [(ngModel)]="requestData.price_per_day" type="number"></ion-input>
         </ion-item>
 
         <ion-item>
             <ion-label>Type</ion-label>
             <ion-select [(ngModel)]="requestData.type" placeholder="Select One">
-                <ion-select-option value="f">ICu</ion-select-option>
-                <ion-select-option value="m">em</ion-select-option>
+                <ion-select-option value="Icu">ICU</ion-select-option>
+                <ion-select-option value="Emergency">Emergency</ion-select-option>
             </ion-select>
         </ion-item>
         <ion-item>
-            <ion-label></ion-label>
-            <ion-input [(ngModel)]="requestData.available"></ion-input>
+            <ion-label>Available:</ion-label>
+            <ion-input [(ngModel)]="requestData.available" type="number"></ion-input>
         </ion-item>
     </ion-list>
+
+    <ion-button (click)="sendRequest()" expand="block">
+        <div>Create</div>
+    </ion-button>
 </ion-content>
