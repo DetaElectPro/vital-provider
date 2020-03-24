@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Storage} from '@ionic/storage';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import {AuthService} from '../../Service/auth.service';
 
 @Component({
     selector: 'app-tab1',
@@ -10,33 +10,21 @@ import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 export class HomePage implements OnInit {
     @ViewChild('slide', {static: false}) slide3: any;
 
-    userInfo: any;
+    response: any;
 
     constructor(
-        private storage: Storage,
-        private iab: InAppBrowser
+        private iab: InAppBrowser,
+        private userServ: AuthService
     ) {
-        // this.userInfo = JSON.parse(localStorage.getItem('userInfo'));
+        this.getDashboardData();
     }
 
-    ngOnInit(): void {
-        this.storage.get('userInfo')
-            .then(res => {
-                this.userInfo = res;
-            })
-            .catch(err => {
-                console.log(err);
-            });
+    ngOnInit() {
+
     }
 
     openBrow() {
-        const browser = this.iab.create('http://192.168.2.3:8000/profile/' + this.userInfo.id);
-        // browser.executeScript('...');
-        // browser.insertCSS(...);
-        // browser.on('loadstop').subscribe(event => {
-        //     browser.insertCSS({code: 'body{color: red;'});
-        // });
-
+        const browser = this.iab.create('http://192.168.2.6:8000/profile/' + this.response.user.id);
         browser.on('loadstop').subscribe(event => {
                 console.log('sus: ', event);
             },
@@ -45,11 +33,18 @@ export class HomePage implements OnInit {
             });
     }
 
-    // getdachbordData() {
-    //     this.data = [requests => {
-    //         title:'Requests'
-    //     }, '', '', 'Wallet', ''],
-    // }
+    getDashboardData() {
+        this.userServ.checkUserService()
+            .subscribe(response => {
+                console.log('res: ', this.response = response);
+                if (this.response.status === true) {
+                } else {
+                    alert('filed');
+                }
+            }, error => {
+                console.log('server: ', error);
+            });
+    }
 
 
     slide_next() {

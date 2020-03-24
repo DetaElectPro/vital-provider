@@ -61,7 +61,7 @@ const routes: Routes = [
     },
     {
         path: 'doctore',
-        loadChildren: () => import('./doctore/doctore.module').then(m => m.DoctorePageModule)
+        loadChildren: () => import('./Pages/doctore/doctore.module').then(m => m.DoctorePageModule)
     }
 
 

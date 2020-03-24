@@ -16,11 +16,12 @@ import {PdfViewerService} from './Service/pdf-viewer.service';
 import {FileOpener} from '@ionic-native/file-opener/ngx';
 import {File} from '@ionic-native/file/ngx';
 import {FileTransfer} from '@ionic-native/file-transfer/ngx';
-import {DoctorePageModule} from './doctore/doctore.module';
+import {DoctorePageModule} from './Pages/doctore/doctore.module';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {FinishRequestComponent} from './components/finish-request/finish-request.component';
 import {FormsModule} from '@angular/forms';
-import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
+import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent, FinishRequestComponent],
@@ -37,6 +38,7 @@ import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
     StatusBar,
     SplashScreen,
     NativeGeocoder,
+    AndroidPermissions,
     FileTransfer,
     FileOpener,
     File,

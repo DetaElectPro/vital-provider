@@ -1,10 +1,14 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>request-details</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button color="light">
+            </ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Request Details</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="request">
     <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
         <ion-refresher-content
                 pullingIcon="arrow-dropdown"
@@ -101,3 +105,13 @@
     </ion-footer>
 
 </ion-content>
+
+<div *ngIf="!request">
+    <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+</div>

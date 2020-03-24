@@ -1,53 +1,13 @@
-<div>
-    <div class="bg-img">
-        <!--        <img src="/src/assets/img/login_bg.png" alt="">-->
-        <img alt="" src="assets/img/login_bg.png">
-    </div>
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button color="light">
+            </ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Update Your Info</ion-title>
+    </ion-toolbar>
+</ion-header>
 
-    <div class="wrapper-page text-center black-opct-1">
-        <ion-button (click)="onCallbackEvent('onDismiss')"
-                    class="text-grey-3 stroke-grey-3 stroke-1 button-circle back-page" color="dark"
-                    shape="outline"
-                    size="small">
-            <ion-icon name="close-circle-sharp" slot="icon-only"></ion-icon>
-        </ion-button>
+<ion-content>
 
-        <div class="full-width">
-            <ion-row class="logo-img mgb-50 ani-fade-out">
-                <img alt="" class="mg-auto" src="assets/images/vitle.png">
-                <p class="text-grey-3 mgt-0 pdl-15 pdr-15">Vitel</p>
-            </ion-row>
-            <ion-list class="mgb-0 ani-bottom-to-top">
-                <ion-item class="text-white white-opct">
-                    <ion-input [(ngModel)]="username" placeholder="Phone" type="text"></ion-input>
-                </ion-item>
-            </ion-list>
-            <ion-list class="ani-bottom-to-top">
-                <ion-item class="text-white white-opct">
-                    <ion-input [(ngModel)]="password" placeholder="Passwword" type="password"></ion-input>
-                </ion-item>
-            </ion-list>
-
-            <ion-button (click)="onCallbackEvent('onLogin')"
-                        class="ani-bottom-to-top white-opct text-white uppercase fw-600 spacing-1"
-                        color="light"
-                        expand="block">Login
-            </ion-button>
-
-            <ion-button (click)="onCallbackEvent('onForgotPassword')"
-                        class="ani-fade-out mgb-35 mgt-20 pull-right text-grey-3"
-                        color="light" expand="block" fill="clear"
-                        size="small">Password
-            </ion-button>
-
-
-
-            <ion-button (click)="onCallbackEvent('onSignUp')" class="ani-fade-out btn-signup mgb-15 text-grey-3"
-                        color="light" expand="block"
-                        fill="clear"
-                        size="small">SignUp
-            </ion-button>
-
-        </div>
-    </div>
-</div>
+</ion-content>

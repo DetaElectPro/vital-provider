@@ -1,16 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {icon, Map, marker, tileLayer} from 'leaflet';
-import 'leaflet/dist/images/marker-shadow.png';
-import 'leaflet/dist/images/marker-icon-2x.png';
 import {EmergencyService} from '../../Service/emergency.service';
 import {ToastController} from '@ionic/angular';
-import {NavigationExtras, Router} from '@angular/router';
-import {Plugins} from '@capacitor/core';
-import {NativeGeocoder, NativeGeocoderOptions, NativeGeocoderResult} from '@ionic-native/native-geocoder/ngx';
+import {Router} from '@angular/router';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 
-
-const {Geolocation} = Plugins;
 
 @Component({
     selector: 'app-ambulance',
@@ -27,31 +21,15 @@ export class AmbulancePage implements OnInit {
     coords: any;
 
     constructor(
-        private nativeGeocoder: NativeGeocoder,
         private requesServ: EmergencyService,
         private router: Router,
         private androidPermissions: AndroidPermissions,
         public toastController: ToastController) {
+        this.checkPermissions2();
     }
 
 
     ngOnInit() {
-
-    }
-
-    async locate() {
-        const coordinates = await Geolocation.getCurrentPosition();
-        this.coords = coordinates.coords;
-
-        const options: NativeGeocoderOptions = {
-            useLocale: true,
-            maxResults: 5
-        };
-        this.nativeGeocoder.reverseGeocode(this.coords.latitude, this.coords.longitude, options)
-            .then((result: NativeGeocoderResult[]) =>
-                console.log(JSON.stringify(result[0]))
-            )
-            .catch((error: any) => console.log(error));
 
     }
 
@@ -69,7 +47,7 @@ export class AmbulancePage implements OnInit {
         const dot = icon({
             iconUrl: 'assets/icon/ambulance.png',
             // shadowUrl: 'dot-shadow.png',
-            iconSize: [30, 30], // size of the icon
+            iconSize: [55, 55], // size of the icon
             shadowSize: [50, 64], // size of the shadow
             iconAnchor: [22, 94], // point of the icon which will correspond to marker's
             shadowAnchor: [4, 62],  // the same for the shadow
@@ -87,7 +65,6 @@ export class AmbulancePage implements OnInit {
             console.log(this.myLatLng);
             this.locData.latitude = this.myLatLng.lat;
             this.locData.longitude = this.myLatLng.lng;
-            this.getAddress(this.myLatLng.lat, this.myLatLng.lng);
 
         });
         console.log(this.myLatLng);
@@ -128,26 +105,19 @@ export class AmbulancePage implements OnInit {
         toast.present();
     }
 
-    // The function below is added
-    getAddress(lat: number, long: number) {
-        const options: NativeGeocoderOptions = {
-            useLocale: true,
-            maxResults: 5
-        };
-        this.nativeGeocoder.reverseGeocode(lat, long, options).then(results => {
-            this.locData.address = Object.values(results[0]).reverse();
-
-        });
+    checkPermissions2() {
+        // this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.CAMERA).then(
+        //     result => console.log('Has permission?', result.hasPermission),
+        //     err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.CAMERA)
+        // );
+        this.androidPermissions.checkPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION
+        ).then(
+            result => console.log('Has permission?', result.hasPermission),
+            err => this.androidPermissions.requestPermission(this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION)
+        );
+        this.androidPermissions.requestPermissions(
+            [
+                this.androidPermissions.PERMISSION.ACCESS_COARSE_LOCATION,
+                this.androidPermissions.PERMISSION.ACCESS_FINE_LOCATION]);
     }
-
-// The function below is added
-    confirmPickupLocation() {
-        const navigationextras: NavigationExtras = {
-            state: {
-                pickupLocation: this.locData.address
-            }
-        };
-        this.router.navigate(['home'], navigationextras);
-    }
-
 }

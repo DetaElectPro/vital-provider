@@ -1,0 +1,46 @@
+<ion-header no-border translucent>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button color="light">
+            </ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Profile</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">
+                <ion-icon slot="icon-only" src="assets/icon/checkmark-filled.svg"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+    <!--    <div class="card">-->
+    <ion-card>
+        <div class="header">
+            <div class="avatar">
+                <img src="https://images.unsplash.com/photo-1518806118471-f28b20a1d79d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80">
+            </div>
+        </div>
+        <ion-card-content>
+            <div class="user-meta ion-text-center">
+                <h3 class="playername">{{doctorData.name}}</h3>
+                <h5 class="country">Address: {{doctorData.employ.address}}</h5>
+                <h5 class="country">Graduation date: {{doctorData.employ.graduation_date}}</h5>
+                <h6 class="ranking">Years of experience:
+                    <ion-chip>
+                        <ion-label>{{doctorData.employ.years_of_experience}}</ion-label>
+                    </ion-chip>
+                </h6>
+            </div>
+
+            <ion-button (click)="download(doctorData.employ.cv, doctorData.name)" color="primary" expand="full">View
+                Cv
+            </ion-button>
+            <ion-button color="secondary" expand="full" href="tel:{{doctorData.phone}}">Call</ion-button>
+            <ion-button (click)="closeModal()" expand="full">Close profile</ion-button>
+        </ion-card-content>
+    </ion-card>
+    <!--    </div>-->
+
+</ion-content>
+

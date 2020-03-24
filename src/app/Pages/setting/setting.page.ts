@@ -27,7 +27,7 @@ export class SettingPage implements OnInit {
         await this.authServ.logout()
             .then(res => {
                 console.log('logOut:', res);
-                this.route.navigate(['/']);
+                this.route.navigate(['/login']);
 
             })
             .catch(err => {

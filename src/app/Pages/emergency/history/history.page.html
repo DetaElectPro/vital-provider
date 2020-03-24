@@ -1,10 +1,14 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Emergency History</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button color="light">
+            </ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Emergency History</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="historyData">
     <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
         <ion-refresher-content
                 pullingIcon="arrow-dropdown"
@@ -25,11 +29,12 @@
             <ion-col class="text-blue ion-text-center" routerLink="/request-details/{{item.id}}">{{item.type}}</ion-col>
 
             <ion-col class="text-amber ion-text-center">
-              {{item.available}}
+                {{item.available}}
             </ion-col>
 
 
-            <ion-col class="text-blue-grey ion-text-center" routerLink="/request-details/{{item.id}}">{{item.created_at| date: 'y-MM-d'}}</ion-col>
+            <ion-col class="text-blue-grey ion-text-center"
+                     routerLink="/request-details/{{item.id}}">{{item.created_at| date: 'y-MM-d'}}</ion-col>
         </ion-row>
     </ion-grid>
 
@@ -40,4 +45,15 @@
                 loadingText="Loading more data...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
+
 </ion-content>
+
+<div *ngIf="!historyData">
+    <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+</div>

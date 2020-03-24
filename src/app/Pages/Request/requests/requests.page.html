@@ -1,11 +1,15 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Requests</ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button color="light">
+            </ion-back-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Requests</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-      <app-explore-container name="requests"></app-explore-container>
+    <app-explore-container name="requests"></app-explore-container>
 
     <ion-list>
         <ion-item *ngFor="let item of requestsData" routerLink="/request-details/{{item.id}}">
@@ -58,7 +62,7 @@
     </div>
 
 
-    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
         <ion-infinite-scroll-content
                 loadingSpinner="bubbles"
                 loadingText="Loading more data...">

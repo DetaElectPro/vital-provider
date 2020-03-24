@@ -7,17 +7,10 @@ import {Component, OnInit} from '@angular/core';
     styleUrls: ['./web-view.page.scss'],
 })
 export class WebViewPage implements OnInit {
-    data: any;
-    username: any;
-    password: any;
 
     constructor() {
     }
 
     ngOnInit() {
-    }
-
-    onCallbackEvent(onLogin: string) {
-        
     }
 }

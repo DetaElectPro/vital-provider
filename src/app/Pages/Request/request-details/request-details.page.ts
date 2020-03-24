@@ -3,8 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {AlertController, LoadingController, ModalController, PopoverController} from '@ionic/angular';
 import {RequestsService} from '../../../Service/requests.service';
 import {Requests} from '../../../Models/requests';
-import {DoctorePage} from '../../../doctore/doctore.page';
-import {FinishRequestComponent} from "../../../components/finish-request/finish-request.component";
+import {DoctorePage} from '../../doctore/doctore.page';
+import {FinishRequestComponent} from '../../../components/finish-request/finish-request.component';
 
 @Component({
     selector: 'app-request-details',
@@ -13,8 +13,6 @@ import {FinishRequestComponent} from "../../../components/finish-request/finish-
 })
 export class RequestDetailsPage implements OnInit {
 
-    // map: Map;
-    // propertyList = [];
     result: any;
     requestId: number;
     request: Requests = {
@@ -72,7 +70,7 @@ export class RequestDetailsPage implements OnInit {
             await this.requestServe.getRequestById(this.requestId)
                 .subscribe(res => {
                     this.result = res;
-                    console.log(this.request = this.result.data);
+                    this.request = this.result.data;
                     loading.dismiss();
                 }, err => {
                     console.log(err);
@@ -86,7 +84,7 @@ export class RequestDetailsPage implements OnInit {
     acceptRequest() {
         this.requestServe.adminAcceptRequestSpecialists(this.requestId)
             .subscribe(res => {
-                    console.log(this.acceptRes = res);
+                    this.acceptRes = res;
                     if (this.acceptRes.accept) {
                         this.router.navigateByUrl('/history');
                     } else {
@@ -104,7 +102,7 @@ export class RequestDetailsPage implements OnInit {
     cancelRequest() {
         this.requestServe.cancelRequestByAdmin(this.requestId)
             .subscribe(res => {
-                    console.log(this.acceptRes = res);
+                    this.acceptRes = res;
                     if (this.acceptRes.accept) {
                         alert('ok');
                     } else {

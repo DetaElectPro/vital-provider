@@ -90,7 +90,8 @@
                 <img src="assets/images/cover.png"/>
 
                 <ion-card-content class="black-opct text-white">
-                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">Icu Serves</ion-card-title>
+                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">Icu Serves
+                    </ion-card-title>
                     <span class="info-stt text-white inline-block"><ion-icon
                             name="stats-chart-outline"></ion-icon>2 action</span>
                 </ion-card-content>
@@ -98,4 +99,8 @@
         </div>
     </ion-card>
 
+    <div *ngIf="response?.user.status == 2">
+        <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
+        <ion-button (click)="openBrow()" color="danger" expand="block">upload cv</ion-button>
+    </div>
 </ion-content>
