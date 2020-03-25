@@ -13,9 +13,9 @@ const TOKEN_KEY = 'token';
 export class AuthService {
     token: any;
     user: any;
-    // url = 'https://medical.detatech.xyz/api/';
+    url = 'https://medical.detatech.xyz/api/';
     // url = 'http://localhost:8000/api/';
-    url = 'http://192.168.2.6:8000/api/';
+    // url = 'http://192.168.2.6:8000/api/';
 
 
     authenticationState = new BehaviorSubject(false);

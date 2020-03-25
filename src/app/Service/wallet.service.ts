@@ -8,7 +8,9 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class WalletService {
 
     // Url = 'http://localhost:8000/api/';
-    Url = 'http://192.168.2.6:8000/api/';
+    // Url = 'http://192.168.2.6:8000/api/';
+    Url = 'https://medical.detatech.xyz/api/';
+
     myHeaders: any;
     token = `Bearer ${localStorage.getItem('token')}`;
 

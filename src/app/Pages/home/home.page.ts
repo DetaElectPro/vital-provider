@@ -23,8 +23,8 @@ export class HomePage implements OnInit {
 
     }
 
-    openBrow() {
-        const browser = this.iab.create('http://192.168.2.6:8000/profile/' + this.response.user.id);
+    openCvUpdate() {
+        const browser = this.iab.create('https://medical.detatech.xyz/profile/' + this.response.user.id);
         browser.on('loadstop').subscribe(event => {
                 console.log('sus: ', event);
             },
@@ -32,6 +32,7 @@ export class HomePage implements OnInit {
                 console.log('error: ', error);
             });
     }
+
 
     getDashboardData() {
         this.userServ.checkUserService()
