@@ -93,7 +93,6 @@ export class NewRequestPage implements OnInit {
         component: IonicSelectableComponent,
         value: any
     }) {
-        console.log('port:', event.value);
         this.requestData.medical_id = event.value.medical_id;
     }
 
@@ -116,16 +115,21 @@ export class NewRequestPage implements OnInit {
         return await modal.present();
     }
 
-    sendRequest() {
+    async sendRequest() {
+        const loading = this.loadingController.create({
+            message: 'Please wait...',
+            translucent: true,
+        });
+        (await loading).present();
         this.requestData.longitude = this.dataReturned.lng;
         this.requestData.latitude = this.dataReturned.lat;
         this.requestData.address = this.dataReturned.address;
         this.requestData.start_time = formatDate(this.requestData.start_time, 'yyyy-MM-dd', 'en_US');
         this.requestData.end_time = formatDate(this.requestData.end_time, 'yyyy-MM-dd', 'en_US');
 
-        console.log('send: ', this.requestData);
         this.requestServ.createRequest(this.requestData)
-            .subscribe(res => {
+            .subscribe(async res => {
+                    (await loading).dismiss();
                     console.log('response: ', this.requrstResult = res);
                     if (this.requrstResult.success) {
                         this.presentToast(this.requrstResult.message);
@@ -135,7 +139,8 @@ export class NewRequestPage implements OnInit {
                     }
 
                 },
-                error1 => {
+                async error1 => {
+                    (await loading).dismiss();
                     console.log('Error: ', this.errorMessage = error1);
                     this.requrstResult('error try again');
                 });

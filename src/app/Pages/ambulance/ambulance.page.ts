@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {icon, Map, marker, tileLayer} from 'leaflet';
 import {EmergencyService} from '../../Service/emergency.service';
-import {ToastController} from '@ionic/angular';
+import {LoadingController, ToastController} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 
@@ -23,6 +23,7 @@ export class AmbulancePage implements OnInit {
     constructor(
         private requesServ: EmergencyService,
         private router: Router,
+        public loadingController: LoadingController,
         private androidPermissions: AndroidPermissions,
         public toastController: ToastController) {
         this.checkPermissions2();
@@ -47,7 +48,7 @@ export class AmbulancePage implements OnInit {
         const dot = icon({
             iconUrl: 'assets/icon/ambulance.png',
             // shadowUrl: 'dot-shadow.png',
-            iconSize: [55, 55], // size of the icon
+            iconSize: [40, 40], // size of the icon
             shadowSize: [50, 64], // size of the shadow
             iconAnchor: [22, 94], // point of the icon which will correspond to marker's
             shadowAnchor: [4, 62],  // the same for the shadow
@@ -76,9 +77,14 @@ export class AmbulancePage implements OnInit {
         this.map.remove();
     }
 
-    sendRequest() {
+    async sendRequest() {
+        const loading = await this.loadingController.create({
+            message: 'Please wait...',
+        });
+        await loading.present();
         this.requesServ.ambulanceRequest(this.locData)
-            .subscribe(response => {
+            .subscribe(async response => {
+                    await loading.dismiss();
                     this.data = response;
                     if (this.data.success) {
                         this.presentToast(this.data.message);
@@ -87,7 +93,8 @@ export class AmbulancePage implements OnInit {
                         this.presentToast(this.data.message);
                     }
                 }
-                , error => {
+                , async error => {
+                    await loading.dismiss();
                     this.Error = error;
                     alert('try again');
                 }

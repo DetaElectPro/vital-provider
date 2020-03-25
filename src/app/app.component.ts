@@ -3,12 +3,12 @@ import {Component} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {FCM} from '@ionic-native/fcm/ngx';
-// import {Router} from '@angular/router';
+import {FCM} from 'capacitor-fcm';
+import {Plugins, PushNotification} from '@capacitor/core';
 
-// import {Plugins, PushNotification, PushNotificationActionPerformed, PushNotificationToken} from '@capacitor/core';
+const {PushNotifications} = Plugins;
 
-// const {PushNotifications} = Plugins;
+const fcm = new FCM();
 
 @Component({
     selector: 'app-root',
@@ -18,13 +18,14 @@ import {FCM} from '@ionic-native/fcm/ngx';
 export class AppComponent {
 
     result: any;
+    topicName = 'admin';
+    remoteToken: string;
+    private notifications: any;
 
     constructor(
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
-        private fcm: FCM,
-        // private router: Router
     ) {
         this.initializeApp();
     }
@@ -33,37 +34,57 @@ export class AppComponent {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
+            this.onLoade();
+            this.subscribeTo();
+            this.getToken();
 
-            this.getPushNotifications();
         });
     }
 
-    getPushNotifications() {
-        this.fcm.getToken().then(token => {
-            console.log(token);
-            localStorage.setItem('fcm_registration_in', token);
-        });
 
-        this.fcm.onTokenRefresh().subscribe(token => {
-            console.log(token);
-            localStorage.setItem('fcm_registration_in', token);
-        });
-
-        this.fcm.onNotification().subscribe(data => {
+    onLoade() {
+        PushNotifications.addListener('registration', data => {
+            // alert(JSON.stringify(data));
             console.log(data);
-            if (data.wasTapped) {
-                console.log('Received in background');
-                // this.router.navigate([data.landing_page, data.price]);
-            } else {
-                console.log('Received in foreground');
-                // this.router.navigate([data.landing_page, data.price]);
-            }
         });
-        this.fcm.subscribeToTopic('admin');
-
-        // this.fcm.unsubscribeFromTopic('marketing');
-
+        PushNotifications.register().then(() =>
+            console.log(`registered for push`));
+        PushNotifications.addListener(
+            'pushNotificationReceived',
+            (notification: PushNotification) => {
+                console.log('notification ' + JSON.stringify(notification));
+                this.notifications.push(notification);
+            }
+        );
     }
 
+    subscribeTo() {
+        PushNotifications.register()
+            .then(_ => {
+                fcm
+                    .subscribeTo({topic: this.topicName})
+                    .then(r => console.log(`subscribed to topic ${this.topicName}`))
+                    .catch(err => console.log(err));
+            })
+            .catch(err => alert(JSON.stringify(err)));
+    }
 
+    // unsubscribeFrom() {
+    //     fcm
+    //         .unsubscribeFrom({topic: 'test'})
+    //         .then(r => alert(`unsubscribed from topic ${this.topicName}`))
+    //         .catch(err => console.log(err));
+    //     if (this.platform.is('android')) {
+    //         fcm.deleteInstance();
+    //     }
+    // }
+
+    getToken() {
+        fcm.getToken()
+            .then(result => {
+                this.remoteToken = result.token;
+                localStorage.setItem('fcm_registration_in', result.token);
+            })
+            .catch(err => console.log(err));
+    }
 }

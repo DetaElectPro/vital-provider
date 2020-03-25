@@ -22,7 +22,6 @@ import {FinishRequestComponent} from './components/finish-request/finish-request
 import {FormsModule} from '@angular/forms';
 import {NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
-import {FCM} from '@ionic-native/fcm/ngx';
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent, FinishRequestComponent],
@@ -44,7 +43,6 @@ import {FCM} from '@ionic-native/fcm/ngx';
     FileOpener,
     File,
     PdfViewerService,
-    FCM,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
 
   ],

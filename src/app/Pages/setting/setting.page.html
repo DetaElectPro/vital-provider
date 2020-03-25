@@ -21,14 +21,23 @@
         </ion-card-header>
     </ion-card>
     <ion-list>
-        <ion-item color="secondary" href="tabs/wallet">
-            My Wallet
-            <span class="wallet-outline" slot="end"></span>
+        <ion-item color="tertiary" href="tabs/wallet">
+            <span style="font-size: large"> My Wallet</span>
+            <ion-icon name="wallet-sharp" slot="end"></ion-icon>
         </ion-item>
 
         <ion-item color="tertiary" href="#">
-            Profile
+            <span style="font-size: large"> Profile</span>
             <ion-icon name="person" slot="end"></ion-icon>
+        </ion-item>
+
+        <ion-item (click)="openTermsAndConditions()" color="tertiary">
+            <span style="font-size: large">Terms and conditions</span>
+            <ion-icon name="document-attach-outline" slot="end"></ion-icon>
+        </ion-item>
+        <ion-item (click)="openPrivacyPolicy()" color="tertiary">
+            <span style="font-size: large"> privacy policy.</span>
+            <ion-icon name="file-tray-full-sharp" slot="end"></ion-icon>
         </ion-item>
 
         <ion-button (click)="logOut()" *ngIf="token" expand="full">

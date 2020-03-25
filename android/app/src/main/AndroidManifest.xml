@@ -12,7 +12,7 @@
         android:usesCleartextTraffic="true">
 
         <activity
-            android:name="io.ionic.starter.MainActivity"
+            android:name="com.hostpital.hospitaladmin.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale"
             android:label="@string/title_activity_main"
             android:launchMode="singleTask"

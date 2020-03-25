@@ -81,9 +81,15 @@ export class RequestDetailsPage implements OnInit {
         }
     }
 
-    acceptRequest() {
+    async acceptRequest() {
+        const loading = this.loadingController.create({
+            message: 'Please wait...',
+            translucent: true,
+        });
+        (await loading).present();
         this.requestServe.adminAcceptRequestSpecialists(this.requestId)
-            .subscribe(res => {
+            .subscribe(async res => {
+                    (await loading).dismiss();
                     this.acceptRes = res;
                     if (this.acceptRes.accept) {
                         this.router.navigateByUrl('/history');
@@ -92,16 +98,23 @@ export class RequestDetailsPage implements OnInit {
                     }
 
                 },
-                error => {
+                async error => {
+                    (await loading).dismiss();
                     this.acceptRes = error;
                     console.log(this.acceptRes);
                 }
             );
     }
 
-    cancelRequest() {
+    async cancelRequest() {
+        const loading = this.loadingController.create({
+            message: 'Please wait...',
+            translucent: true,
+        });
+        (await loading).present();
         this.requestServe.cancelRequestByAdmin(this.requestId)
-            .subscribe(res => {
+            .subscribe(async res => {
+                    (await loading).dismiss();
                     this.acceptRes = res;
                     if (this.acceptRes.accept) {
                         alert('ok');
@@ -110,7 +123,8 @@ export class RequestDetailsPage implements OnInit {
                     }
 
                 },
-                error => {
+                async error => {
+                    (await loading).dismiss();
                     this.acceptRes = error;
                     console.log(this.acceptRes);
                 }
@@ -188,12 +202,7 @@ export class RequestDetailsPage implements OnInit {
         return await modal.present();
     }
 
-    requestDone() {
-
-    }
-
-
-    async notifications(ev: any) {
+    async requestDone(ev: any) {
         const popover = await this.popoverCtrl.create({
             component: FinishRequestComponent,
             event: ev,

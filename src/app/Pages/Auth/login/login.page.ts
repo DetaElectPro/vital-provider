@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../Service/auth.service';
 import {Router} from '@angular/router';
+import {LoadingController} from '@ionic/angular';
 
 // import {Storage} from '@ionic/storage';
 
@@ -16,6 +17,7 @@ export class LoginPage implements OnInit {
     constructor(
         private authServe: AuthService,
         private router: Router,
+        public loadingController: LoadingController
         // private storage: Storage
     ) {
     }
@@ -25,10 +27,17 @@ export class LoginPage implements OnInit {
     }
 
 
-    userLogin() {
+    async userLogin() {
+        const loading = await this.loadingController.create({
+            message: 'Please wait...',
+            translucent: true,
+
+        });
+        await loading.present();
         this.authServe.loginServes(this.loginData)
-            .then(data => {
-                this.usersData = data;
+            .then(async response => {
+                await loading.dismiss();
+                this.usersData = response;
                 if (this.usersData.error) {
                     alert('error data');
                 } else {
@@ -36,12 +45,13 @@ export class LoginPage implements OnInit {
                     if (this.usersData.user.status === 1) {
                         this.router.navigate(['/medical-board']);
                     }
-                    if (this.usersData.user.status === 2) {
+                    if (this.usersData.user.status === 2 || this.usersData.user.status === 3) {
                         this.router.navigate(['/']);
                     }
                 }
             })
-            .catch(err => {
+            .catch(async err => {
+                await loading.dismiss();
                 console.log('serve Error: ', err);
             });
     }

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {ToastController} from '@ionic/angular';
+import {LoadingController, ToastController} from '@ionic/angular';
 import {EmergencyService} from '../../../Service/emergency.service';
 
 @Component({
@@ -18,16 +18,20 @@ export class RequestPage implements OnInit {
 
   constructor(private router: Router,
               private emergencyServ: EmergencyService,
+              public loadingController: LoadingController,
               public toastController: ToastController) {
   }
 
   ngOnInit() {
   }
 
-  sendRequest() {
-    console.log('send: ', this.requestData);
+  async sendRequest() {
+    const loading = await this.loadingController.create({
+      message: 'Please wait...',
+    });
     this.emergencyServ.addEmergency(this.requestData)
-        .subscribe(res => {
+        .subscribe(async res => {
+              await loading.dismiss();
               console.log('response: ', this.requrstResult = res);
               if (this.requrstResult.success) {
                 this.presentToast(this.requrstResult.message);
@@ -37,7 +41,8 @@ export class RequestPage implements OnInit {
               }
 
             },
-            error1 => {
+            async error1 => {
+              await loading.dismiss();
               console.log('Error: ', this.errorMessage = error1);
               this.presentToast('error try again');
             });

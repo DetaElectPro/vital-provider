@@ -150,4 +150,8 @@ export class AuthService {
         return this.http.put(`${this.url}auth/check_user`, data, this.myHeaders);
     }
 
+    public getSlide(): Observable<any> {
+        return this.http.get(`${this.url}home`, this.myHeaders);
+    }
+
 }

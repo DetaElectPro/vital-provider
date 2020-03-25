@@ -66,7 +66,6 @@ export class MedicalBoardPage implements OnInit {
 
     async getMedicalFiled() {
         const loading = this.loadingController.create({
-            spinner: null,
             message: 'Please wait...',
             translucent: true,
         });

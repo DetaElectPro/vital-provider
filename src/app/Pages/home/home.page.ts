@@ -11,6 +11,8 @@ export class HomePage implements OnInit {
     @ViewChild('slide', {static: false}) slide3: any;
 
     response: any;
+    responseFcm: any;
+    dateSlide: any;
 
     constructor(
         private iab: InAppBrowser,
@@ -20,7 +22,7 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit() {
-
+        this.slideHome();
     }
 
     ionViewDidEnter() {
@@ -69,6 +71,15 @@ export class HomePage implements OnInit {
             });
     }
 
+    slideHome() {
+        this.userServ.getSlide()
+            .subscribe(response => {
+                this.dateSlide = response;
+                console.log('res: ', response);
+            }, error => {
+                console.log('server: ', error);
+            });
+    }
 
     slide_next() {
         this.slide3.slideNext();
