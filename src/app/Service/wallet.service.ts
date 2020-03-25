@@ -28,7 +28,7 @@ export class WalletService {
      * Return my Point as observable
      */
     public getBalanceService(): Observable<any> {
-        return this.http.get(`${this.Url}my_wallets`, this.myHeaders);
+        return this.http.get(`${this.Url}wallets`, this.myHeaders);
     }
 
 }

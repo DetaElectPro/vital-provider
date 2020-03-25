@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Login - Users</ion-title>
+        <ion-title>Login</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -8,10 +8,10 @@
     <br>
     <ion-list class="ion-padding-horizontal ion-text-center">
         <div>
-            <img src="assets/images/vitle.png" width="25%">
+            <img src="assets/images/vitle.png" width="30%">
         </div>
-        <h2 color="light" ion-text>
-
+        <h2 class="text-d-purple" ion-text>
+            For Medical Serves
         </h2>
     </ion-list>
 
@@ -19,22 +19,23 @@
         <ion-card-content>
             <ion-item>
                 <ion-label position="floating">Phone</ion-label>
-                <ion-input type="text" min="6" max="20" [(ngModel)]="loginData.phone"></ion-input>
+                <ion-input [(ngModel)]="loginData.phone" max="20" min="6" type="text"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label position="floating">Password</ion-label>
-                <ion-input type="password" min="6" max="20" [(ngModel)]="loginData.password"></ion-input>
+                <ion-input [(ngModel)]="loginData.password" max="20" min="6" type="password"></ion-input>
             </ion-item>
 
-            <ion-button expand="block" (click)="userLogin()">Login</ion-button>
+            <ion-button (click)="userLogin()" expand="block">Login</ion-button>
 
         </ion-card-content>
 
-        <p>Forgot your password?
+        <p class="ion-text-center">Forgot your password?
             <a href="password_reset">reset</a>
 
-        <p style="text-align: center;margin: 15%;">do not have an account?<a href="register"><b>Create a new
+        <p class="ion-text-center">Do not have an account?<a href="register"><b>Create
+            a new
             account</b></a></p>
 
     </ion-card>

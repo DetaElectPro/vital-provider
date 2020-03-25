@@ -27,6 +27,13 @@ ion-toolbar {
   --color: var(--ion-color-light);
 }
 
+.item.sc-ion-label-ios-h, .item .sc-ion-label-ios-h {
+  font-size: small;
+}
+
+.item.sc-ion-label-md-h, .item .sc-ion-label-md-h {
+  font-size: small;
+}
 
 // http://ionicframework.com/docs/v2/theming/
 
@@ -3333,8 +3340,8 @@ ion-card {
   }
 
   ion-label {
-    margin-top: 5px !important;
-    margin-bottom: 5px !important;
+    //margin-top: 5px !important;
+    //margin-bottom: 5px !important;
   }
 
   &.card-avt-pst {

@@ -57,9 +57,11 @@ export class AuthService {
 
     logout() {
         this.http.post(`${this.url}logout`, localStorage.getItem('token'));
-        this.storage.remove('userInfo');
-        return this.storage.remove(TOKEN_KEY).then(() => {
-            this.authenticationState.next(false);
+        return this.storage.remove('userInfo').then(res => {
+            console.log('logOut: ', res);
+            this.storage.remove(TOKEN_KEY).then(() => {
+                this.authenticationState.next(false);
+            });
         });
     }
 
@@ -87,7 +89,6 @@ export class AuthService {
                     this.token = res;
                     this.user = res;
                     this.token = this.token.token;
-                    console.log('token', this.token);
                     this.storage.set(TOKEN_KEY, this.token).then(() => {
                         this.authenticationState.next(true);
                     });
@@ -101,7 +102,6 @@ export class AuthService {
     }
 
     registerServes(userData) {
-        console.log(userData);
         return new Promise((resolve, reject) => {
             this.http.post(this.url + 'auth/register', JSON.stringify(userData), {
                 headers: new HttpHeaders().set('Content-Type', 'application/json'),
@@ -144,6 +144,10 @@ export class AuthService {
 
     public checkUserService(): Observable<any> {
         return this.http.get(`${this.url}auth/check_user`, this.myHeaders);
+    }
+
+    public updateFcmToken(data): Observable<any> {
+        return this.http.put(`${this.url}auth/check_user`, data, this.myHeaders);
     }
 
 }

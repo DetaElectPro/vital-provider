@@ -20,8 +20,9 @@ import {DoctorePageModule} from './Pages/doctore/doctore.module';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {FinishRequestComponent} from './components/finish-request/finish-request.component';
 import {FormsModule} from '@angular/forms';
-import { NativeGeocoder, NativeGeocoderOptions } from '@ionic-native/native-geocoder/ngx';
+import {NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
+import {FCM} from '@ionic-native/fcm/ngx';
 
 @NgModule({
   declarations: [AppComponent, NotificationsComponent, FinishRequestComponent],
@@ -43,6 +44,7 @@ import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
     FileOpener,
     File,
     PdfViewerService,
+    FCM,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
 
   ],

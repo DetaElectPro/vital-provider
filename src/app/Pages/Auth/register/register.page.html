@@ -19,30 +19,31 @@
         <ion-card-content>
             <ion-item>
                 <ion-label position="floating">Name</ion-label>
-                <ion-input type="text" min="6" max="20" [(ngModel)]="registerData.name"></ion-input>
+                <ion-input [(ngModel)]="registerData.name" max="20" min="6" type="text"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label position="floating">Phone</ion-label>
-                <ion-input type="text" min="6" max="20" [(ngModel)]="registerData.phone"></ion-input>
+                <ion-input [(ngModel)]="registerData.phone" max="20" min="6" type="text"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label position="floating">Password</ion-label>
-                <ion-input type="password" min="6" max="20" [(ngModel)]="registerData.password"></ion-input>
+                <ion-input [(ngModel)]="registerData.password" max="20" min="6" type="password"></ion-input>
             </ion-item>
 
             <ion-item>
                 <ion-label position="floating">Re-Password</ion-label>
-                <ion-input type="password" min="6" max="20" [(ngModel)]="registerData.password_check"></ion-input>
+                <ion-input [(ngModel)]="registerData.password_check" max="20" min="6" type="password"></ion-input>
             </ion-item>
 
-            <ion-button expand="block" (click)="userRegister()">تسجيل الدخول</ion-button>
+            <ion-button (click)="userRegister()" expand="block">Registration</ion-button>
 
         </ion-card-content>
 
 
-        <p style="text-align: center;margin: 15%;">do yo have a account?<a href="login"><b>Login Now</b></a></p>
+        <p class="ion-text-center" style="text-align: center;margin: 15%;">do yo have a account?<a href="login"><b
+                class="ion-text-center">Login Now</b></a></p>
 
     </ion-card>
 </ion-content>

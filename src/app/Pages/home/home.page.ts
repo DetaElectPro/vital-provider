@@ -23,6 +23,12 @@ export class HomePage implements OnInit {
 
     }
 
+    ionViewDidEnter() {
+        if (localStorage.getItem('fcm_registration_in')) {
+            this.updateFcmToken();
+        }
+    }
+
     openCvUpdate() {
         const browser = this.iab.create('https://medical.detatech.xyz/profile/' + this.response.user.id);
         browser.on('loadstop').subscribe(event => {
@@ -37,11 +43,27 @@ export class HomePage implements OnInit {
     getDashboardData() {
         this.userServ.checkUserService()
             .subscribe(response => {
-                console.log('res: ', this.response = response);
+                this.response = response;
                 if (this.response.status === true) {
                 } else {
                     alert('filed');
                 }
+            }, error => {
+                console.log('server: ', error);
+            });
+    }
+
+    updateFcmToken() {
+        const data = {
+            fcm_registration_in: localStorage.getItem('fcm_registration_in')
+        };
+        this.userServ.updateFcmToken(data)
+            .subscribe(response => {
+                console.log('res: ', response);
+                // if (this.response.status === true) {
+                // } else {
+                //     alert('filed');
+                // }
             }, error => {
                 console.log('server: ', error);
             });

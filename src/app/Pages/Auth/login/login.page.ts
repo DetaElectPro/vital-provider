@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
     styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-    loginData = {phone: '', password: '', role: 3};
+    loginData = {phone: '', password: '', role: 3, fcm_registration_in: ''};
     usersData: any = [];
 
     constructor(
@@ -21,13 +21,14 @@ export class LoginPage implements OnInit {
     }
 
     ngOnInit() {
+        this.loginData.fcm_registration_in = localStorage.getItem('fcm_registration_in');
     }
 
 
     userLogin() {
         this.authServe.loginServes(this.loginData)
             .then(data => {
-                console.log('outPut: ', this.usersData = data);
+                this.usersData = data;
                 if (this.usersData.error) {
                     alert('error data');
                 } else {

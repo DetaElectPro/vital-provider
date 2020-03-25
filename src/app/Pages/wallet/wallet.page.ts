@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {WalletService} from '../../Service/wallet.service';
 
 @Component({
@@ -6,7 +6,7 @@ import {WalletService} from '../../Service/wallet.service';
     templateUrl: 'wallet.page.html',
     styleUrls: ['wallet.page.scss']
 })
-export class WalletPage {
+export class WalletPage implements OnInit {
 
     data: any;
     private errorMesg: any;
@@ -16,12 +16,16 @@ export class WalletPage {
     ) {
     }
 
+    ngOnInit(): void {
+        this.loadData();
+    }
 
     async loadData() {
         await this.walletServ.getBalanceService()
             .subscribe(
                 data => {
                     console.log(this.data = data);
+                    this.data = this.data.data;
                 },
                 error => {
                     console.log(this.errorMesg = error);

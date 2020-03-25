@@ -8,7 +8,7 @@ import {Router} from '@angular/router';
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
-    registerData: any = {name: '', phone: '', password: '', role: 3};
+    registerData: any = {name: '', phone: '', password: '', password_check: '', role: 3, fcm_registration_in: ''};
 
     result: any;
 
@@ -16,21 +16,25 @@ export class RegisterPage implements OnInit {
     }
 
     ngOnInit() {
+        this.registerData.fcm_registration_in = localStorage.getItem('fcm_registration_in');
     }
 
     userRegister() {
-        this.authServe.registerServes(this.registerData)
-            .then(data => {
-                this.result = data;
-                // console.log(data);
-                if (this.registerData.error) {
-                    alert('error data');
-                } else {
-                    this.route.navigate(['/login']);
-                }
-            })
-            .catch(err => {
-                console.log('serve Error: ', err);
-            });
+        if (this.registerData.password === this.registerData.password_check) {
+            this.authServe.registerServes(this.registerData)
+                .then(data => {
+                    this.result = data;
+                    if (this.result.error) {
+                        alert(`Message: ${this.result.message}`);
+                    } else {
+                        this.route.navigate(['/login']);
+                    }
+                })
+                .catch(err => {
+                    console.log('serve Error: ', err);
+                });
+        } else {
+            alert(`password don't match`);
+        }
     }
 }

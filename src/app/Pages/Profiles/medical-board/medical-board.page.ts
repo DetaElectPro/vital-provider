@@ -23,10 +23,9 @@ export class MedicalBoardPage implements OnInit {
         registration_date: '',
         years_of_experience: 0
     };
-
-    private dataResult: any;
     // specialtiesList: SpecialiesOptaion[];
     specialtiesList: any;
+    private dataResult: any;
     private errorMessage: any;
 
 
@@ -89,6 +88,5 @@ export class MedicalBoardPage implements OnInit {
         component: IonicSelectableComponent,
         value: any
     }) {
-        console.log('port:', event.value);
     }
 }

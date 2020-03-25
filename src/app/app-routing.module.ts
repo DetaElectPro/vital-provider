@@ -7,10 +7,6 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./Pages/tabs/tabs.module').then(m => m.TabsPageModule), canActivate: [AuthGuard]
     },
-    // {
-    //     path: 'requests',
-    //     loadChildren: () => import('./Pages/request/request-tabs/request-tabs.module').then(m => m.RequestTabsPageModule)
-    // },
     {
         path: 'requests',
         loadChildren: () => import('./Pages/request/requests/requests.module').then(m => m.RequestsPageModule)
@@ -62,7 +58,15 @@ const routes: Routes = [
     {
         path: 'doctore',
         loadChildren: () => import('./Pages/doctore/doctore.module').then(m => m.DoctorePageModule)
-    }
+    },
+    {
+        path: 'pharmacy',
+        loadChildren: () => import('./Pages/pharmacy/pharmacy.module').then(m => m.PharmacyPageModule)
+    },
+    // {
+    //     path: 'wallet',
+    //     loadChildren: () => import('./Pages/wallet/wallet.module').then(m => m.WalletPageModule)
+    // }
 
 
 ];
