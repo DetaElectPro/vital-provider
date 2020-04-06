@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {AuthService} from '../../Service/auth.service';
+import {ActionSheetController} from '@ionic/angular';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'app-tab1',
@@ -16,17 +18,19 @@ export class HomePage implements OnInit {
 
     constructor(
         private iab: InAppBrowser,
-        private userServ: AuthService
+        private userServ: AuthService,
+        private router: Router,
+        public actionSheetController: ActionSheetController
     ) {
-        this.getDashboardData();
+        // this.getDashboardData();
     }
 
     ngOnInit() {
-        this.slideHome();
+        // this.slideHome();
     }
 
     ionViewDidEnter() {
-        if (localStorage.getItem('fcm_registration_in')) {
+        if (localStorage.getItem(' fcm_registration_id')) {
             this.updateFcmToken();
         }
     }
@@ -41,23 +45,23 @@ export class HomePage implements OnInit {
             });
     }
 
-
-    getDashboardData() {
-        this.userServ.checkUserService()
-            .subscribe(response => {
-                this.response = response;
-                if (this.response.status === true) {
-                } else {
-                    alert('filed');
-                }
-            }, error => {
-                console.log('server: ', error);
-            });
-    }
+    //
+    // getDashboardData() {
+    //     this.userServ.checkUserService()
+    //         .subscribe(response => {
+    //             this.response = response;
+    //             if (this.response.status === true) {
+    //             } else {
+    //                 alert('filed');
+    //             }
+    //         }, error => {
+    //             console.log('server: ', error);
+    //         });
+    // }
 
     updateFcmToken() {
         const data = {
-            fcm_registration_in: localStorage.getItem('fcm_registration_in')
+            fcm_registration_id: localStorage.getItem(' fcm_registration_id')
         };
         this.userServ.updateFcmToken(data)
             .subscribe(response => {
@@ -71,15 +75,15 @@ export class HomePage implements OnInit {
             });
     }
 
-    slideHome() {
-        this.userServ.getSlide()
-            .subscribe(response => {
-                this.dateSlide = response;
-                console.log('res: ', response);
-            }, error => {
-                console.log('server: ', error);
-            });
-    }
+    // slideHome() {
+    //     this.userServ.getSlide()
+    //         .subscribe(response => {
+    //             this.dateSlide = response;
+    //             console.log('res: ', response);
+    //         }, error => {
+    //             console.log('server: ', error);
+    //         });
+    // }
 
     slide_next() {
         this.slide3.slideNext();
@@ -88,4 +92,101 @@ export class HomePage implements OnInit {
     slide_prev() {
         this.slide3.slidePrev();
     }
+
+    async ambulanceActionSheet() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'Ambulances Services',
+            buttons: [{
+                text: 'Create request',
+                icon: 'add-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/ambulance']);
+                }
+            }, {
+                text: 'browser',
+                icon: 'list-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/ambulance-history']);
+                }
+            }, {
+                text: 'Cancel',
+                icon: 'close',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Cancel clicked');
+                }
+            }]
+        });
+        await actionSheet.present();
+    }
+
+    async pharmacyActionSheet() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'pharmacy Services',
+            buttons: [{
+                text: 'Find pharmacy',
+                icon: 'assets/icon/pharmacy.svg',
+                handler: () => {
+                    this.router.navigate(['/find-pharmacy']);
+                }
+            }, {
+                text: 'Last Request',
+                icon: 'list-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/pharmacy']);
+                }
+            }, {
+                text: 'Your Request history',
+                icon: 'list-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/pharmacy-history']);
+                }
+            },
+                {
+                    text: 'Your Accept history',
+                    icon: 'list-circle-outline',
+                    handler: () => {
+                        this.router.navigate(['/accept-pharmacy']);
+                    }
+                }, {
+                    text: 'Cancel',
+                    icon: 'close',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('Cancel clicked');
+                    }
+                }]
+        });
+        await actionSheet.present();
+    }
+
+    async emergencyActionSheet() {
+        const actionSheet = await this.actionSheetController.create({
+            header: 'Requests Services',
+            buttons: [{
+                text: 'Browse new requests',
+                icon: 'list-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/emergency-pages-request']);
+                }
+            }, {
+                text: 'History',
+                icon: 'document-attach-outline',
+                handler: () => {
+                    // this.router.navigate(['/emergency-pages-history']);
+                    alert('available soon');
+                }
+            }, {
+                text: 'Cancel',
+                icon: 'close',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Cancel clicked');
+                }
+            }]
+        });
+        await actionSheet.present();
+    }
+
+
 }

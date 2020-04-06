@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-toolbar>
+
+        <ion-title class="ion-text-center">details</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content *ngIf="!pharmacy">
+    <div class="ion-padding ion-color-success">
+        <ion-skeleton-text animated class="ion-color-success" style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated class="ion-color-success"></ion-skeleton-text>
+        <ion-skeleton-text animated class="ion-color-success" style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+    <div class="ion-padding ion-color-success">
+        <ion-skeleton-text animated class="ion-color-success" style="width: 80%"></ion-skeleton-text>
+        <ion-skeleton-text animated class="ion-color-success"></ion-skeleton-text>
+        <ion-skeleton-text animated class="ion-color-success" style="width: 50%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+    </div>
+</ion-content>
+
+<ion-content *ngIf="pharmacy" class="ion-no-padding">
+    <ion-card>
+        <ion-item>
+            <ion-avatar slot="start">
+                <img src="{{pharmacy?.user?.image}}"/>
+            </ion-avatar>
+            <ion-label>
+                <h3>Create by: DR. {{pharmacy?.user?.name}}</h3>
+            </ion-label>
+        </ion-item>
+
+        <ion-card-content>
+            <ion-label>
+                <p>#: {{pharmacy?.id}}</p>
+                <h2>Name: {{pharmacy?.name}}</h2>
+                <h3>Type: {{pharmacy?.type}}</h3>
+                <h3>dose: {{pharmacy?.dose}} m/g</h3>
+                <p>Location: {{pharmacy?.address}}</p>
+                <p>Type: {{pharmacy?.type}}</p>
+                <p>Created at: {{pharmacy?.created_at|date: 'yyyy-MMMM-dd '}}</p>
+            </ion-label>
+        </ion-card-content>
+        <ion-row>
+            <ion-col class="ion-no-padding" size="6">
+                <ion-button color="primary" fill="outline" size="small">
+                    Order #:{{pharmacy?.id}}
+                </ion-button>
+            </ion-col>
+            <ion-col class="ion-no-padding" size="6">
+                <ion-button fill="outline" size="small">
+                    Available: {{pharmacy?.available}}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+    <ion-card>
+        <div *ngIf="!formCard" class="ion-text-center ion-align-items-center">
+            <ion-button (click)="pharmacyConfirm()" disabled="{{formCard}}" expand="block">
+                <ion-icon name="thumbs-up"></ion-icon>
+                <div>Accept</div>
+            </ion-button>
+        </div>
+        <!--                <div *ngIf="pharmacy.status == 2">-->
+        <ion-button (click)="requestCancel()" color="danger" disabled="" expand="block">
+            <div>Cancel</div>
+        </ion-button>
+        <!--                </div>-->
+
+    </ion-card>
+
+    <ion-list *ngIf="formCard">
+        <ion-item>
+            <ion-label>Price:</ion-label>
+            <ion-input [(ngModel)]="formData.price" type="number"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Location:</ion-label>
+            <ion-input [(ngModel)]="formData.address" type="text"></ion-input>
+        </ion-item>
+        <ion-button (click)="emergencyConfirm(formData)" shape="round" type="full">Send</ion-button>
+    </ion-list>
+</ion-content>

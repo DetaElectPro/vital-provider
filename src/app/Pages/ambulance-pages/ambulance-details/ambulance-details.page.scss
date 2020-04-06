@@ -1,0 +1,16 @@
+aion-content{
+  ion-card{
+    margin:0;
+    ion-row{
+      ion-col{
+        text-align: start;
+      }
+      ion-col:last-child{
+        text-align: center;
+      }
+      ion-col:first-child{
+        text-align: end;
+      }
+    }
+  }
+}

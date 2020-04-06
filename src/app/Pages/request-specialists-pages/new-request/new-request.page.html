@@ -1,0 +1,90 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="ion-text-center">New Request</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <app-explore-container (click)="goTo()"></app-explore-container>
+    <ion-list>
+
+
+        <form (ngSubmit)="sendRequest()" [formGroup]="requestDataForm" novalidate>
+
+            <ion-item>
+                <ion-label color="primary">Specialties</ion-label>
+                <ionic-selectable
+                        (onChange)="portChange($event)"
+                        [(ngModel)]="MedicalBoard.medical_field_id"
+                        [canSearch]="true"
+                        [class.error1]="!requestDataForm.controls.medical_id.valid && requestDataForm.controls.medical_id.dirty"
+                        [items]="specialtiesList"
+                        formControlName="medical_id"
+                        itemTextField="name"
+                        itemValueField="id">
+                </ionic-selectable>
+            </ion-item>
+
+
+            <ion-item>
+                <ion-label color="tertiary" position="floating">Name</ion-label>
+                <ion-input [(ngModel)]="requestData.name"
+                           [class.error1]="!requestDataForm.controls.name.valid && requestDataForm.controls.name.dirty"
+                           formControlName="name"
+                           type="text">
+                </ion-input>
+            </ion-item>
+
+
+            <ion-item>
+                <ion-label color="primary">Start at</ion-label>
+                <ion-datetime [(ngModel)]="requestData.start_time"
+                              [class.error1]="!requestDataForm.controls.start_time.valid && requestDataForm.controls.start_time.dirty"
+                              displayFormat="YYYY-MM-DD"
+                              formControlName="start_time"
+                              min="{{minDate}}"
+                              pickerFormat="YYYY MMMM DD"
+                              placeholder="Select Date"></ion-datetime>
+
+            </ion-item>
+            <ion-item>
+                <ion-label color="primary">End at</ion-label>
+                <ion-datetime [(ngModel)]="requestData.end_time"
+                              [class.error1]="!requestDataForm.controls.end_time.valid && requestDataForm.controls.end_time.dirty"
+                              displayFormat="YYYY-MM-DD"
+                              formControlName="end_time"
+                              min="{{minDate}}"
+                              pickerFormat="YYYY MMMM DD"
+                              placeholder="Select Date"
+                ></ion-datetime>
+
+            </ion-item>
+
+            <ion-item>
+                <ion-label color="tertiary" position="floating">Number of hour</ion-label>
+                <ion-input [(ngModel)]="requestData.number_of_hour"
+                           [class.error1]="!requestDataForm.controls.number_of_hour.valid && requestDataForm.controls.number_of_hour.dirty"
+                           formControlName="number_of_hour"
+                           type="number"></ion-input>
+            </ion-item>
+
+            <ion-item>
+                <ion-label color="tertiary" position="floating">Price</ion-label>
+                <ion-input [(ngModel)]="requestData.price"
+                           [class.error1]="!requestDataForm.controls.price.valid && requestDataForm.controls.price.dirty"
+                           formControlName="price"
+                           type="number"></ion-input>
+            </ion-item>
+
+            <ion-button (click)="PickLocation()" expand="block" fill="outline">Pick your Location & Address</ion-button>
+            <ion-button [disabled]="requestDataForm.invalid" expand="block" type="submit">
+                send
+            </ion-button>
+
+        </form>
+    </ion-list>
+
+    <p *ngIf="dataReturned">Address: {{dataReturned.address}}</p>
+
+
+</ion-content>

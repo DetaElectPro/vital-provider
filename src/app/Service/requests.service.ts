@@ -57,7 +57,7 @@ export class RequestsService {
 
 
     /**
-     * Search request by title
+     * Search new-request by title
      */
     public searchPlaces(title: string): Observable<any> {
         console.log('Search params', title);
@@ -65,7 +65,7 @@ export class RequestsService {
     }
 
     /**
-     * Show my History request
+     * Show my History new-request
      */
     public requestSpecialistsHistory(): Observable<any> {
         return this.http.get(`${this.Url}request_specialists_admin_history`, this.myHeaders);

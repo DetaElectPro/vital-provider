@@ -3,12 +3,7 @@ import {Component} from '@angular/core';
 import {Platform} from '@ionic/angular';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {FCM} from 'capacitor-fcm';
-import {Plugins, PushNotification} from '@capacitor/core';
-
-const {PushNotifications} = Plugins;
-
-const fcm = new FCM();
+import { FCM } from '@ionic-native/fcm/ngx';
 
 @Component({
     selector: 'app-root',
@@ -26,6 +21,7 @@ export class AppComponent {
         private platform: Platform,
         private splashScreen: SplashScreen,
         private statusBar: StatusBar,
+        private fcm: FCM,
     ) {
         this.initializeApp();
     }
@@ -34,57 +30,32 @@ export class AppComponent {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
-            this.onLoade();
-            this.subscribeTo();
-            this.getToken();
-
+            this.getFCM();
         });
     }
 
+    getFCM(){
+     
+        this.fcm.subscribeToTopic('doctor');
 
-    onLoade() {
-        PushNotifications.addListener('registration', data => {
-            // alert(JSON.stringify(data));
-            console.log(data);
+        this.fcm.getToken().then(token => {
+            localStorage.setItem('fcm_registration_id', token);
+        //   console.log(token);
         });
-        PushNotifications.register().then(() =>
-            console.log(`registered for push`));
-        PushNotifications.addListener(
-            'pushNotificationReceived',
-            (notification: PushNotification) => {
-                console.log('notification ' + JSON.stringify(notification));
-                this.notifications.push(notification);
-            }
-        );
-    }
-
-    subscribeTo() {
-        PushNotifications.register()
-            .then(_ => {
-                fcm
-                    .subscribeTo({topic: this.topicName})
-                    .then(r => console.log(`subscribed to topic ${this.topicName}`))
-                    .catch(err => console.log(err));
-            })
-            .catch(err => alert(JSON.stringify(err)));
-    }
-
-    // unsubscribeFrom() {
-    //     fcm
-    //         .unsubscribeFrom({topic: 'test'})
-    //         .then(r => alert(`unsubscribed from topic ${this.topicName}`))
-    //         .catch(err => console.log(err));
-    //     if (this.platform.is('android')) {
-    //         fcm.deleteInstance();
-    //     }
-    // }
-
-    getToken() {
-        fcm.getToken()
-            .then(result => {
-                this.remoteToken = result.token;
-                localStorage.setItem('fcm_registration_in', result.token);
-            })
-            .catch(err => console.log(err));
+  
+        this.fcm.onNotification().subscribe(data => {
+          console.log(data);
+          if (data.wasTapped) {
+            console.log('Received in background');
+            // this.router.navigate([data.landing_page, data.price]);
+          } else {
+            console.log('Received in foreground');
+            // this.router.navigate([data.landing_page, data.price]);
+          }
+        });
+  
+        this.fcm.onTokenRefresh().subscribe(token => {
+          console.log(token);
+        });
     }
 }

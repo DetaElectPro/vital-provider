@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='utf-8'?>
-<resources>
-    <string name="app_name">vital provider</string>
-    <string name="title_activity_main">vital provider</string>
-    <string name="package_name">com.hostpital.hospitaladmin</string>
-    <string name="custom_url_scheme">com.hostpital.hospitaladmin</string>
-</resources>

@@ -23,7 +23,7 @@ export class EmergencyService {
   }
 
   /**
-   * Show my History request
+   * Show my History new-request
    */
   public addEmergency(data): Observable<any> {
     return this.http.post(`${this.Url}emergency_serviced`, data, this.myHeaders);
@@ -37,8 +37,59 @@ export class EmergencyService {
   }
 
 
-
   public ambulanceRequest(data) {
     return this.http.post(`${this.Url}ambulances`, data, this.myHeaders);
+  }
+
+  public search(search): Observable<any> {
+    return this.http.get(`${this.Url}emergency_serviced_search/${search}`, this.myHeaders);
+  }
+
+  public getRequestById(id): Observable<any> {
+    return this.http.get(`${this.Url}emergency_serviced/${id}`, this.myHeaders);
+  }
+
+  public userRequestEmergency(id, data): Observable<any> {
+    return this.http.post(`${this.Url}emergency_serviced_user_emergency/${id}`, data, this.myHeaders);
+  }
+
+  public userCancleRequestEmergency(id): Observable<any> {
+    return this.http.get(`${this.Url}emergency_serviced_emergency/${id}`, this.myHeaders);
+  }
+
+  /**
+   * Return list of History as observable
+   */
+  public getEmergency(page = 0): Observable<any> {
+    return this.http.get(`${this.Url}emergency_serviced?page=${page}`, this.myHeaders);
+  }
+
+
+  // Pharmacy
+
+
+  public getPharmcyRequest(page = 0): Observable<any> {
+    return this.http.get(`${this.Url}pharmacies?page=${page}`, this.myHeaders);
+  }
+
+  public getPharmcyHistory(page = 0): Observable<any> {
+    return this.http.get(`${this.Url}pharmacy_by_user?page=${page}`, this.myHeaders);
+  }
+
+  public getPharmcyHistoryAccept(page = 0): Observable<any> {
+    return this.http.get(`${this.Url}pharmacy_by_pharmacy?page=${page}`, this.myHeaders);
+  }
+
+  public getPharmcyRequestbyID(id): Observable<any> {
+    return this.http.get(`${this.Url}pharmacies/${id}`, this.myHeaders);
+  }
+
+  sendPharmcyRequest(data): Observable<any> {
+    return this.http.post(`${this.Url}pharmacies`, data, this.myHeaders);
+  }
+
+  updatePharmcyRequest(id, data): Observable<any> {
+    console.log(data);
+    return this.http.patch(`${this.Url}pharmacies/${id}`, data, this.myHeaders);
   }
 }

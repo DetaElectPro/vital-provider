@@ -1,8 +1,0 @@
-{
-  "appId": "com.hostpital.hospitaladmin",
-  "appName": "Vital provider",
-  "bundledWebRuntime": false,
-  "npmClient": "npm",
-  "webDir": "www",
-  "cordova": {}
-}

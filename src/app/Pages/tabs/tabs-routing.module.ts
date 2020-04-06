@@ -32,7 +32,7 @@ const routes: Routes = [
                     {
                         path: '',
                         loadChildren: () =>
-                            import('../wallet/wallet.module').then(m => m.WalletPageModule)
+                            import('../user-pages/wallet/wallet.module').then(m => m.WalletPageModule)
                     }
                 ]
             },
