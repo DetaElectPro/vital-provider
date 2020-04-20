@@ -45,7 +45,7 @@ export class AmbulancePage implements OnInit {
         const dot = icon({
             iconUrl: 'assets/icon/ambulance.png',
             // shadowUrl: 'dot-shadow.png',
-            iconSize: [40, 40], // size of the icon
+            iconSize: [35, 50], // size of the icon
             shadowSize: [50, 64], // size of the shadow
             iconAnchor: [22, 94], // point of the icon which will correspond to marker's
             shadowAnchor: [4, 62],  // the same for the shadow

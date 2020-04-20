@@ -37,7 +37,8 @@ export class EmergencyDetailsPage implements OnInit {
 
   async requestData() {
     const loading = await this.loadingController.create({
-      message: 'Loading...'
+      message: 'Loading...',
+        spinner: 'bubbles'
     });
     await loading.present();
     await this.requestServe.getRequestById(this.requestId)

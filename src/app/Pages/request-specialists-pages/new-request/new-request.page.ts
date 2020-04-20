@@ -71,7 +71,7 @@ export class NewRequestPage implements OnInit {
 
     async getMedicalFiled() {
         const loading = this.loadingController.create({
-            spinner: null,
+            spinner: 'bubbles',
             message: 'Please wait...',
             translucent: true,
         });

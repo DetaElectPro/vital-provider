@@ -39,7 +39,7 @@ export class MedicalBoardPage implements OnInit {
 
     async medicalBsaveData() {
         const loading = this.loadingController.create({
-            spinner: null,
+            spinner: 'circular',
             message: 'Please wait...',
             translucent: true,
         });
@@ -50,7 +50,7 @@ export class MedicalBoardPage implements OnInit {
         // @ts-ignore
         this.MedicalBoard.medical_field_id = this.MedicalBoard.medical_field_id.id;
         this.medicalServ.medicalBoardService(this.MedicalBoard)
-            .then(async data => {
+            .subscribe(async data => {
                 (await loading).dismiss();
                 this.dataResult = data;
                 if (this.dataResult.success) {
@@ -58,11 +58,10 @@ export class MedicalBoardPage implements OnInit {
                 } else {
                     alert('error try again');
                 }
-            })
-            .catch(async err => {
+            }, (async err => {
                 (await loading).dismiss();
                 console.log(err);
-            });
+            }));
     }
 
     async getMedicalFiled() {
@@ -74,9 +73,9 @@ export class MedicalBoardPage implements OnInit {
         (await loading).present();
         this.medicalServ.medicalFiledService()
             .subscribe(async data => {
+                    (await loading).dismiss();
                     this.specialtiesList = data;
                     this.specialtiesList = this.specialtiesList.data;
-                    (await loading).dismiss();
                 },
                 async err => {
                     console.log(err);

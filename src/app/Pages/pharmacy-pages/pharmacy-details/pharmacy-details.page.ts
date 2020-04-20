@@ -39,7 +39,8 @@ export class PharmacyDetailsPage implements OnInit {
 
   async requestData() {
     const loading = await this.loadingController.create({
-      message: 'Loading...'
+      message: 'Loading...',
+      spinner: 'dots'
     });
     await loading.present();
     await this.pharmacyServe.getPharmcyRequestbyID(this.requestId)

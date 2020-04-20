@@ -8,6 +8,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 export class BlogService {
   private token: any;
   private myHeaders: any;
+  Url = 'https://api.vital-helth.com/api/';
 
   constructor(
       private storage: Storage,

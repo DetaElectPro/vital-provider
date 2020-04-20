@@ -64,7 +64,8 @@ export class RequestDetailsPage implements OnInit {
     async requestData() {
         if (this.route.snapshot.paramMap.get('id') !== 'null') {
             const loading = await this.loadingController.create({
-                message: 'Loading...'
+                message: 'Loading...',
+                spinner: 'bubbles'
             });
             await loading.present();
             await this.requestServe.getRequestById(this.requestId)

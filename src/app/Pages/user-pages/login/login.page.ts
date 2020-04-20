@@ -10,7 +10,7 @@ import {LoadingController} from '@ionic/angular';
     styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-    loginData = {phone: '', password: '', role: 3, fcm_registration_id: ''};
+    loginData = {phone: null, password: null, role: 3, fcm_registration_id: null};
     usersData: any = [];
 
     constructor(
@@ -29,11 +29,12 @@ export class LoginPage implements OnInit {
         const loading = await this.loadingController.create({
             message: 'Please wait...',
             translucent: true,
-
+            spinner: 'bubbles'
         });
         await loading.present();
         this.authServe.loginServes(this.loginData)
             .then(async response => {
+                console.log(response);
                 await loading.dismiss();
                 this.usersData = response;
                 if (this.usersData.error) {
