@@ -93,6 +93,7 @@ export class AuthService {
                     this.user = res;
                     this.token = this.token.token;
                     this.storage.set('userInfo', this.user.user);
+                    localStorage.setItem('token', this.token);
                     this.storage.set(TOKEN_KEY, this.token).then(() => {
                         this.authenticationState.next(true);
                     });
