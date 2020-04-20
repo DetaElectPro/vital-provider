@@ -20,26 +20,10 @@ import {DoctorePageModule} from './Pages/user-pages/doctore/doctore.module';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {FinishRequestComponent} from './components/finish-request/finish-request.component';
 import {FormsModule} from '@angular/forms';
-import {NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {FCM} from '@ionic-native/fcm/ngx';
 import {TokenInterceptor} from './interceptors/token.interceptor';
 
-
-export function tokenGetter() {
-    return localStorage.getItem('token');
-}
-
-export function jwtOptionsFactory() {
-    return {
-        tokenGetter: () => {
-            return localStorage.getItem('token');
-        },
-        whitelistedDomains: ['localhost:8101'],
-        blacklistedDomain: ['localhost:8101/login'],
-        throwNoTokenError: true
-    };
-}
 
 @NgModule({
     declarations: [AppComponent, NotificationsComponent, FinishRequestComponent],
@@ -56,7 +40,6 @@ export function jwtOptionsFactory() {
         StatusBar,
         SplashScreen,
         FCM,
-        NativeGeocoder,
         AndroidPermissions,
         FileTransfer,
         FileOpener,
