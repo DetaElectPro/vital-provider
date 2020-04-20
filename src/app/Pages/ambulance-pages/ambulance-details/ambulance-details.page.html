@@ -1,0 +1,88 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/ambulance-history">
+                <ion-icon name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>Ambulance Details</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!request">
+    <div class="ion-padding custom-skeleton">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+</ion-content>
+
+
+<ion-content class="ion-no-padding">
+    <!-- card with content and item with person profile  -->
+    <div id="mapId" style="width: 100%; height: 40%">
+    </div>
+
+    <ion-card *ngIf="request">
+        <ion-item>
+            <ion-avatar slot="start">
+                <img src="{{request?.user.image}}"/>
+            </ion-avatar>
+            <ion-label>
+                <h3>Create by: DR. {{request?.user.name}}</h3>
+                <!--                <p class="ion-text-center">{{item.dob}}</p>-->
+            </ion-label>
+        </ion-item>
+
+        <ion-card-content>
+            <p class="ion-text-center">Title: &nbsp; {{request?.title}}</p>
+            <p class="ion-text-center">Address:&nbsp; {{request?.address}}</p>
+            <p class="ion-text-center">Contact:&nbsp; {{request?.user.phone}}</p>
+
+        </ion-card-content>
+        <ion-row>
+            <ion-col class="ion-no-padding" size="4">
+                <ion-button disabled color="primary" fill="outline" size="small">
+                    Order #:{{request?.id}}
+                </ion-button>
+            </ion-col>
+            <ion-col class="ion-no-padding" size="4">
+                <ion-button disabled="" fill="outline" size="small">
+                    Status: {{request?.status}}
+                </ion-button>
+            </ion-col>
+            <ion-col *ngIf="request.user_id == userInfo.id" class="ion-no-padding" size="4">
+                <ion-button color="primary"  size="small" (click)="userAction()">
+                    Action
+                </ion-button>
+            </ion-col>
+<!--            <ion-col *ngIf="request.user_id !== userInfo.id" class="ion-no-padding" size="5">-->
+<!--                <ion-button color="primary" disabled fill="clear" size="small">-->
+
+<!--                </ion-button>-->
+<!--            </ion-col>-->
+
+        </ion-row>
+    </ion-card>
+
+    <!--    <ion-card>-->
+    <!--        <ion-card-content>-->
+    <!--        </ion-card-content>-->
+
+    <!--        <div *ngIf="request.status == 1" class="ion-text-center ion-align-items-center">-->
+    <!--            <ion-button (click)="requestConfirm()" expand="block">-->
+    <!--                <ion-icon name="thumbs-up"></ion-icon>-->
+    <!--                <div>Accept</div>-->
+    <!--            </ion-button>-->
+    <!--        </div>-->
+    <!--        <div *ngIf="request.status == 2">-->
+    <!--            <ion-button (click)="requestCancel()" color="danger" expand="block">-->
+    <!--                <ion-icon name="thumbs-up"></ion-icon>-->
+    <!--                <div>Cancel</div>-->
+    <!--            </ion-button>-->
+    <!--        </div>-->
+
+    <!--    </ion-card>-->
+</ion-content>

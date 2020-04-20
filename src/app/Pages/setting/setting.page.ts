@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {AuthService} from '../../Service/auth.service';
-import {error} from 'util';
 import {Router} from '@angular/router';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-tab2',
@@ -11,12 +11,12 @@ import {Router} from '@angular/router';
 })
 export class SettingPage implements OnInit {
     token: any;
-    image = '../assets/images/man.png';
     userInfo: any;
 
 
     constructor(
         private storage: Storage,
+        private iab: InAppBrowser,
         private authServ: AuthService,
         private route: Router) {
         this.token = this.storage.get('access_token');
@@ -44,6 +44,26 @@ export class SettingPage implements OnInit {
             })
             .catch(erro => {
                 alert(erro);
+            });
+    }
+
+    openPrivacyPolicy() {
+        const browser = this.iab.create('https://medical.detatech.xyz/privacy_policy');
+        browser.on('loadstop').subscribe(event => {
+                console.log('sus: ', event);
+            },
+            error => {
+                console.log('error: ', error);
+            });
+    }
+
+    openTermsAndConditions() {
+        const browser = this.iab.create('https://medical.detatech.xyz/terms_and_conditions');
+        browser.on('loadstop').subscribe(event => {
+                console.log('sus: ', event);
+            },
+            error => {
+                console.log('error: ', error);
             });
     }
 }

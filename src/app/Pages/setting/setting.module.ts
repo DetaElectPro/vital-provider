@@ -1,10 +1,11 @@
-import { IonicModule } from '@ionic/angular';
-import { RouterModule } from '@angular/router';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { SettingPage } from './setting.page';
-import { ExploreContainerComponentModule } from '../../components/explore-container/explore-container.module';
+import {IonicModule} from '@ionic/angular';
+import {RouterModule} from '@angular/router';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {SettingPage} from './setting.page';
+import {ExploreContainerComponentModule} from '../../components/explore-container/explore-container.module';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   imports: [
@@ -12,8 +13,10 @@ import { ExploreContainerComponentModule } from '../../components/explore-contai
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    RouterModule.forChild([{ path: '', component: SettingPage }])
+    RouterModule.forChild([{path: '', component: SettingPage}])
   ],
+  providers: [InAppBrowser],
   declarations: [SettingPage]
 })
-export class SettingPageModule {}
+export class SettingPageModule {
+}

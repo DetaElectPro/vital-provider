@@ -9,47 +9,44 @@ const routes: Routes = [
     },
     {
         path: 'requests',
-        loadChildren: () => import('./Pages/request/requests/requests.module').then(m => m.RequestsPageModule)
+        loadChildren: () => import('./Pages/request-specialists-pages/requests/requests.module').then(m => m.RequestsPageModule)
     },
     {
         path: 'history',
-        loadChildren: () => import('./Pages/Request/history/history.module').then(m => m.HistoryPageModule)
+        loadChildren: () => import('./Pages/request-specialists-pages/history/history.module').then(m => m.HistoryPageModule)
     },
     {
         path: 'request-details/:id',
-        loadChildren: () => import('./Pages/Request/request-details/request-details.module').then(m => m.RequestDetailsPageModule)
+        loadChildren: () => import('./Pages/request-specialists-pages/request-details/request-details.module')
+            .then(m => m.RequestDetailsPageModule)
     },
     {
         path: 'login',
-        loadChildren: () => import('./Pages/Auth/login/login.module').then(m => m.LoginPageModule)
+        loadChildren: () => import('./Pages/user-pages/login/login.module').then(m => m.LoginPageModule)
     },
     {
         path: 'register',
-        loadChildren: () => import('./Pages/Auth/register/register.module').then(m => m.RegisterPageModule)
+        loadChildren: () => import('./Pages/user-pages/register/register.module').then(m => m.RegisterPageModule)
     },
     {
         path: 'ambulance',
-        loadChildren: () => import('./Pages/ambulance/ambulance.module').then(m => m.AmbulancePageModule)
+        loadChildren: () => import('./Pages/ambulance-pages/ambulance/ambulance.module').then(m => m.AmbulancePageModule)
     },
     {
         path: 'medical-board',
-        loadChildren: () => import('./Pages/Profiles/medical-board/medical-board.module').then(m => m.MedicalBoardPageModule)
-    },
-    {
-        path: 'web-view',
-        loadChildren: () => import('./Pages/web-view/web-view.module').then(m => m.WebViewPageModule)
+        loadChildren: () => import('./Pages/user-pages/medical-board/medical-board.module').then(m => m.MedicalBoardPageModule)
     },
     {
         path: 'emergency-request',
-        loadChildren: () => import('./Pages/emergency/request/request.module').then(m => m.RequestPageModule)
+        loadChildren: () => import('./Pages/emergency-pages/new-request/new-request.module').then(m => m.RequestPageModule)
     },
     {
         path: 'emergency-history',
-        loadChildren: () => import('./Pages/emergency/history/history.module').then(m => m.HistoryPageModule)
+        loadChildren: () => import('./Pages/emergency-pages/history/history.module').then(m => m.HistoryPageModule)
     },
     {
         path: 'new-request',
-        loadChildren: () => import('./Pages/Request/new-request/new-request.module').then(m => m.NewRequestPageModule)
+        loadChildren: () => import('./Pages/request-specialists-pages/new-request/new-request.module').then(m => m.NewRequestPageModule)
     },
     {
         path: 'map',
@@ -57,16 +54,62 @@ const routes: Routes = [
     },
     {
         path: 'doctore',
-        loadChildren: () => import('./Pages/doctore/doctore.module').then(m => m.DoctorePageModule)
+        loadChildren: () => import('./Pages/user-pages/doctore/doctore.module').then(m => m.DoctorePageModule)
+    },
+    {
+        path: 'blog',
+        loadChildren: () => import('./Pages/Blog-pages/blog/blog.module').then(m => m.BlogPageModule)
+    },
+    {
+        path: 'blog-details',
+        loadChildren: () => import('./Pages/Blog-pages/blog-details/blog-details.module').then(m => m.BlogDetailsPageModule)
+    },
+    {
+        path: 'find-pharmacy',
+        loadChildren: () => import('./Pages/pharmacy-pages/find-pharmacy/find-pharmacy.module')
+            .then(m => m.FindPharmacyPageModule)
     },
     {
         path: 'pharmacy',
-        loadChildren: () => import('./Pages/pharmacy/pharmacy.module').then(m => m.PharmacyPageModule)
+        loadChildren: () => import('./Pages/pharmacy-pages/pharmacy/pharmacy.module').then(m => m.PharmacyPageModule)
     },
-    // {
-    //     path: 'wallet',
-    //     loadChildren: () => import('./Pages/wallet/wallet.module').then(m => m.WalletPageModule)
-    // }
+    {
+        path: 'pharmacy-details/:id',
+        loadChildren: () => import('./Pages/pharmacy-pages/pharmacy-details/pharmacy-details.module')
+            .then(m => m.PharmacyDetailsPageModule)
+    },
+    {
+        path: 'emergency-pages-request',
+        loadChildren: () => import('./Pages/emergency-pages/request/request.module').then(m => m.RequestPageModule)
+    },
+    {
+        path: 'emergency-pages-history',
+        loadChildren: () => import('./Pages/emergency-pages/history/history.module').then(m => m.HistoryPageModule)
+    },
+    {
+        path: 'ambulance-history',
+        loadChildren: () => import('./Pages/ambulance-pages/ambulance-history/ambulance-history.module')
+            .then(m => m.AmbulanceHistoryPageModule)
+    },
+    {
+        path: 'ambulance-details/:id',
+        loadChildren: () => import('./Pages/ambulance-pages/ambulance-details/ambulance-details.module')
+            .then(m => m.AmbulanceDetailsPageModule)
+    },
+    {
+        path: 'emergency-details/:id',
+        loadChildren: () => import('./Pages/emergency-pages/emergency-details/emergency-details.module')
+            .then(m => m.EmergencyDetailsPageModule)
+    },
+    {
+        path: 'pharmacy-history',
+        loadChildren: () => import('./Pages/pharmacy-pages/history/history.module').then(m => m.HistoryPageModule)
+    },
+  {
+    path: 'accept-pharmacy',
+    loadChildren: () => import('./Pages/pharmacy-pages/accep-pharmacy/accep-pharmacy.module').then( m => m.AccepPharmacyPageModule)
+  },
+
 
 
 ];

@@ -1,0 +1,47 @@
+<ion-header no-border translucent>
+    <ion-toolbar>
+
+        <ion-title class="ion-text-center">Profile</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">
+                <ion-icon slot="icon-only" src="assets/icon/checkmark-filled.svg"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content fullscreen="true">
+    <!--    <div class="card">-->
+    <ion-card>
+        <div class="header">
+            <div class="avatar">
+                <img src="{{doctorData?.image}}">
+            </div>
+        </div>
+        <ion-card-content>
+            <div class="user-meta ion-text-center">
+                <h3 class="playername">Dr. {{doctorData?.name}}</h3>
+                <h5 class="country">Address: {{doctorData?.employ?.address}}</h5>
+                <h5 class="country">Graduation date: {{doctorData?.employ?.graduation_date| date: 'yyyy-MMMM-dd'}}</h5>
+                <h5 class="country">Medical number: {{doctorData?.employ?.medical_registration_number}}</h5>
+                <h5 class="country">Registration
+                    At: {{doctorData?.employ?.registration_date| date: 'yyyy-MMMM-dd'}}</h5>
+                <h5 class="country">Specialty At: {{doctorData?.employ?.specialty?.name}}</h5>
+                <h6 class="ranking">Years of experience:
+                    <ion-chip>
+                        <ion-label>{{doctorData?.employ?.years_of_experience}}</ion-label>
+                    </ion-chip>
+                </h6>
+            </div>
+
+            <ion-button (click)="download(doctorData?.employ?.cv, doctorData?.name)" color="primary" expand="full">View
+                Cv
+            </ion-button>
+            <ion-button color="secondary" expand="full" href="tel:{{doctorData?.phone}}">Call</ion-button>
+            <ion-button (click)="closeModal()" expand="full">Close profile</ion-button>
+        </ion-card-content>
+    </ion-card>
+    <!--    </div>-->
+
+</ion-content>
+

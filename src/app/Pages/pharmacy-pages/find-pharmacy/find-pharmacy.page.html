@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="ion-text-center">Find pharmacy</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-list>
+        <ion-item>
+            <ion-label position="floating">You are looking for:</ion-label>
+            <ion-input [(ngModel)]="medicine.name"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="floating">Dose:</ion-label>
+            <ion-input [(ngModel)]="medicine.dose"></ion-input>
+            <!--            <p>{{medicine.dose}} m.g</p>-->
+        </ion-item>
+
+
+        <ion-item>
+            <ion-label position="floating">Any company:</ion-label>
+            <ion-checkbox [(ngModel)]="medicine.company"></ion-checkbox>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Type:</ion-label>
+            <ion-select [(ngModel)]="medicine.type">
+                <ion-select-option value="Syrup">Syrup</ion-select-option>
+                <ion-select-option value="Ing">Ing</ion-select-option>
+                <ion-select-option value="Tab">Tab</ion-select-option>
+                <ion-select-option value="Ointment">Ointment</ion-select-option>
+                <ion-select-option value="Eye drop">Eye drop</ion-select-option>
+                <ion-select-option value="Infusion">Infusion</ion-select-option>
+            </ion-select>
+        </ion-item>
+
+        <ion-button (click)="sendRequest()" expand="block" shape="round">Send</ion-button>
+
+    </ion-list>
+
+</ion-content>

@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-title class="ion-text-center">History</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content *ngIf="!pharmacyData" class="ion-padding custom-skeleton">
+  <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+  <ion-skeleton-text animated></ion-skeleton-text>
+  <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+  <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+  <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+</ion-content>
+
+<ion-content *ngIf="pharmacyData">
+  <ion-searchbar (ionCancel)="clearSearch()" (ionChange)="searchRequests()" animated
+                 showCancelButton="focus"></ion-searchbar>
+  <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
+    <ion-refresher-content
+            pullingIcon="arrow-down-outline"
+            pullingText="Pull to refresh"
+            refreshingSpinner="circles"
+            refreshingText="Refreshing...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list>
+    <ion-item *ngFor="let item of pharmacyData" color="standard" routerLink="/pharmacy-details/{{item.id}}">
+      <ion-avatar slot="start">
+        <img src="{{item?.user?.image}}"/>
+        <p>Dr- {{item?.user?.name}}</p>
+      </ion-avatar>
+      <ion-label>
+        <p>#: {{item?.id}}</p>
+        <h2>Name: {{item?.name}}</h2>
+        <h3>Type: {{item?.type}}</h3>
+        <h3>dose: {{item?.dose}} m/g</h3>
+        <p>Location: {{item?.address}}</p>
+        <p>Type: {{item?.type}}</p>
+        <p>Created at: {{item?.created_at|date: 'yyyy-MMMM-dd '}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
+    <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

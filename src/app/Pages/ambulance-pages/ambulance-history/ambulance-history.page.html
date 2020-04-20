@@ -1,0 +1,57 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Ambulance History</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!historyData">
+    <div class="ion-padding ion-color-success">
+        <ion-skeleton-text animated class="ion-color-success" style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated class="ion-color-success"></ion-skeleton-text>
+        <ion-skeleton-text animated class="ion-color-success" style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+</ion-content>
+
+<ion-content *ngIf="historyData">
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
+        <ion-refresher-content
+                pullingIcon="arrow-down-outline"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-grid>
+        <ion-row>
+            <ion-col>Title</ion-col>
+            <ion-col>status</ion-col>
+            <ion-col>Date</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of historyData">
+
+            <ion-col (click)="openDetails(item)">{{item.title}}</ion-col>
+
+            <ion-col *ngIf="item.status ==1">
+                <ion-button (click)="openDetails(item)" color="warning" size="small">Waiting</ion-button>
+            </ion-col>
+            <ion-col *ngIf="item.status ==2">
+                <ion-button (click)="openDetails(item)" color="success" size="small">In progress</ion-button>
+            </ion-col>
+            <ion-col *ngIf="item.status ==3">
+                <ion-button (click)="openDetails(item)" color="secondary" size="small">Finished</ion-button>
+            </ion-col>
+
+            <ion-col (click)="openDetails(item)">{{item.created_at| date: 'y-MM-d'}}</ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-content>

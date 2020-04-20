@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="ion-text-center">History</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="!historyData">
+    <div class="ion-padding custom-skeleton skin-blue">
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        <ion-skeleton-text animated></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    </div>
+</ion-content>
+<ion-content *ngIf="historyData">
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
+        <ion-refresher-content
+                pullingIcon="arrow-down-outline"
+                pullingText="Pull to refresh"
+                refreshingSpinner="circles"
+                refreshingText="Refreshing...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <app-explore-container (click)="goTo()"></app-explore-container>
+
+    <ion-grid>
+        <ion-row>
+            <ion-col>Title</ion-col>
+            <ion-col>Status</ion-col>
+            <ion-col>Date</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let item of historyData">
+            <ion-col routerLink="/request-details/{{item.id}}">{{item.name}}</ion-col>
+
+            <ion-col *ngIf="item.status ==1">
+                <ion-button color="tertiary" size="small">new</ion-button>
+            </ion-col>
+            <ion-col *ngIf="item.status ==2">
+                <ion-button color="warning" size="small">Waiting</ion-button>
+            </ion-col>
+            <ion-col *ngIf="item.status ==3">
+                <ion-button color="success" size="small">In progress</ion-button>
+            </ion-col>
+            <ion-col *ngIf="item.status ==6">
+                <ion-button color="secondary" size="small">Finished</ion-button>
+            </ion-col>
+
+            <ion-col routerLink="/request-details/{{item.id}}">{{item.start_time| date: 'y-MM-d'}}</ion-col>
+        </ion-row>
+    </ion-grid>
+
+
+    <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>
+

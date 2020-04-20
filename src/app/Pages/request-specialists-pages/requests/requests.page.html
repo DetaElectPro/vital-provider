@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-toolbar>
+
+        <ion-title class="ion-text-center">Requests</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <app-explore-container name="requests"></app-explore-container>
+
+    <ion-list>
+        <ion-item *ngFor="let item of requestsData" routerLink="/request-details/{{item.id}}">
+            <ion-avatar slot="start">
+                <img src="assets/images/1.jpg">
+            </ion-avatar>
+            <ion-label>
+                <p>id: {{item.id}}</p>
+                <h2>We Need: {{item.specialties.medical.name}}</h2>
+                <h3>Specialized in: {{item.specialties.name}}</h3>
+                <h3>Hospital: {{item.name}}</h3>
+                <p>Address: {{item.address}}</p>
+                <p>data: {{item.created_at}}</p>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+
+    <div *ngIf="!requestsData">
+        <div class="ion-padding custom-skeleton">
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+            <ion-skeleton-text animated></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </div>
+
+        <ion-list>
+            <ion-list-header>
+                <ion-label>
+                    <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+                </ion-label>
+            </ion-list-header>
+            <ion-item>
+                <ion-thumbnail slot="start">
+                    <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-thumbnail>
+                <ion-label>
+                    <h3>
+                        <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    </h3>
+                    <p>
+                        <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+                    </p>
+                    <p>
+                        <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                    </p>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+
+
+    <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

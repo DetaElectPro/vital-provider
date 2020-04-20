@@ -1,17 +1,38 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="ion-text-center">Dashboard</ion-title>
+    </ion-toolbar>
+</ion-header>
 <ion-content class="skin.main_bg">
     <div class="wrapper-slide">
-        <div class="wrapper-slide-pagination">
-            <ion-slides #slide autoplay="3000" class="height-auto" loop="true" pager="false" speed="1000">
-                <ion-slide>
-                    <img alt="" src="assets/img/home1.jpg">
-                </ion-slide>
+        <!--        <div *ngIf="!dateSlide" class="wrapper-slide-pagination">-->
+        <!--            <ion-slides #slide autoplay="3000" class="height-auto" loop="true" pager="false" speed="1000">-->
+        <!--                <ion-slide>-->
+        <!--                    <img alt="" src="assets/img/home1.jpg">-->
+        <!--                </ion-slide>-->
 
-                <ion-slide>
-                    <img alt="" src="assets/img/home2.jpg">
-                </ion-slide>
+        <!--                <ion-slide>-->
+        <!--                    <img alt="" src="assets/img/home2.jpg">-->
+        <!--                </ion-slide>-->
 
-                <ion-slide>
-                    <img alt="" src="assets/img/home3.jpg">
+        <!--                <ion-slide>-->
+        <!--                    <img alt="" src="assets/img/home3.jpg">-->
+        <!--                </ion-slide>-->
+        <!--            </ion-slides>-->
+        <!--            <div class="btn-pagination">-->
+        <!--                <ion-badge (click)="slide_next()" class="pull-right">-->
+        <!--                    <ion-icon name="arrow-forward-outline"></ion-icon>-->
+        <!--                </ion-badge>-->
+        <!--                <ion-badge (click)="slide_prev()" class="pull-left">-->
+        <!--                    <ion-icon name="arrow-back-outline"></ion-icon>-->
+        <!--                </ion-badge>-->
+        <!--            </div>-->
+        <!--        </div>-->
+        <div *ngIf="dateSlide" class="wrapper-slide-pagination">
+            <ion-slides #slide *ngFor="let item of dateSlide" autoplay="3000" class="height-auto" loop="true"
+                        pager="false" speed="1000">
+                <ion-slide routerLink="advertise/{{item.id}}">
+                    <img [src]="item.image" ]>
                 </ion-slide>
             </ion-slides>
             <div class="btn-pagination">
@@ -23,21 +44,6 @@
                 </ion-badge>
             </div>
         </div>
-
-        <!--        <div class="ion-padding">-->
-        <!--            <div class="mgt-20 mgb-40">-->
-        <!--                <h6 class="uppercase fs-13 fw-500 text-grey-4">title</h6>-->
-        <!--                <ion-row class="mgt-10 mgb-20 mgl&#45;&#45;5 mgr&#45;&#45;5">-->
-        <!--                    <ion-col col-6>-->
-        <!--                        <div (click)="openPage()" class="shadow-2 white-opct-1 pd-15 text-center">-->
-        <!--                            <ion-icon class="fs-22 text-grey-5 mgt-10" name="call"></ion-icon>-->
-        <!--                            <h2 class="text-grey-5 fs-12 spacing-1 mg-5 uppercase fw-600 text-ellipsis">title</h2>-->
-        <!--                        </div>-->
-        <!--                    </ion-col>-->
-        <!--                </ion-row>-->
-        <!--            </div>-->
-        <!--        </div>-->
-
     </div>
 
     <ion-card class="card-more-content bdra-5" routerLink="/new-request">
@@ -70,7 +76,7 @@
     </ion-card>
 
 
-    <ion-card class="card-more-content bdra-5" routerLink="/ambulance">
+    <ion-card (click)="ambulanceActionSheet()" class="card-more-content bdra-5">
         <div class="wrapper">
             <div class="thumb">
                 <img src="assets/images/am3.jpg"/>
@@ -94,6 +100,20 @@
                     </ion-card-title>
                     <span class="info-stt text-white inline-block"><ion-icon
                             name="stats-chart-outline"></ion-icon>2 action</span>
+                </ion-card-content>
+            </div>
+        </div>
+    </ion-card>
+
+    <ion-card (click)="pharmacyActionSheet()" class="card-more-content bdra-5">
+        <div class="wrapper">
+            <div class="thumb">
+                <img src="assets/images/pharmcy.jpg"/>
+
+                <ion-card-content class="black-opct text-white">
+                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">Pharmacy</ion-card-title>
+                    <span class="info-stt text-white inline-block"><ion-icon
+                            name="stats-chart-outline"></ion-icon>3 action</span>
                 </ion-card-content>
             </div>
         </div>
