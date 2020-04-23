@@ -3,6 +3,7 @@ import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {AuthService} from '../../Service/auth.service';
 import {ActionSheetController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-tab1',
@@ -13,30 +14,32 @@ export class HomePage implements OnInit {
     @ViewChild('slide', {static: false}) slide3: any;
 
     response: any;
-    responseFcm: any;
     dateSlide: any;
+    userInfo: any;
 
     constructor(
+        private storage: Storage,
         private iab: InAppBrowser,
         private userServ: AuthService,
         private router: Router,
         public actionSheetController: ActionSheetController
     ) {
-        // this.getDashboardData();
     }
 
     ngOnInit() {
-        // this.slideHome();
-    }
-
-    ionViewDidEnter() {
-        if (localStorage.getItem(' fcm_registration_id')) {
-            this.updateFcmToken();
-        }
+        this.storage.get('userInfo')
+            .then(res => {
+                console.log('user: ', this.userInfo = res);
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        this.getDashboardData();
+        this.updateFcmToken();
     }
 
     openCvUpdate() {
-        const browser = this.iab.create('https://medical.detatech.xyz/profile/' + this.response.user.id);
+        const browser = this.iab.create('http://api.vital-helth.com/profile/' + this.userInfo.id);
         browser.on('loadstop').subscribe(event => {
                 console.log('sus: ', event);
             },
@@ -45,19 +48,19 @@ export class HomePage implements OnInit {
             });
     }
 
-    //
-    // getDashboardData() {
-    //     this.userServ.checkUserService()
-    //         .subscribe(response => {
-    //             this.response = response;
-    //             if (this.response.status === true) {
-    //             } else {
-    //                 alert('filed');
-    //             }
-    //         }, error => {
-    //             console.log('server: ', error);
-    //         });
-    // }
+
+    getDashboardData() {
+        this.userServ.checkUserService()
+            .subscribe(response => {
+                this.response = response;
+                if (this.response.status === true) {
+                } else {
+                    alert('filed');
+                }
+            }, error => {
+                console.log('server: ', error);
+            });
+    }
 
     updateFcmToken() {
         const data = {

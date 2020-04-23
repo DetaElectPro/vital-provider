@@ -46,6 +46,11 @@
         </div>
     </div>
 
+    <div *ngIf="response?.user.status == 2">
+        <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
+        <ion-button (click)="openCvUpdate()" color="danger" expand="block">upload cv</ion-button>
+    </div>
+
     <ion-card class="card-more-content bdra-5" routerLink="/new-request">
         <div class="wrapper">
             <div class="thumb">
@@ -119,8 +124,4 @@
         </div>
     </ion-card>
 
-    <div *ngIf="response?.user.status == 2">
-        <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
-        <ion-button (click)="openCvUpdate()" color="danger" expand="block">upload cv</ion-button>
-    </div>
 </ion-content>

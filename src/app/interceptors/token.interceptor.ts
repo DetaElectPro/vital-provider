@@ -38,7 +38,7 @@ export class TokenInterceptor implements HttpInterceptor {
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    console.log('event--->>>', event);
+                    // console.log('event--->>>', event);
                 }
                 return event;
             }),
@@ -50,13 +50,13 @@ export class TokenInterceptor implements HttpInterceptor {
                         this.router.navigate(['login']);
                     }
                 }
-                if (error.status === 500) {
-                    if (error.error.success === false) {
-                        this.presentToast('Login failed');
-                    } else {
-                        this.router.navigate(['login']);
-                    }
-                }
+                // if (error.status === 500) {
+                //     if (error.error.success === false) {
+                //         this.presentToast('Login failed');
+                //     } else {
+                //         this.router.navigate(['login']);
+                //     }
+                // }
                 return throwError(error);
             }));
     }

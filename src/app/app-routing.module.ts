@@ -8,10 +8,6 @@ const routes: Routes = [
         loadChildren: () => import('./Pages/tabs/tabs.module').then(m => m.TabsPageModule), canActivate: [AuthGuard]
     },
     {
-        path: 'requests',
-        loadChildren: () => import('./Pages/request-specialists-pages/requests/requests.module').then(m => m.RequestsPageModule)
-    },
-    {
         path: 'history',
         loadChildren: () => import('./Pages/request-specialists-pages/history/history.module').then(m => m.HistoryPageModule)
     },

@@ -13,6 +13,12 @@
             <ion-label>Welcome, <br>Dr. {{userInfo?.name}}</ion-label>
         </ion-item>
     </ion-card>
+
+    <div *ngIf="response?.user?.status == 2">
+        <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
+        <ion-button (click)="openCvUpdate()" color="danger" expand="block">upload cv</ion-button>
+    </div>
+
     <ion-grid>
         <ion-row>
             <ion-col (click)="requestActionSheet()" size="4">
@@ -76,8 +82,5 @@
 
     </ion-grid>
 
-    <div *ngIf="response?.user?.status == 2">
-        <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
-        <ion-button (click)="openCvUpdate()" color="danger" expand="block">upload cv</ion-button>
-    </div>
+
 </ion-content>

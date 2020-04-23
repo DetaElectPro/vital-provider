@@ -48,7 +48,7 @@ export class SettingPage implements OnInit {
     }
 
     openPrivacyPolicy() {
-        const browser = this.iab.create('https://medical.detatech.xyz/privacy_policy');
+        const browser = this.iab.create('https://vital-helth.com/privacy_policy');
         browser.on('loadstop').subscribe(event => {
                 console.log('sus: ', event);
             },
@@ -58,7 +58,7 @@ export class SettingPage implements OnInit {
     }
 
     openTermsAndConditions() {
-        const browser = this.iab.create('https://medical.detatech.xyz/terms_and_conditions');
+        const browser = this.iab.create('https://vital-helth.com/terms_and_conditions');
         browser.on('loadstop').subscribe(event => {
                 console.log('sus: ', event);
             },
