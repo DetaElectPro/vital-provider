@@ -1,0 +1,29 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Cv Update</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding" color="dark">
+    <div (fileOver)="fileOverBase($event)" [ngClass]="{'drop-file-over': hasBaseDropZoneOver}" [uploader]="fileUploader"
+         class="area"
+         ng2FileDrop>
+        <div id="dropZone">Drop files here</div>
+    </div>
+
+
+    <input [uploader]="fileUploader"
+           accept="image/*" enctype="multipart/form-data" multiple ng2FileSelect type="file"/>
+
+
+    <ion-button (click)="uploadFiles()" expand="full">Upload image</ion-button>
+
+    <h2>Your files: {{ fileUploader?.queue?.length }}</h2>
+    <ul>
+        <li *ngFor="let item of fileUploader.queue">
+            {{ item?.file?.name }}
+        </li>
+    </ul>
+
+</ion-content>

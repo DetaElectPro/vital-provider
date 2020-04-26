@@ -27,7 +27,7 @@
 
 
             <ion-item>
-                <ion-label color="tertiary" position="floating">Name</ion-label>
+                <ion-label color="tertiary" position="floating">Hospital name</ion-label>
                 <ion-input [(ngModel)]="requestData.name"
                            [class.error1]="!requestDataForm.controls.name.valid && requestDataForm.controls.name.dirty"
                            formControlName="name"
@@ -69,14 +69,14 @@
             </ion-item>
 
             <ion-item>
-                <ion-label color="tertiary" position="floating">Price</ion-label>
+                <ion-label color="tertiary" position="floating">Price per hour</ion-label>
                 <ion-input [(ngModel)]="requestData.price"
                            [class.error1]="!requestDataForm.controls.price.valid && requestDataForm.controls.price.dirty"
                            formControlName="price"
                            type="number"></ion-input>
             </ion-item>
 
-            <ion-button (click)="PickLocation()" expand="block" fill="outline">Pick your Location & Address</ion-button>
+            <ion-button (click)="pickLocation()" color="danger" expand="block" fill="outline">Pick your Location & Address</ion-button>
             <ion-button [disabled]="requestDataForm.invalid" expand="block" type="submit">
                 send
             </ion-button>

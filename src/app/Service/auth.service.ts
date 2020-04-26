@@ -126,6 +126,16 @@ export class AuthService {
             );
     }
 
+    uploadFormData(data) {
+        console.log(data);
+        return this.http.post<any>('http://localhost/medical_api/public/api/upload_image', data, {
+            headers: new HttpHeaders().set('Content-Type', 'application/json')
+        });
+    }
+
+    uploadCvFile(data) {
+        return this.http.post<any>('http://localhost/medical_api/public/api/upload_cv', data);
+    }
 
     /**
      * Return list of Requests as observable

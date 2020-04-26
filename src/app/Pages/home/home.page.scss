@@ -20,30 +20,32 @@ button {
   background-color: transparent !important;
 }
 
-//ion-card {
-//  //background: transparent;
-//  //box-shadow: none !important;
-//  //-webkit-box-shadow: none !important;
-//  box-shadow: 0 2px 4px rgb(0, 0, 0);
-//}
-//ion-grid {
-//  //box-shadow: none !important;
-//}
-//p {
-//  color: black;
-//  //color: #ffffff;
-//}
-//ion-col div {
-//  border: none !important;
-//
-//  // background-color: #f0f5ff;
-//  border-radius: 2px;
-//  padding: 5px;
-//  text-align: center;
-//}
+ion-card {
+  background: transparent;
+  //box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: 0 2px 4px rgb(0, 0, 0);
+  max-height: 190px;
+  height: 190px;
 
-//.title {
-//  font-weight: bold;
-//  background-clip: border-box;
-//  background-color: rgba(107, 200, 255, 0.63);
-//}
+  img {
+    max-height: 190px;
+    height: 190px;
+    width:100%;
+    max-width:100%;
+  }
+}
+
+.title {
+  margin-top: -30%;
+  font-weight: bold;
+  background-clip: border-box;
+  background-color: #36abe0;
+  color: white;
+}
+.chart {
+  background-clip: border-box;
+  background-color: #171c17;
+  color: white;
+}
+

@@ -66,4 +66,14 @@ export class SettingPage implements OnInit {
                 console.log('error: ', error);
             });
     }
+
+    updateImage() {
+        const browser = this.iab.create('https://api.vital-helth.com/uploade_image');
+        browser.on('loadstop').subscribe(event => {
+                console.log('sus: ', event);
+            },
+            error => {
+                console.log('error: ', error);
+            });
+    }
 }

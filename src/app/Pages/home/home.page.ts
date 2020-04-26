@@ -16,6 +16,7 @@ export class HomePage implements OnInit {
     response: any;
     dateSlide: any;
     userInfo: any;
+    // styleImage = 'max-height: 250px; height: 250px; max-width:100%;';
 
     constructor(
         private storage: Storage,

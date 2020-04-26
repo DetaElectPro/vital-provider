@@ -104,7 +104,15 @@ const routes: Routes = [
   {
     path: 'accept-pharmacy',
     loadChildren: () => import('./Pages/pharmacy-pages/accep-pharmacy/accep-pharmacy.module').then( m => m.AccepPharmacyPageModule)
+  },  {
+    path: 'image-update',
+    loadChildren: () => import('./Pages/user-pages/image-update/image-update.module').then( m => m.ImageUpdatePageModule)
   },
+  {
+    path: 'cv-update',
+    loadChildren: () => import('./Pages/user-pages/cv-update/cv-update.module').then( m => m.CvUpdatePageModule)
+  },
+
 
 
 

@@ -96,7 +96,7 @@ export class NewRequestPage implements OnInit {
         this.requestData.medical_id = event.value.medical_id;
     }
 
-    async PickLocation() {
+    async pickLocation() {
         const modal = await this.modalController.create({
             component: MapPage,
             // componentProps: {

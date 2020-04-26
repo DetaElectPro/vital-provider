@@ -31,9 +31,14 @@ export class TokenInterceptor implements HttpInterceptor {
             });
         }
 
-        request = request.clone({
-            headers: request.headers.set('Accept', 'application/json')
-        });
+        if (request.body instanceof FormData) {
+            console.log('foem');
+            console.log('foem');
+            // contentType = ''
+            request = request.clone({headers: request.headers.delete('content-type', 'multipart/form-data')});
+            request = request.clone({headers: request.headers.delete('content-type', 'multipart/form-data')});
+            request = request.clone({headers: request.headers.delete('accept', 'application/json')});
+        }
 
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {

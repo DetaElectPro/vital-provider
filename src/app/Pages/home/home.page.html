@@ -3,21 +3,30 @@
         <ion-title class="ion-text-center">Dashboard</ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content class="skin.main_bg">
+<ion-content [fullscreen]="true" class="ion-padding">
+    <ion-item *ngIf="userInfo">
+        <ion-avatar slot="start">
+            <img src="{{userInfo?.image}}"/>
+        </ion-avatar>
+        <ion-label>Welcome, <br>Dr. {{userInfo?.name}}</ion-label>
+    </ion-item>
+
+    <div *ngIf="response?.user?.status == 2">
+        <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
+        <ion-button (click)="openCvUpdate()" color="danger" expand="block">upload cv</ion-button>
+    </div>
+
     <div class="wrapper-slide">
         <!--        <div *ngIf="!dateSlide" class="wrapper-slide-pagination">-->
         <!--            <ion-slides #slide autoplay="3000" class="height-auto" loop="true" pager="false" speed="1000">-->
         <!--                <ion-slide>-->
-        <!--                    <img alt="" src="assets/img/home1.jpg">-->
-        <!--                </ion-slide>-->
+        <!--                    <img g                </ion-slide>-->
 
         <!--                <ion-slide>-->
-        <!--                    <img alt="" src="assets/img/home2.jpg">-->
-        <!--                </ion-slide>-->
+        <!--                    <img g               </ion-slide>-->
 
         <!--                <ion-slide>-->
-        <!--                    <img alt="" src="assets/img/home3.jpg">-->
-        <!--                </ion-slide>-->
+        <!--                    <img g      </ion-slide>-->
         <!--            </ion-slides>-->
         <!--            <div class="btn-pagination">-->
         <!--                <ion-badge (click)="slide_next()" class="pull-right">-->
@@ -32,7 +41,7 @@
             <ion-slides #slide *ngFor="let item of dateSlide" autoplay="3000" class="height-auto" loop="true"
                         pager="false" speed="1000">
                 <ion-slide routerLink="advertise/{{item.id}}">
-                    <img [src]="item.image" ]>
+                    <img src="">
                 </ion-slide>
             </ion-slides>
             <div class="btn-pagination">
@@ -51,77 +60,62 @@
         <ion-button (click)="openCvUpdate()" color="danger" expand="block">upload cv</ion-button>
     </div>
 
+    <div *ngIf="response?.user.status == 1">
+        <p class="ion-text-center">Please complete Medical board <strong>CV</strong></p>
+        <ion-button color="danger" expand="block" routerDirection="/medical-board">upload cv</ion-button>
+    </div>
+
     <ion-card class="card-more-content bdra-5" routerLink="/new-request">
-        <div class="wrapper">
-            <div class="thumb">
-                <img src="assets/images/1.jpg"/>
+        <img src="assets/images/1.jpg"/>
 
                 <ion-card-content class="black-opct text-white">
-                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">Requests</ion-card-title>
-                    <span class="info-stt text-white inline-block"><ion-icon
+                    <ion-card-title class="title">Requests</ion-card-title>
+                    <span class=""><ion-icon
                             name="stats-chart-outline"></ion-icon>3 action</span>
                 </ion-card-content>
-            </div>
-        </div>
     </ion-card>
 
 
     <ion-card class="card-more-content bdra-5" routerLink="/history">
-        <div class="wrapper">
-            <div class="thumb">
                 <img src="assets/images/2.jpg"/>
 
                 <ion-card-content class="black-opct text-white">
-                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">History</ion-card-title>
-                    <span class="info-stt text-white inline-block"><ion-icon
+                    <ion-card-title class="title">History</ion-card-title>
+                    <span class="chart"><ion-icon
                             name="stats-chart-outline"></ion-icon>1 action</span>
                 </ion-card-content>
-            </div>
-        </div>
     </ion-card>
 
 
     <ion-card (click)="ambulanceActionSheet()" class="card-more-content bdra-5">
-        <div class="wrapper">
-            <div class="thumb">
                 <img src="assets/images/am3.jpg"/>
 
                 <ion-card-content class="black-opct text-white">
-                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">Ambulance</ion-card-title>
-                    <span class="info-stt text-white inline-block"><ion-icon
+                    <ion-card-title class="title">Ambulance</ion-card-title>
+                    <span class="chart"><ion-icon
                             name="stats-chart-outline"></ion-icon>2 action</span>
                 </ion-card-content>
-            </div>
-        </div>
     </ion-card>
 
     <ion-card class="card-more-content bdra-5" routerLink="/emergency-request">
-        <div class="wrapper">
-            <div class="thumb">
                 <img src="assets/images/cover.png"/>
 
                 <ion-card-content class="black-opct text-white">
-                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">Icu Serves
+                    <ion-card-title class="title">Icu Serves
                     </ion-card-title>
-                    <span class="info-stt text-white inline-block"><ion-icon
+                    <span class="chart"><ion-icon
                             name="stats-chart-outline"></ion-icon>2 action</span>
                 </ion-card-content>
-            </div>
-        </div>
     </ion-card>
 
     <ion-card (click)="pharmacyActionSheet()" class="card-more-content bdra-5">
-        <div class="wrapper">
-            <div class="thumb">
                 <img src="assets/images/pharmcy.jpg"/>
 
                 <ion-card-content class="black-opct text-white">
-                    <ion-card-title class="text-white uppercase spacing-1 fw-600 fs-16 title">Pharmacy</ion-card-title>
-                    <span class="info-stt text-white inline-block"><ion-icon
+                    <ion-card-title class="title">Pharmacy</ion-card-title>
+                    <span class="chart"><ion-icon
                             name="stats-chart-outline"></ion-icon>3 action</span>
                 </ion-card-content>
-            </div>
-        </div>
     </ion-card>
 
 </ion-content>
