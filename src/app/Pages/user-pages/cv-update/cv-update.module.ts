@@ -1,6 +1,6 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {IonicModule} from '@ionic/angular';
 
@@ -15,7 +15,8 @@ import {FileUploadModule} from 'ng2-file-upload';
     FormsModule,
     IonicModule,
     RouterModule.forChild([{path: '', component: CvUpdatePage}]),
-    FileUploadModule
+    FileUploadModule,
+    ReactiveFormsModule
   ],
   declarations: [CvUpdatePage]
 })

@@ -19,7 +19,7 @@ export class SettingPage implements OnInit {
         private iab: InAppBrowser,
         private authServ: AuthService,
         private route: Router) {
-        this.token = this.storage.get('access_token');
+        // this.token = this.storage.get('access_token');
 
     }
 

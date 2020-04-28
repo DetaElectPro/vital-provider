@@ -28,6 +28,8 @@ export class NewRequestPage implements OnInit {
   async sendRequest() {
     const loading = await this.loadingController.create({
       message: 'Please wait...',
+      spinner: 'dots'
+      
     });
     this.emergencyServ.addEmergency(this.requestData)
         .subscribe(async res => {

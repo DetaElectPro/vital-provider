@@ -6,24 +6,24 @@
 
 
 <ion-content class="ion-padding" color="dark">
-    <div (fileOver)="fileOverBase($event)" [ngClass]="{'drop-file-over': hasBaseDropZoneOver}" [uploader]="fileUploader"
-         class="area"
-         ng2FileDrop>
-        <div id="dropZone">Drop files here</div>
-    </div>
+    <ion-item *ngIf="userInfo">
+        <ion-avatar slot="start">
+            <img src="{{userInfo?.image}}" />
+        </ion-avatar>
+        <ion-label>Welcome, <br>Dr. {{userInfo?.name}}</ion-label>
+    </ion-item>
+
+    <form (ngSubmit)="uploadFiles()" [formGroup]="requestDataForm" novalidate>
+        <ion-item class="input">
+            <input [uploader]="fileUploader" accept="application/pdf" formControlName="cv" ng2FileSelect type="file"
+                id="file" class="fileInput input" />
+            <label for="file">
+                <ion-icon color="primary" name="list-circle-outline"></ion-icon>
+                choose a Cv file
+            </label>
+        </ion-item>
 
 
-    <input [uploader]="fileUploader"
-           accept="image/*" enctype="multipart/form-data" multiple ng2FileSelect type="file"/>
-
-
-    <ion-button (click)="uploadFiles()" expand="full">Upload image</ion-button>
-
-    <h2>Your files: {{ fileUploader?.queue?.length }}</h2>
-    <ul>
-        <li *ngFor="let item of fileUploader.queue">
-            {{ item?.file?.name }}
-        </li>
-    </ul>
-
+        <ion-button expand="full" [disabled]="requestDataForm.invalid" type="submit">Update Cv file</ion-button>
+    </form>
 </ion-content>
