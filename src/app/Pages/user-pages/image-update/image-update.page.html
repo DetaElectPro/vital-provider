@@ -14,13 +14,17 @@
     </ion-item>
 
     <form (ngSubmit)="uploadFiles()" [formGroup]="requestDataForm" novalidate>
-        <ion-item>
-            <input [uploader]="fileUploader" accept="image/*" formControlName="image" multiple ng2FileSelect type="file"
-                [(ngModel)]="requestData.image" id="file" class="fileInput" />
-            <label for="file">
-                <ion-icon name="image-sharp"></ion-icon>
-                update / add Profile
+       
+        <ion-item class="image-upload" style="margin-left: 25%;">
+            <input [uploader]="fileUploader" accept="image/*" 
+            [(ngModel)]="requestData.image"
+            formControlName="image"
+            ng2FileSelect type="file" id="file"
+                class="fileInput" />
+            <label class="filebutton" for="file">
+                <img src="assets/images/profile.png">
             </label>
+            <p>update / add Profile</p>
         </ion-item>
 
         <ion-item>

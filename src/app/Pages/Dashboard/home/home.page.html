@@ -14,9 +14,15 @@
         </ion-item>
     </ion-card>
 
+    
+    <div *ngIf="response?.user?.status == 1">
+        <p class="ion-text-center">Please complete your <strong>Registration</strong></p>
+        <ion-button [routerLink]="['/medical-board']" routerLinkActive="router-link-active"  color="danger" expand="block">upload cv</ion-button>
+    </div>
+
     <div *ngIf="response?.user?.status == 2">
         <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
-        <ion-button (click)="openCvUpdate()" color="danger" expand="block">upload cv</ion-button>
+        <ion-button [routerLink]="['/cv-update']" routerLinkActive="router-link-active"  color="danger" expand="block">upload cv</ion-button>
     </div>
 
     <ion-grid>

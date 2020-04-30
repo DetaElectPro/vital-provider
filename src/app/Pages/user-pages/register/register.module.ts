@@ -4,17 +4,19 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegisterPageRoutingModule } from './register-routing.module';
 
 import { RegisterPage } from './register.page';
+import { RouterModule } from '@angular/router';
+import { FileUploadModule } from 'ng2-file-upload';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegisterPageRoutingModule
-  ],
+    RouterModule.forChild([{ path: '', component: RegisterPage }]),
+    FileUploadModule,
+   ],
   declarations: [RegisterPage]
 })
 export class RegisterPageModule {}

@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {HttpBackend, HttpClient} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 
 @Injectable({
     providedIn: 'root'
@@ -7,28 +7,15 @@ import {HttpBackend, HttpClient} from '@angular/common/http';
 export class FileUploadeService {
     Url = 'https://api.vital-helth.com/api/';
 
-
-    // private httpClient: HttpClient;
-    // private myHeaders: any;
-    //
-    // constructor(
-    //     // handler: HttpBackend,
-    //     private http: HttpClient) {
-    //     // this.httpClient = new HttpClient(handler);
-    //     this.myHeaders = {
-    //         headers: new HttpHeaders()
-    //         // .set('Content-Type', 'application/json')
-    //             .set('content-type', 'multipart/form-data')
-    //     };
-    // }
-
-
     private httpClient: HttpClient;
 
     constructor(handler: HttpBackend) {
         this.httpClient = new HttpClient(handler);
     }
 
+    registerServes(data) {
+        return this.httpClient.post<any>(`${this.Url}auth/register`, data);
+    }
 
     uploadFormData(data) {
         console.log(data);

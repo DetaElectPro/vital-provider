@@ -69,7 +69,7 @@ export class CvUpdatePage implements OnInit {
             formData.append('userId', this.userInfo.id);
             formData.append('cv', file.rawFile, file.name);
 
-            requests.push(this.uploadingService.uploadFormData(formData));
+            requests.push(this.uploadingService.uploadCvFile(formData));
 
         });
 
