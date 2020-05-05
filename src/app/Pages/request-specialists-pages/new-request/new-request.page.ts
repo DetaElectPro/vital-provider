@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {NewRequestModel} from '../../../Models/new-request';
-import {MedicalBoard} from '../../../Models/medical-board';
-import {IonicSelectableComponent} from 'ionic-selectable';
-import {AuthService} from '../../../Service/auth.service';
-import {Router} from '@angular/router';
-import {LoadingController, ModalController, ToastController} from '@ionic/angular';
-import {MapPage} from '../../map/map.page';
-import {RequestsService} from '../../../Service/requests.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {formatDate} from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { NewRequestModel } from '../../../Models/new-request';
+import { MedicalBoard } from '../../../Models/medical-board';
+import { IonicSelectableComponent } from 'ionic-selectable';
+import { AuthService } from '../../../Service/auth.service';
+import { Router } from '@angular/router';
+import { LoadingController, ModalController, ToastController } from '@ionic/angular';
+import { MapPage } from '../../map/map.page';
+import { RequestsService } from '../../../Service/requests.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
     selector: 'app-new-request',
@@ -78,10 +78,10 @@ export class NewRequestPage implements OnInit {
         (await loading).present();
         this.medicalServ.medicalFiledService()
             .subscribe(async data => {
-                    this.specialtiesList = data;
-                    this.specialtiesList = this.specialtiesList.data;
-                    (await loading).dismiss();
-                },
+                this.specialtiesList = data;
+                this.specialtiesList = this.specialtiesList.data;
+                (await loading).dismiss();
+            },
                 async err => {
                     console.log(err);
                     (await loading).dismiss();
@@ -93,10 +93,10 @@ export class NewRequestPage implements OnInit {
         component: IonicSelectableComponent,
         value: any
     }) {
-        this.requestData.medical_id = event.value.medical_id;
+        this.requestData.medical_id = event.value.id;
     }
 
-    async PickLocation() {
+    async pickLocation() {
         const modal = await this.modalController.create({
             component: MapPage,
             // componentProps: {
@@ -126,19 +126,18 @@ export class NewRequestPage implements OnInit {
         this.requestData.address = this.dataReturned.address;
         this.requestData.start_time = formatDate(this.requestData.start_time, 'yyyy-MM-dd', 'en_US');
         this.requestData.end_time = formatDate(this.requestData.end_time, 'yyyy-MM-dd', 'en_US');
-
         this.requestServ.createRequest(this.requestData)
             .subscribe(async res => {
-                    (await loading).dismiss();
-                    console.log('response: ', this.requrstResult = res);
-                    if (this.requrstResult.success) {
-                        this.presentToast(this.requrstResult.message);
-                        this.router.navigate(['/history']);
-                    } else {
-                        this.presentToast(this.requrstResult.message);
-                    }
+                (await loading).dismiss();
+                console.log('response: ', this.requrstResult = res);
+                if (this.requrstResult.success) {
+                    this.presentToast(this.requrstResult.message);
+                    this.router.navigate(['/history']);
+                } else {
+                    this.presentToast(this.requrstResult.message);
+                }
 
-                },
+            },
                 async error1 => {
                     (await loading).dismiss();
                     console.log('Error: ', this.errorMessage = error1);

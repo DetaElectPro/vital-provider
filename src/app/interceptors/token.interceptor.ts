@@ -31,14 +31,19 @@ export class TokenInterceptor implements HttpInterceptor {
             });
         }
 
-        request = request.clone({
-            headers: request.headers.set('Accept', 'application/json')
-        });
+        if (request.body instanceof FormData) {
+            console.log('foem');
+            console.log('foem');
+            // contentType = ''
+            request = request.clone({headers: request.headers.delete('content-type', 'multipart/form-data')});
+            request = request.clone({headers: request.headers.delete('content-type', 'multipart/form-data')});
+            request = request.clone({headers: request.headers.delete('accept', 'application/json')});
+        }
 
         return next.handle(request).pipe(
             map((event: HttpEvent<any>) => {
                 if (event instanceof HttpResponse) {
-                    console.log('event--->>>', event);
+                    // console.log('event--->>>', event);
                 }
                 return event;
             }),
@@ -50,13 +55,13 @@ export class TokenInterceptor implements HttpInterceptor {
                         this.router.navigate(['login']);
                     }
                 }
-                if (error.status === 500) {
-                    if (error.error.success === false) {
-                        this.presentToast('Login failed');
-                    } else {
-                        this.router.navigate(['login']);
-                    }
-                }
+                // if (error.status === 500) {
+                //     if (error.error.success === false) {
+                //         this.presentToast('Login failed');
+                //     } else {
+                //         this.router.navigate(['login']);
+                //     }
+                // }
                 return throwError(error);
             }));
     }

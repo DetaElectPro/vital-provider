@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ActionSheetController, AlertController, LoadingController} from '@ionic/angular';
 import {AmbulanceService} from '../../../Service/ambulance.service';
-import {Map, marker, tileLayer} from 'leaflet';
+import {icon, Map, marker, tileLayer} from 'leaflet';
 import {Storage} from '@ionic/storage';
 
 @Component({
@@ -121,17 +121,27 @@ export class AmbulanceDetailsPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.map = new Map('mapId').setView([this.params.latitude, this.params.longitude], 20);
+    this.map = new Map('mapId').setView([this.params.latitude, this.params.longitude], 15);
 
     tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-      // tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
       attribution: 'detaTech.xyz'
     }).addTo(this.map);
     this.leafletMap();
   }
 
   leafletMap() {
-    marker([this.params.latitude, this.params.longitude]).addTo(this.map)
+    const dot = icon({
+      iconUrl: 'assets/icon/ambulance.png',
+      // shadowUrl: 'dot-shadow.png',
+      iconSize: [35, 50], // size of the icon
+      shadowSize: [50, 64], // size of the shadow
+      iconAnchor: [22, 94], // point of the icon which will correspond to marker's
+      shadowAnchor: [4, 62],  // the same for the shadow
+      popupAnchor: [-3, -76] // point from which the popup should open relative..
+    });
+
+    marker([this.params.latitude, this.params.longitude],
+        {autoPan: true, icon: dot}).addTo(this.map)
         .bindPopup('location')
         .openPopup();
   }

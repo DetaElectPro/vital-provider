@@ -8,10 +8,6 @@ const routes: Routes = [
         loadChildren: () => import('./Pages/tabs/tabs.module').then(m => m.TabsPageModule), canActivate: [AuthGuard]
     },
     {
-        path: 'requests',
-        loadChildren: () => import('./Pages/request-specialists-pages/requests/requests.module').then(m => m.RequestsPageModule)
-    },
-    {
         path: 'history',
         loadChildren: () => import('./Pages/request-specialists-pages/history/history.module').then(m => m.HistoryPageModule)
     },
@@ -108,7 +104,15 @@ const routes: Routes = [
   {
     path: 'accept-pharmacy',
     loadChildren: () => import('./Pages/pharmacy-pages/accep-pharmacy/accep-pharmacy.module').then( m => m.AccepPharmacyPageModule)
+  },  {
+    path: 'image-update',
+    loadChildren: () => import('./Pages/user-pages/image-update/image-update.module').then( m => m.ImageUpdatePageModule)
   },
+  {
+    path: 'cv-update',
+    loadChildren: () => import('./Pages/user-pages/cv-update/cv-update.module').then( m => m.CvUpdatePageModule)
+  },
+
 
 
 

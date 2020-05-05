@@ -9,7 +9,7 @@ export class WalletService {
 
     // Url = 'http://localhost:8000/api/';
     // Url = 'http://192.168.2.6:8000/api/';
-    Url = 'http://api.vital-helth.com/api/';
+    Url = 'https://api.vital-helth.com/api/';
 
     constructor(
         private http: HttpClient

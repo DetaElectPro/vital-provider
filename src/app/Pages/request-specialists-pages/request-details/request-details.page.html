@@ -1,21 +1,21 @@
 <ion-header>
     <ion-toolbar>
-
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/history">
+                <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title class="ion-text-center">Request Details</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="request">
     <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
-        <ion-refresher-content
-                pullingIcon="arrow-down-outline"
-                pullingText="Pull to refresh"
-                refreshingSpinner="circles"
-                refreshingText="Refreshing...">
+        <ion-refresher-content pullingIcon="arrow-down-outline" pullingText="Pull to refresh"
+                               refreshingSpinner="circles" refreshingText="Refreshing...">
         </ion-refresher-content>
     </ion-refresher>
 
-    <app-explore-container name="details"></app-explore-container>
     <ion-card>
         <ion-card-header>
             <ion-grid>
@@ -68,7 +68,11 @@
 
                 <ion-button (click)="openProfile()" expand="block">
                     <ion-icon name="person-circle-outline"></ion-icon>
-                    full CV
+                    Doctor Profile
+                </ion-button>
+                <ion-button (click)="openPdf(request.accept_request.doctor.employ.cv)" expand="block">
+                    <ion-icon name="document-attach"></ion-icon>
+                    Doctor PDF CV
                 </ion-button>
             </ion-card-content>
         </div>

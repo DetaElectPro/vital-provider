@@ -1,0 +1,44 @@
+.fileInput {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.fileInput   label {
+  font-size: xx-large;
+  color: #717171;
+  background-color: white;
+  display: inline-block;
+  cursor: pointer;
+  padding: .5em 1em;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+ion-icon {
+  zoom: 1.8;
+  padding: 3px;
+}
+
+.input{
+  border: #006599;
+    border-top-color: #006599;
+    border-top-style: solid;
+    border-top-width: medium;
+    border-right-color: #006599;
+    border-right-style: solid;
+    border-right-width: medium;
+    border-bottom-color: #006599;
+    border-bottom-style: solid;
+    border-bottom-width: medium;
+    border-left-color: #006599;
+    border-left-style: solid;
+    border-left-width: medium;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
+    border-image-slice: 100%;
+    border-image-source: solid;
+    border-image-width: 1;
+border-bottom-style: solid;
+}

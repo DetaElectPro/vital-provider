@@ -1,8 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {AuthService} from '../../Service/auth.service';
 import {ActionSheetController} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-tab1',
@@ -13,59 +13,50 @@ export class HomePage implements OnInit {
     @ViewChild('slide', {static: false}) slide3: any;
 
     response: any;
-    responseFcm: any;
     dateSlide: any;
+    userInfo: any;
 
     constructor(
-        private iab: InAppBrowser,
+        private storage: Storage,
         private userServ: AuthService,
         private router: Router,
         public actionSheetController: ActionSheetController
     ) {
-        // this.getDashboardData();
     }
 
     ngOnInit() {
-        // this.slideHome();
+        this.storage.get('userInfo')
+            .then(res => {
+                this.userInfo = res;
+            })
+            .catch(err => {
+                console.log(err);
+            });
+        this.getDashboardData();
+        this.updateFcmToken();
     }
 
-    ionViewDidEnter() {
-        if (localStorage.getItem(' fcm_registration_id')) {
-            this.updateFcmToken();
-        }
-    }
 
-    openCvUpdate() {
-        const browser = this.iab.create('https://medical.detatech.xyz/profile/' + this.response.user.id);
-        browser.on('loadstop').subscribe(event => {
-                console.log('sus: ', event);
-            },
-            error => {
-                console.log('error: ', error);
+    getDashboardData() {
+        this.userServ.checkUserService()
+            .subscribe(response => {
+                this.response = response;
+                if (this.response.status === true) {
+                } else {
+                    alert('filed');
+                }
+            }, error => {
+                console.log('server: ', error);
             });
     }
 
-    //
-    // getDashboardData() {
-    //     this.userServ.checkUserService()
-    //         .subscribe(response => {
-    //             this.response = response;
-    //             if (this.response.status === true) {
-    //             } else {
-    //                 alert('filed');
-    //             }
-    //         }, error => {
-    //             console.log('server: ', error);
-    //         });
-    // }
-
     updateFcmToken() {
         const data = {
-            fcm_registration_id: localStorage.getItem(' fcm_registration_id')
+            fcm_registration_id: localStorage.getItem('fcm_registration_id')
         };
         this.userServ.updateFcmToken(data)
             .subscribe(response => {
-                console.log('res: ', response);
+                // console.log('res: ', response);
                 // if (this.response.status === true) {
                 // } else {
                 //     alert('filed');
@@ -75,15 +66,6 @@ export class HomePage implements OnInit {
             });
     }
 
-    // slideHome() {
-    //     this.userServ.getSlide()
-    //         .subscribe(response => {
-    //             this.dateSlide = response;
-    //             console.log('res: ', response);
-    //         }, error => {
-    //             console.log('server: ', error);
-    //         });
-    // }
 
     slide_next() {
         this.slide3.slideNext();

@@ -93,6 +93,7 @@ export class AuthService {
                     this.user = res;
                     this.token = this.token.token;
                     this.storage.set('userInfo', this.user.user);
+                    localStorage.setItem('token', this.token);
                     this.storage.set(TOKEN_KEY, this.token).then(() => {
                         this.authenticationState.next(true);
                     });
@@ -102,17 +103,6 @@ export class AuthService {
                 });
         });
     }
-
-    //
-    // login(data): Observable<any> {
-    //     return this.http.post<any>(this.url + 'auth/login', data, {
-    //         headers: new HttpHeaders().set('Content-Type', 'application/json')
-    //     })
-    //         .pipe(
-    //             tap(_ => this.log('login')),
-    //             catchError(this.handleError('login', []))
-    //         );
-    // }
 
     registerServes(userData) {
         return new Promise((resolve, reject) => {
@@ -136,16 +126,6 @@ export class AuthService {
             );
     }
 
-    // medicalBoardService(boardData) {
-    //     return new Promise((resolve, reject) => {
-    //         this.http.post(this.url + 'employs', boardData)
-    //             .subscribe(res => {
-    //                 resolve(res);
-    //             }, (err) => {
-    //                 reject(err);
-    //             });
-    //     });
-    // }
 
     /**
      * Return list of Requests as observable
@@ -154,21 +134,17 @@ export class AuthService {
         return this.http.get(this.url + 'medical_specialties');
     }
 
-    public medicalSpecialtiesService(id): Observable<any> {
-        return this.http.get(`${this.url}medical_specialties/${id}`);
-    }
-
     public checkUserService(): Observable<any> {
         return this.http.get(`${this.url}auth/check_user`);
     }
 
     public updateFcmToken(data): Observable<any> {
-        return this.http.put(`${this.url}auth/check_user`, data);
+        return this.http.post<any>(`${this.url}auth/fcm_update`, data);
     }
 
-    public getSlide(): Observable<any> {
-        return this.http.get(`${this.url}home`);
-    }
+    // public getSlide(): Observable<any> {
+    //     return this.http.get(`${this.url}home`);
+    // }
 
     private handleError<T>(operation = 'operation', result?: T) {
         return (error: any): Observable<T> => {

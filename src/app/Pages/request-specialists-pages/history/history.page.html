@@ -1,5 +1,10 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/tabs/home">
+                <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title class="ion-text-center">History</ion-title>
     </ion-toolbar>
 </ion-header>
@@ -15,11 +20,8 @@
 </ion-content>
 <ion-content *ngIf="historyData">
     <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
-        <ion-refresher-content
-                pullingIcon="arrow-down-outline"
-                pullingText="Pull to refresh"
-                refreshingSpinner="circles"
-                refreshingText="Refreshing...">
+        <ion-refresher-content pullingIcon="arrow-down-outline" pullingText="Pull to refresh"
+            refreshingSpinner="circles" refreshingText="Refreshing...">
         </ion-refresher-content>
     </ion-refresher>
 
@@ -53,10 +55,7 @@
 
 
     <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
-        <ion-infinite-scroll-content
-                loadingSpinner="bubbles"
-                loadingText="Loading more data...">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
-

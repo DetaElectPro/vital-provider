@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../../../Service/auth.service';
-import {Router} from '@angular/router';
-import {LoadingController} from '@ionic/angular';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../Service/auth.service';
+import { Router } from '@angular/router';
+import { LoadingController } from '@ionic/angular';
 
 
 @Component({
@@ -10,8 +10,11 @@ import {LoadingController} from '@ionic/angular';
     styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-    loginData = {phone: null, password: null, role: 3, fcm_registration_id: null};
+    loginData = { phone: null, password: null, role: 3, fcm_registration_id: null };
     usersData: any = [];
+    showPass = false;
+    passIcon = 'eye-outline';
+
 
     constructor(
         private authServe: AuthService,
@@ -40,8 +43,6 @@ export class LoginPage implements OnInit {
                 if (this.usersData.error) {
                     alert('error data');
                 } else {
-                    localStorage.setItem('token', this.usersData.token);
-                    localStorage.setItem('doctorID', this.usersData.id);
                     if (this.usersData.user.status === 1) {
                         this.router.navigate(['/medical-board']);
                     }
@@ -54,5 +55,14 @@ export class LoginPage implements OnInit {
                 await loading.dismiss();
                 console.log('serve Error: ', err);
             });
+    }
+
+    showPassword() {
+        this.showPass = !this.showPass;
+        if (this.passIcon === 'eye-outline') {
+            this.passIcon = 'eye-off-outline';
+        } else {
+            this.passIcon = 'eye-outline';
+        }
     }
 }

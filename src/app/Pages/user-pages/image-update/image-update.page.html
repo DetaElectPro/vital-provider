@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/tabs/setting">
+                <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Image Update</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+    <ion-item *ngIf="userInfo">
+        <ion-avatar slot="start">
+            <img src="{{userInfo?.image}}" />
+        </ion-avatar>
+        <ion-label>Welcome, <br>Dr. {{userInfo?.name}}</ion-label>
+    </ion-item>
+
+    <form (ngSubmit)="uploadFiles()" [formGroup]="requestDataForm" novalidate>
+
+        <ion-item class="image-upload" style="margin-left: 25%;">
+            <input [uploader]="fileUploader" accept="image/*" [(ngModel)]="requestData.image" formControlName="image"
+                ng2FileSelect type="file" id="file" class="fileInput" />
+            <label class="filebutton" for="file">
+                <img src="assets/images/profile.png">
+            </label>
+            <p>update / add Profile</p>
+        </ion-item>
+
+        <ion-item>
+            <ion-label color="tertiary" position="floating">Full Name</ion-label>
+            <ion-input [class.error1]="!requestDataForm.controls.name.valid && requestDataForm.controls.name.dirty"
+                formControlName="name" [value]="userInfo?.name" [placeholder]="userInfo?.name" disabled="true"
+                type="text">
+            </ion-input>
+        </ion-item>
+
+
+        <ion-item>
+            <ion-label color="tertiary" position="floating">Phone Number</ion-label>
+            <ion-input [class.error1]="!requestDataForm.controls.phone.valid && requestDataForm.controls.phone.dirty"
+                formControlName="phone" [(ngModel)]="requestData.phone" [value]="userInfo?.phone"
+                [placeholder]="userInfo?.phone" disabled="true" type="text">
+            </ion-input>
+        </ion-item>
+
+
+        <ion-item>
+            <ion-label color="tertiary" position="floating">E-mail</ion-label>
+            <ion-input [class.error1]="!requestDataForm.controls.email.valid && requestDataForm.controls.email.dirty"
+                formControlName="email" [(ngModel)]="requestData.email" [value]="userInfo?.email"
+                [placeholder]="userInfo?.email" type="text">
+            </ion-input>
+        </ion-item>
+
+
+        <ion-button expand="full" [disabled]="requestDataForm.invalid" type="submit">Update Profile</ion-button>
+    </form>
+    <!--    <h2>Your files: {{ fileUploader?.queue?.length }}</h2>-->
+    <!--    <ul>-->
+    <!--        <li *ngFor="let item of fileUploader.queue">-->
+    <!--            {{ item?.file?.name }}-->
+    <!--        </li>-->
+    <!--    </ul>-->
+
+
+</ion-content>
+<!--<input [uploader]="fileUploader"-->
+<!--       accept="image/*" formControlName="name"-->
+<!--       multiple ng2FileSelect type="file"/>-->

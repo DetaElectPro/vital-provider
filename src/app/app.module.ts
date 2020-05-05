@@ -12,34 +12,17 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {IonicStorageModule} from '@ionic/storage';
 import {IonicSelectableModule} from 'ionic-selectable';
 import {MapPageModule} from './Pages/map/map.module';
-import {PdfViewerService} from './Service/pdf-viewer.service';
-import {FileOpener} from '@ionic-native/file-opener/ngx';
-import {File} from '@ionic-native/file/ngx';
-import {FileTransfer} from '@ionic-native/file-transfer/ngx';
 import {DoctorePageModule} from './Pages/user-pages/doctore/doctore.module';
 import {NotificationsComponent} from './components/notifications/notifications.component';
 import {FinishRequestComponent} from './components/finish-request/finish-request.component';
 import {FormsModule} from '@angular/forms';
-import {NativeGeocoder} from '@ionic-native/native-geocoder/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {FCM} from '@ionic-native/fcm/ngx';
 import {TokenInterceptor} from './interceptors/token.interceptor';
+import {FileTransfer} from '@ionic-native/file-transfer/ngx';
+import {File} from '@ionic-native/file/ngx';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
-
-export function tokenGetter() {
-    return localStorage.getItem('token');
-}
-
-export function jwtOptionsFactory() {
-    return {
-        tokenGetter: () => {
-            return localStorage.getItem('token');
-        },
-        whitelistedDomains: ['localhost:8101'],
-        blacklistedDomain: ['localhost:8101/login'],
-        throwNoTokenError: true
-    };
-}
 
 @NgModule({
     declarations: [AppComponent, NotificationsComponent, FinishRequestComponent],
@@ -55,13 +38,11 @@ export function jwtOptionsFactory() {
     providers: [
         StatusBar,
         SplashScreen,
-        FCM,
-        NativeGeocoder,
-        AndroidPermissions,
-        FileTransfer,
-        FileOpener,
         File,
-        PdfViewerService,
+        FileTransfer,
+        FCM,
+        AndroidPermissions,
+        InAppBrowser,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         {
             provide: HTTP_INTERCEPTORS,

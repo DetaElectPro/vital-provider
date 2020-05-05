@@ -1,6 +1,6 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Login</ion-title>
+        <ion-title class="ion-text-center">Login</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -10,9 +10,9 @@
         <div>
             <img src="assets/images/vitle.png" width="30%">
         </div>
-        <h2 class="text-d-purple" ion-text>
-            For Medical Serves
-        </h2>
+        <!-- <h2 class="ion-text-center">
+            For Medical Services
+        </h2> -->
     </ion-list>
 
     <ion-card>
@@ -23,9 +23,15 @@
             </ion-item>
 
             <ion-item>
+                <ion-input [(ngModel)]="loginData.password" [type]="showPass? 'text': 'password'" placeholder="Password"></ion-input>
+                <ion-icon (click)="showPassword()" [name]="passIcon" slot="end"></ion-icon>
+            </ion-item>
+
+
+            <!-- <ion-item>
                 <ion-label position="floating">Password</ion-label>
                 <ion-input [(ngModel)]="loginData.password" max="20" min="6" type="password"></ion-input>
-            </ion-item>
+            </ion-item> -->
 
             <ion-button (click)="userLogin()" expand="block">Login</ion-button>
 
@@ -34,7 +40,7 @@
         <p class="ion-text-center">Forgot your password?
             <a href="password_reset">reset</a>
 
-        <p class="ion-text-center">Do not have an account?<a href="register"><b>Create
+            <p class="ion-text-center">Do not have an account?<a href="register"><b>Create
             a new
             account</b></a></p>
 

@@ -1,0 +1,88 @@
+  
+  .col-phone {
+    border: transparent;
+    //border: 1px solid;
+    // background-color: lightgrey;
+  }
+  
+  .row {
+    border: transparent;
+    // background-color: lightgrey;
+    //border: 1px solid;
+    //border-top-left-radius: 15px;
+    //border-bottom-left-radius: 15px
+  }
+  
+  .button-dev {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .h2-style {
+    margin-top: 30%;
+  }
+  
+  .card-content-md h3, .card-content-md h4, .card-content-md h5, .card-content-md h6 {
+    margin-left: -5px;
+    margin-right: 7px;
+    margin-top: 36px;
+    margin-bottom: 2px;
+    font-size: 16px;
+    font-weight: 400;
+  }
+  
+  .fileInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+  }
+  .fileInput   label {
+    color: #717171;
+    background-color: white;
+    display: inline-block;
+    cursor: pointer;
+    padding: .5em 1em;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .image-upload>input {
+    display: none;
+    margin-left: 25%;
+  }
+  
+  label.filebutton {
+    width:120px;
+    height:90px;
+    overflow:hidden;
+    position:relative;
+    background-color:#ccc;
+    border-radius: 50%;
+  
+    // border-bottom-left-radius: 40px;
+    // border-bottom-right-radius: 40px;
+    // border-top-left-radius: 40px;
+    // border-top-right-radius: 40px;
+  }
+  
+  img {
+    border-radius: 50%;
+  }
+  label span input {
+    z-index: 999;
+    line-height: 0;
+    font-size: 50px;
+    position: absolute;
+    top: -2px;
+    left: -700px;
+    opacity: 0;
+    filter: alpha(opacity = 0);
+    -ms-filter: "alpha(opacity=0)";
+    cursor: pointer;
+    _cursor: hand;
+    margin: 0;
+    padding:0;
+  }

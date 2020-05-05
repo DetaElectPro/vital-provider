@@ -1,24 +1,26 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Register - Users</ion-title>
+        <ion-title class="ion-text-center">Register</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <br>
-    <ion-list class="ion-padding-horizontal ion-text-center">
-        <div>
-            <img src="assets/images/vitle.png" width="25%">
-        </div>
-        <h2 color="light" ion-text>
-
-        </h2>
-    </ion-list>
 
     <ion-card>
         <ion-card-content>
+            <ion-item class="image-upload" style="margin-left: 25%;">
+                <input [uploader]="fileUploader" accept="image/*" ng2FileSelect type="file" id="file"
+                    class="fileInput" />
+                <label class="filebutton" for="file">
+                    <img src="assets/images/profile.png">
+                </label>
+                <p>pic Profile Image</p>
+            </ion-item>
+
+
+            
             <ion-item>
-                <ion-label position="floating">Name</ion-label>
+                <ion-label position="floating">Full name</ion-label>
                 <ion-input [(ngModel)]="registerData.name" max="20" min="6" type="text"></ion-input>
             </ion-item>
 

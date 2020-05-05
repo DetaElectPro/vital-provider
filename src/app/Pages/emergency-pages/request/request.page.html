@@ -1,6 +1,11 @@
 <ion-header>
     <ion-toolbar>
-        <ion-title>Requests</ion-title>
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/tabs/home">
+                <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Requests</ion-title>
     </ion-toolbar>
 </ion-header>
 <ion-content *ngIf="!emergencyData" class="ion-padding custom-skeleton">
@@ -12,28 +17,25 @@
 </ion-content>
 
 <ion-content *ngIf="emergencyData">
-    <ion-searchbar (ionCancel)="clearSearch()" (ionChange)="searchRequests()" animated
-                   showCancelButton="focus"></ion-searchbar>
+    <ion-searchbar (ionCancel)="clearSearch()" (ionChange)="searchRequests()" animated showCancelButton="focus">
+    </ion-searchbar>
     <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
-        <ion-refresher-content
-                pullingIcon="arrow-down-outline"
-                pullingText="Pull to refresh"
-                refreshingSpinner="circles"
-                refreshingText="Refreshing...">
+        <ion-refresher-content pullingIcon="arrow-down-outline" pullingText="Pull to refresh"
+            refreshingSpinner="circles" refreshingText="Refreshing...">
         </ion-refresher-content>
     </ion-refresher>
     <ion-list>
         <ion-item *ngFor="let item of emergencyData" routerLink="/emergency-details/{{item.id}}">
             <ion-label>
-<!--                <p>id: {{item?.id}}</p>-->
+                <!--                <p>id: {{item?.id}}</p>-->
                 <h2>Name: {{item?.name}}</h2>
                 <h3>Type: {{item?.type}}</h3>
                 <h3>available: {{item?.available}}</h3>
                 <p>Address: {{item?.address}}</p>
                 <p>Price per day: {{item?.price_per_day}}</p>
-<!--                <p>contact: {{item?.contact}}</p>-->
-<!--                <p>Post at: {{item?.created_at}}</p>-->
-<!--                <p>Last update at: {{item?.updated_at}}</p>-->
+                <!--                <p>contact: {{item?.contact}}</p>-->
+                <!--                <p>Post at: {{item?.created_at}}</p>-->
+                <!--                <p>Last update at: {{item?.updated_at}}</p>-->
             </ion-label>
             <ion-card-header>
 
@@ -42,9 +44,7 @@
     </ion-list>
 
     <ion-infinite-scroll (ionInfinite)="loadData($event)" threshold="100px">
-        <ion-infinite-scroll-content
-                loadingSpinner="bubbles"
-                loadingText="Loading more data...">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
         </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>
