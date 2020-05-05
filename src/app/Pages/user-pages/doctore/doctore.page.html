@@ -34,14 +34,16 @@
                 </h6>
             </div>
 
-            <ion-button (click)="download(doctorData?.employ?.cv, doctorData?.name)" color="primary" expand="full">View
-                Cv
-            </ion-button>
+<!--            <ion-button [href]="doctorData?.employ?.cv" color="primary" expand="full">View-->
+<!--                Cv-->
+<!--            </ion-button>-->
             <ion-button color="secondary" expand="full" href="tel:{{doctorData?.phone}}">Call</ion-button>
             <ion-button (click)="closeModal()" expand="full">Close profile</ion-button>
         </ion-card-content>
     </ion-card>
     <!--    </div>-->
+    <!--            <ion-button href="" (click)="download(doctorData?.employ?.cv)" color="primary" expand="full">View-->
+
 
 </ion-content>
 

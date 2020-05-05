@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FileLikeObject, FileUploader } from 'ng2-file-upload';
-import { concat } from 'rxjs';
-import { Storage } from '@ionic/storage';
-import { FileUploadeService } from '../../../Servies/file-uploade.service';
-import { MedicalBoard } from 'src/app/Models/medical-board';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {FileLikeObject, FileUploader} from 'ng2-file-upload';
+import {concat} from 'rxjs';
+import {Storage} from '@ionic/storage';
+import {FileUploadeService} from '../../../Service/file-uploade.service';
+import {MedicalBoard} from 'src/app/Models/medical-board';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import {LoadingController, ToastController} from '@ionic/angular';
 
 @Component({
     selector: 'app-cv-update',
@@ -21,6 +21,7 @@ export class CvUpdatePage implements OnInit {
     medicalData: MedicalBoard;
     updateResponse: any;
     userInfo: any;
+
     constructor(
         private storage: Storage,
         public router: Router,
@@ -79,27 +80,39 @@ export class CvUpdatePage implements OnInit {
                 console.log(res);
                 this.updateResponse = res;
                 if (!this.updateResponse.error) {
-                    this.presentToast(this.updateResponse.message)
-                }
-                else {
+                    this.presentToast(this.updateResponse.message);
+                } else {
                     alert('Error');
                 }
             },
             async err => {
                 await loading.dismiss();
                 console.log(err);
+                this.errorToast('server Error try later');
             }
         );
     }
 
-    async presentToast(message) {
+    async presentToast(messageRes) {
         const toast = await this.toastController.create({
-            message: message,
-            duration: 3000,
-            color: 'primary',
+            message: messageRes + '/n' + 'will update in next login',
+            duration: 7000,
+            color: 'success',
             position: 'middle'
         });
         toast.present();
-        this.router.navigate(['/'])
+        this.router.navigate(['/']);
+    }
+
+
+    async errorToast(messageRes) {
+        const toast = await this.toastController.create({
+            message: messageRes + '/n' + 'will update in next login',
+            duration: 7000,
+            color: 'success',
+            position: 'middle'
+        });
+        toast.present();
+        this.router.navigate(['/']);
     }
 }

@@ -35,6 +35,7 @@ export class Requests {
             image: string;
             active: number;
             status: number;
+            employ: { cv: string }
         };
     };
 }

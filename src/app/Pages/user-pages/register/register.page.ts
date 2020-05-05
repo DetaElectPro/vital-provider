@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { FileUploader, FileLikeObject } from 'ng2-file-upload';
-import { FileUploadeService } from 'src/app/Servies/file-uploade.service';
+import { FileUploadeService } from 'src/app/Service/file-uploade.service';
 import { concat } from 'rxjs';
 
 @Component({
@@ -12,7 +12,7 @@ import { concat } from 'rxjs';
 })
 export class RegisterPage implements OnInit {
 
-    registerData: any = { name: '', phone: '', password: '', role: null, fcm_registration_id: null, image: null };
+    registerData: any = { name: '', phone: '', password: '', role: 3, fcm_registration_id: null, image: null };
 
     result: any;
     showPass = false;

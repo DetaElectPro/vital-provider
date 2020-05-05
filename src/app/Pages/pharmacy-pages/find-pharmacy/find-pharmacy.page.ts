@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Medicine} from '../../../Models/medicine';
-import {EmergencyService} from '../../../Service/emergency.service';
-import {LoadingController, ToastController} from '@ionic/angular';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Medicine } from '../../../Models/medicine';
+import { EmergencyService } from '../../../Service/emergency.service';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-find-pharmacy',
@@ -10,14 +10,14 @@ import {Router} from '@angular/router';
   styleUrls: ['./find-pharmacy.page.scss'],
 })
 export class FindPharmacyPage implements OnInit {
-  medicine: Medicine = {company: false, dose: null, type: '', name: ''};
+  medicine: Medicine = { company: false, dose: null, type: '', name: '' };
   response: any;
 
   constructor(
-      private pharmacyServ: EmergencyService,
-      public loadingController: LoadingController,
-      public route: Router,
-      public tostMessage: ToastController
+    private pharmacyServ: EmergencyService,
+    public loadingController: LoadingController,
+    public route: Router,
+    public tostMessage: ToastController
   ) {
   }
 
@@ -26,24 +26,25 @@ export class FindPharmacyPage implements OnInit {
 
   async sendRequest() {
     const loading = this.loadingController.create({
-      spinner: null,
+      spinner: 'dots',
       message: 'Please wait...',
       translucent: true,
     });
     (await loading).present();
     this.pharmacyServ.sendPharmcyRequest(this.medicine)
-        .subscribe(async response => {
-              this.response = response;
-              (await loading).dismiss();
-              if (this.response.success) {
-                this.route.navigate([`pharmacy-details/${this.response.data.id}`]);
-                this.succseMessage(this.response.message);
-              } else {
-                this.faildMessage();
-              }
-            },
-            async error1 =>
-                console.table(error1));
+      .subscribe(async response => {
+        this.response = response;
+        (await loading).dismiss();
+        if (this.response.success) {
+          this.route.navigate([`pharmacy-details/${this.response.data.id}`]);
+          this.succseMessage(this.response.message);
+        } else {
+          this.faildMessage();
+        }
+      },
+        async error1 =>
+          console.table(error1));
+    alert('try later');
     (await loading).dismiss();
 
   }

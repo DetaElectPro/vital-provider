@@ -1,5 +1,4 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {AuthService} from '../../Service/auth.service';
 import {ActionSheetController} from '@ionic/angular';
 import {Router} from '@angular/router';
@@ -16,11 +15,9 @@ export class HomePage implements OnInit {
     response: any;
     dateSlide: any;
     userInfo: any;
-    // styleImage = 'max-height: 250px; height: 250px; max-width:100%;';
 
     constructor(
         private storage: Storage,
-        private iab: InAppBrowser,
         private userServ: AuthService,
         private router: Router,
         public actionSheetController: ActionSheetController
@@ -30,23 +27,13 @@ export class HomePage implements OnInit {
     ngOnInit() {
         this.storage.get('userInfo')
             .then(res => {
-                console.log('user: ', this.userInfo = res);
+                this.userInfo = res;
             })
             .catch(err => {
                 console.log(err);
             });
         this.getDashboardData();
         this.updateFcmToken();
-    }
-
-    openCvUpdate() {
-        const browser = this.iab.create('http://api.vital-helth.com/profile/' + this.userInfo.id);
-        browser.on('loadstop').subscribe(event => {
-                console.log('sus: ', event);
-            },
-            error => {
-                console.log('error: ', error);
-            });
     }
 
 
@@ -65,11 +52,11 @@ export class HomePage implements OnInit {
 
     updateFcmToken() {
         const data = {
-            fcm_registration_id: localStorage.getItem(' fcm_registration_id')
+            fcm_registration_id: localStorage.getItem('fcm_registration_id')
         };
         this.userServ.updateFcmToken(data)
             .subscribe(response => {
-                console.log('res: ', response);
+                // console.log('res: ', response);
                 // if (this.response.status === true) {
                 // } else {
                 //     alert('filed');
@@ -79,15 +66,6 @@ export class HomePage implements OnInit {
             });
     }
 
-    // slideHome() {
-    //     this.userServ.getSlide()
-    //         .subscribe(response => {
-    //             this.dateSlide = response;
-    //             console.log('res: ', response);
-    //         }, error => {
-    //             console.log('server: ', error);
-    //         });
-    // }
 
     slide_next() {
         this.slide3.slideNext();

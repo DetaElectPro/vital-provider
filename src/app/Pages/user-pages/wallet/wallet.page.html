@@ -1,6 +1,10 @@
 <ion-header [translucent]="true">
     <ion-toolbar>
-
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/tabs/setting">
+                <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title class="ion-text-center">
             My Wallet
         </ion-title>
@@ -10,17 +14,17 @@
 <ion-content [fullscreen]="true">
     <div class="card">
         <div class="card-body">
-            <ion-item color="secondary">
+            <ion-item>
                 My Balance
                 <span class="wallet-outline" slot="end"> {{data?.balance}}</span>
             </ion-item>
 
-            <div class="skin-blue">
+            <div>
                 <p class="text-d-purple"> Buy More</p>
-                <ion-button color="secondary" expand="full" href="tel:{{0114847667}}">Call
+                <ion-button expand="full" href="tel:{{0114847667}}">Call
                     <ion-icon name="call"></ion-icon>
                 </ion-button>
-                <ion-button color="danger" expand="full">Bok
+                <ion-button (click)="bokApp()" color="danger" expand="full">Bok
                     <ion-icon name="card"></ion-icon>
                 </ion-button>
 

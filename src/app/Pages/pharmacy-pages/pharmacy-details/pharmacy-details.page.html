@@ -1,7 +1,11 @@
 <ion-header>
     <ion-toolbar>
-
-        <ion-title class="ion-text-center">details</ion-title>
+        <ion-buttons slot="start">
+            <ion-button expand="block" routerDirection="backward" routerLink="/tabs/home">
+                <ion-icon color="light" name="arrow-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title class="ion-text-center">Details</ion-title>
     </ion-toolbar>
 </ion-header>
 
@@ -27,7 +31,7 @@
     <ion-card>
         <ion-item>
             <ion-avatar slot="start">
-                <img src="{{pharmacy?.user?.image}}"/>
+                <img src="{{pharmacy?.user?.image}}" />
             </ion-avatar>
             <ion-label>
                 <h3>Create by: DR. {{pharmacy?.user?.name}}</h3>

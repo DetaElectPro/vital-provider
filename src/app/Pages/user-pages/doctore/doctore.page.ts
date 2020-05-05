@@ -1,33 +1,30 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController, NavParams} from '@ionic/angular';
-import {PdfViewerService} from '../../../Service/pdf-viewer.service';
 
 @Component({
-  selector: 'app-doctore',
-  templateUrl: './doctore.page.html',
-  styleUrls: ['./doctore.page.scss'],
+    selector: 'app-doctore',
+    templateUrl: './doctore.page.html',
+    styleUrls: ['./doctore.page.scss'],
 })
 export class DoctorePage implements OnInit {
 
-  doctorData: any;
+    doctorData: any;
 
-  constructor(
-      private modalController: ModalController,
-      private navParams: NavParams,
-      private pdf: PdfViewerService
-  ) {
-  }
+    constructor(
+        private modalController: ModalController,
+        private navParams: NavParams,
+        // private iab: InAppBrowser,
+    ) {
+    }
 
-  ngOnInit() {
-    this.doctorData = this.navParams.data.doctor;
-    console.log('Doctor: ', this.doctorData);
-  }
+    ngOnInit() {
+        this.doctorData = this.navParams.data.doctor;
+        // console.log('Doctor: ', this.doctorData);
+    }
 
-  async closeModal() {
-    await this.modalController.dismiss('onClosedData');
-  }
+    async closeModal() {
+        await this.modalController.dismiss('onClosedData');
+    }
 
-  download(url, title) {
-    this.pdf.download(url, title);
-  }
+
 }
