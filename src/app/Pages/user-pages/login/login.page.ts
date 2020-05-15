@@ -37,7 +37,7 @@ export class LoginPage implements OnInit {
         await loading.present();
         this.authServe.loginServes(this.loginData)
             .then(async response => {
-                console.log(response);
+                // console.log(response);
                 await loading.dismiss();
                 this.usersData = response;
                 if (this.usersData.error) {

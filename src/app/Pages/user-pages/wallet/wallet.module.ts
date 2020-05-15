@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {WalletPage} from './wallet.page';
-import {InAppBrowser} from '@ionic-native/in-app-browser';
+// import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 @NgModule({
     imports: [
@@ -14,7 +14,7 @@ import {InAppBrowser} from '@ionic-native/in-app-browser';
         RouterModule.forChild([{path: '', component: WalletPage}])
     ],
     declarations: [WalletPage],
-    providers: [InAppBrowser]
+    // providers: [InAppBrowser]
 })
 export class WalletPageModule {
 }

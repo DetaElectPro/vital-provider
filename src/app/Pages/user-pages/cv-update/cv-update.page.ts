@@ -3,7 +3,6 @@ import {FileLikeObject, FileUploader} from 'ng2-file-upload';
 import {concat} from 'rxjs';
 import {Storage} from '@ionic/storage';
 import {FileUploadeService} from '../../../Service/file-uploade.service';
-import {MedicalBoard} from 'src/app/Models/medical-board';
 import {FormGroup, FormControl, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {LoadingController, ToastController} from '@ionic/angular';
@@ -16,9 +15,7 @@ import {LoadingController, ToastController} from '@ionic/angular';
 export class CvUpdatePage implements OnInit {
 
     public fileUploader: FileUploader = new FileUploader({});
-    public hasBaseDropZoneOver = false;
     requestDataForm: FormGroup;
-    medicalData: MedicalBoard;
     updateResponse: any;
     userInfo: any;
 
@@ -43,17 +40,20 @@ export class CvUpdatePage implements OnInit {
     ngOnInit() {
         this.storage.get('userInfo').then(data => {
             this.userInfo = data;
-            console.log(this.userInfo);
         }).catch(error => {
             console.log(error);
         });
     }
 
     getFiles(): FileLikeObject[] {
-        return this.fileUploader.queue.map((fileItem) => {
-            return fileItem.file;
+        if (this.fileUploader.queue.length > 1) {
+            this.fileUploader.removeFromQueue(this.fileUploader.queue[0]);
+        } else {
+            return this.fileUploader.queue.map((fileItem) => {
+                return fileItem.file;
 
-        });
+            });
+        }
     }
 
     async uploadFiles() {
@@ -95,7 +95,7 @@ export class CvUpdatePage implements OnInit {
 
     async presentToast(messageRes) {
         const toast = await this.toastController.create({
-            message: messageRes + '/n' + 'will update in next login',
+            message: messageRes + '\n' + '& will update in next login',
             duration: 7000,
             color: 'success',
             position: 'middle'
@@ -107,7 +107,7 @@ export class CvUpdatePage implements OnInit {
 
     async errorToast(messageRes) {
         const toast = await this.toastController.create({
-            message: messageRes + '/n' + 'will update in next login',
+            message: messageRes ,
             duration: 7000,
             color: 'success',
             position: 'middle'

@@ -27,7 +27,7 @@ ion-chip {
 
     .avatar {
       width: 160px; //40vw
-      height: 160px;
+      height: 100px;
       position: relative;
       margin: 0 auto;
 
@@ -51,7 +51,8 @@ ion-chip {
 
   .user-meta {
     padding-top: 40px;
-
+    border: outset #4CAF50 !important;
+    border-radius: 20px!important;
     .playername {
       font-size: 24px;
       font-weight: 600;
@@ -63,6 +64,7 @@ ion-chip {
       color: #949ea6;
       text-transform: uppercase;
       margin: 0 auto;
+
     }
   }
 }

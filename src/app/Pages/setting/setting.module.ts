@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {SettingPage} from './setting.page';
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+// import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
   imports: [
@@ -13,7 +13,7 @@ import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
     FormsModule,
     RouterModule.forChild([{path: '', component: SettingPage}])
   ],
-  providers: [InAppBrowser],
+  // providers: [InAppBrowser],
   declarations: [SettingPage]
 })
 export class SettingPageModule {

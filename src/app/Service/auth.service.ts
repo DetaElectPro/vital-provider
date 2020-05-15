@@ -57,17 +57,22 @@ export class AuthService {
     //     } else {
     //         return this.authenticationState.next(false);
     //     }
-    //
+
     // }
 
     logout() {
         this.http.post(`${this.url}logout`, localStorage.getItem('token'));
-        return this.storage.remove('userInfo').then(res => {
+        this.storage.remove('userInfo');
+        return this.storage.remove('token').then(res => {
             console.log('logOut: ', res);
             localStorage.removeItem('token');
             this.authenticationState.next(false);
 
         });
+    }
+
+    resetPassword(passwordResetData: any) {
+        return this.http.post(`${this.url}reset_password`, passwordResetData);
     }
 
 
@@ -164,5 +169,6 @@ export class AuthService {
     private log(message: string) {
         console.log(message);
     }
+
 
 }

@@ -101,19 +101,22 @@ const routes: Routes = [
         path: 'pharmacy-history',
         loadChildren: () => import('./Pages/pharmacy-pages/history/history.module').then(m => m.HistoryPageModule)
     },
-  {
-    path: 'accept-pharmacy',
-    loadChildren: () => import('./Pages/pharmacy-pages/accep-pharmacy/accep-pharmacy.module').then( m => m.AccepPharmacyPageModule)
-  },  {
-    path: 'image-update',
-    loadChildren: () => import('./Pages/user-pages/image-update/image-update.module').then( m => m.ImageUpdatePageModule)
-  },
-  {
-    path: 'cv-update',
-    loadChildren: () => import('./Pages/user-pages/cv-update/cv-update.module').then( m => m.CvUpdatePageModule)
-  },
-
-
+    {
+        path: 'accept-pharmacy',
+        loadChildren: () => import('./Pages/pharmacy-pages/accep-pharmacy/accep-pharmacy.module').then(m => m.AccepPharmacyPageModule)
+    },
+    {
+        path: 'image-update',
+        loadChildren: () => import('./Pages/user-pages/image-update/image-update.module').then(m => m.ImageUpdatePageModule)
+    },
+    {
+        path: 'cv-update',
+        loadChildren: () => import('./Pages/user-pages/cv-update/cv-update.module').then(m => m.CvUpdatePageModule)
+    },
+    {
+        path: 'password_reset',
+        loadChildren: () => import('./Pages/user-pages/password-reset/password-reset.module').then(m => m.PasswordResetPageModule)
+    },
 
 
 ];

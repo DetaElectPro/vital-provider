@@ -7,7 +7,7 @@ import {IonicModule} from '@ionic/angular';
 
 import {RequestDetailsPage} from './request-details.page';
 import {RouterModule} from '@angular/router';
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+// import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @NgModule({
     imports: [
@@ -16,7 +16,7 @@ import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
         IonicModule,
         RouterModule.forChild([{path: '', component: RequestDetailsPage}]),
     ],
-    providers: [InAppBrowser],
+    // providers: [InAppBrowser],
     declarations: [RequestDetailsPage],
 })
 export class RequestDetailsPageModule {

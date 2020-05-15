@@ -19,9 +19,6 @@ import {FormsModule} from '@angular/forms';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {FCM} from '@ionic-native/fcm/ngx';
 import {TokenInterceptor} from './interceptors/token.interceptor';
-import {FileTransfer} from '@ionic-native/file-transfer/ngx';
-import {File} from '@ionic-native/file/ngx';
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 
 @NgModule({
@@ -38,11 +35,8 @@ import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
     providers: [
         StatusBar,
         SplashScreen,
-        File,
-        FileTransfer,
         FCM,
         AndroidPermissions,
-        InAppBrowser,
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         {
             provide: HTTP_INTERCEPTORS,

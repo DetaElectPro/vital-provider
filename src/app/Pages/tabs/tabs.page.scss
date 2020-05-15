@@ -1,1 +1,120 @@
-
+//ion-tabs{
+//  background: #121212;
+//  --height: 76px;
+//  min-width: 420px;
+//}
+//
+//ion-tab-bar {
+//  background: #121212;
+//  border-radius: 30px;
+//  margin: 0px 5% !important;
+//}
+//
+//.tab-selected ion-icon {
+//  color: white;
+//  transform: scale(.85) ;
+//  transition: all .25s;
+//}
+//.tab-selected ion-label {
+//  display: block;
+//  width: 20px;
+//  height: 4px !important;
+//  border-radius: 5px;
+//  background: purple;
+//}
+//
+//ion-tab-button:not(.tab-selected) {
+//  ion-icon {
+//    transform: translateY(6px) scale(1);
+//    transition: all .1s;
+//  }
+//}
+//
+//
+//#tab-button-tab1,
+//#tab-button-tab2,
+//#tab-button-tab3,
+//#tab-button-tab4,
+//#tab-button-tab5 {
+//  --background: #23272a;
+//  -webkit-box-shadow: 5px 5px 15px -15px  rgba(0,0,0,0.4);
+//  -moz-box-shadow: 5px 5px 15px -15px  rgba(0,0,0,0.4);
+//  box-shadow: 5px 5px 15px -15px  rgba(0,0,0,0.4);
+//}
+//#tab-button-tab1 {
+//  border-top-left-radius: 30px;
+//  border-bottom-left-radius: 30px;
+//}
+//
+//#tab-button-tab2 {
+//  border-top-right-radius: 12px;
+//}
+//
+//.tab-3 {
+//  padding: 0 !important;
+//  margin: 0 !important;
+//  max-width: 72px !important;
+//  background: #23272a !important;
+//  margin-top: -30px !important;
+//  height: 86px;
+//  --ripple-color: transparent !important;
+//  cursor:  default !important;
+//  div {
+//    position: absolute;
+//    background:#121212 !important;
+//    height: 72px;
+//    width: 72px !important;
+//    border-bottom-left-radius: 50%;
+//    border-bottom-right-radius: 50%;
+//  }
+//}
+//
+//#tab-button-tab4 {
+//  border-top-left-radius: 12px;
+//}
+//
+//#tab-button-tab5 {
+//  border-top-right-radius: 30px;
+//  border-bottom-right-radius: 30px;
+//}
+//ion-badge {
+//  --background: purple;
+//  --color: white;
+//  width: 23px;
+//  height: 21px;
+//  font-size: .8rem;
+//}
+//
+//@media screen and (max-width: 420px) {
+//  ion-fab {
+//    left: 210px;
+//    transform: translateX(calc(240px* -50%));
+//  }
+//}
+//
+//ion-fab {
+//  overflow: visible !important;
+//  bottom: 16px !important;
+//  position: absolute;
+//  bottom: 12px !important;
+//
+//  ion-fab-button {
+//    --background: var(--ion-color-light);
+//    --background-hover: purple;
+//    --background-activated: purple;
+//    --background-focused: purple;
+//    --color: purple;
+//    --ripple-color: purple;
+//    border-color: purple !important;
+//    border-width: 6px !important;
+//    border-radius: 50% !important;
+//    border-style: solid !important;
+//
+//  }
+//  .active-middle {
+//    --background: purple !important;
+//    --color: var(--ion-color-light) !important;
+//    border-color: transparent !important;
+//    border-width: 0 !important;
+//  }
+//}

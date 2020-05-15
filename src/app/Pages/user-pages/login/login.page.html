@@ -23,7 +23,8 @@
             </ion-item>
 
             <ion-item>
-                <ion-input [(ngModel)]="loginData.password" [type]="showPass? 'text': 'password'" placeholder="Password"></ion-input>
+                <ion-input [(ngModel)]="loginData.password" [type]="showPass? 'text': 'password'"
+                           placeholder="Password"></ion-input>
                 <ion-icon (click)="showPassword()" [name]="passIcon" slot="end"></ion-icon>
             </ion-item>
 
@@ -40,9 +41,12 @@
         <p class="ion-text-center">Forgot your password?
             <a href="password_reset">reset</a>
 
-            <p class="ion-text-center">Do not have an account?<a href="register"><b>Create
+        <p class="ion-text-center">Do not have an account?<a href="register"><b>Create
             a new
             account</b></a></p>
 
     </ion-card>
+
+    <ion-label color="danger">v 1.1</ion-label>
+
 </ion-content>

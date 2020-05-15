@@ -12,46 +12,6 @@
     </ion-item>
 
 
-
-    <div class="wrapper-slide">
-        <!--        <div *ngIf="!dateSlide" class="wrapper-slide-pagination">-->
-        <!--            <ion-slides #slide autoplay="3000" class="height-auto" loop="true" pager="false" speed="1000">-->
-        <!--                <ion-slide>-->
-        <!--                    <img g                </ion-slide>-->
-
-        <!--                <ion-slide>-->
-        <!--                    <img g               </ion-slide>-->
-
-        <!--                <ion-slide>-->
-        <!--                    <img g      </ion-slide>-->
-        <!--            </ion-slides>-->
-        <!--            <div class="btn-pagination">-->
-        <!--                <ion-badge (click)="slide_next()" class="pull-right">-->
-        <!--                    <ion-icon name="arrow-forward-outline"></ion-icon>-->
-        <!--                </ion-badge>-->
-        <!--                <ion-badge (click)="slide_prev()" class="pull-left">-->
-        <!--                    <ion-icon name="arrow-back-outline"></ion-icon>-->
-        <!--                </ion-badge>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <div *ngIf="dateSlide" class="wrapper-slide-pagination">
-            <ion-slides #slide *ngFor="let item of dateSlide" autoplay="3000" class="height-auto" loop="true"
-                        pager="false" speed="1000">
-                <ion-slide routerLink="advertise/{{item.id}}">
-                    <img src="">
-                </ion-slide>
-            </ion-slides>
-            <div class="btn-pagination">
-                <ion-badge (click)="slide_next()" class="pull-right">
-                    <ion-icon name="arrow-forward-outline"></ion-icon>
-                </ion-badge>
-                <ion-badge (click)="slide_prev()" class="pull-left">
-                    <ion-icon name="arrow-back-outline"></ion-icon>
-                </ion-badge>
-            </div>
-        </div>
-    </div>
-
     <div *ngIf="response?.user.status == 2">
         <p class="ion-text-center">Please complete the profile and upload the <strong>CV</strong></p>
         <ion-button routerLink="/cv-update" color="danger" expand="block">upload cv</ion-button>

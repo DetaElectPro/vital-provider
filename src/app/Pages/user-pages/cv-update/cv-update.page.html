@@ -13,15 +13,15 @@
 <ion-content class="ion-padding" color="dark">
     <ion-item *ngIf="userInfo">
         <ion-avatar slot="start">
-            <img src="{{userInfo?.image}}" />
+            <img src="{{userInfo?.image}}"/>
         </ion-avatar>
         <ion-label>Welcome, <br>Dr. {{userInfo?.name}}</ion-label>
     </ion-item>
 
     <form (ngSubmit)="uploadFiles()" [formGroup]="requestDataForm" novalidate>
         <ion-item class="input">
-            <input [uploader]="fileUploader" accept="application/pdf" formControlName="cv" ng2FileSelect type="file"
-                id="file" class="fileInput input" />
+            <input [uploader]="fileUploader" formControlName="cv" ng2FileSelect type="file"
+                   id="file" class="fileInput input"/>
             <label for="file">
                 <ion-icon color="primary" name="list-circle-outline"></ion-icon>
                 choose a Cv file
@@ -31,4 +31,9 @@
 
         <ion-button expand="full" [disabled]="requestDataForm.invalid" type="submit">Update Cv file</ion-button>
     </form>
+
+    <ion-button [href]="userInfo?.employ?.cv" target="_blank" expand="block">
+        <ion-icon name="document-attach"></ion-icon>
+        Download your CV
+    </ion-button>
 </ion-content>

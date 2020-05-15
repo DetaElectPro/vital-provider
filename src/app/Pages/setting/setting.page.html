@@ -7,10 +7,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-    <ion-card color="light">
+    <ion-card *ngIf="userInfo" color="light">
         <ion-item>
             <ion-avatar slot="start">
-                <img src="{{userInfo?.image}}" />
+                <img src="{{userInfo?.image}}"/>
             </ion-avatar>
             <ion-label>Name: Dr. {{userInfo?.name}}</ion-label>
         </ion-item>
@@ -50,4 +50,6 @@
         </ion-button>
 
     </ion-list>
+
+    <p class="ion-text-center" style="color: red">v 1.1</p>
 </ion-content>

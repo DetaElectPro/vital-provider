@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
-import { LoadingController, ToastController } from '@ionic/angular';
-import { FileUploader, FileLikeObject } from 'ng2-file-upload';
-import { FileUploadeService } from 'src/app/Service/file-uploade.service';
-import { concat } from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute, NavigationExtras} from '@angular/router';
+import {LoadingController, ToastController} from '@ionic/angular';
+import {FileUploader, FileLikeObject} from 'ng2-file-upload';
+import {FileUploadeService} from 'src/app/Service/file-uploade.service';
+import {concat} from 'rxjs';
 
 @Component({
     selector: 'app-register',
@@ -12,7 +12,7 @@ import { concat } from 'rxjs';
 })
 export class RegisterPage implements OnInit {
 
-    registerData: any = { name: '', phone: '', password: '', role: 3, fcm_registration_id: null, image: null };
+    registerData: any = {name: '', phone: '', password: '', role: 3, fcm_registration_id: null, image: null};
 
     result: any;
     showPass = false;
@@ -20,73 +20,82 @@ export class RegisterPage implements OnInit {
 
 
     public fileUploader: FileUploader = new FileUploader({});
-    public hasBaseDropZoneOver = false;
+
     constructor(
         private route: Router,
         public toastController: ToastController,
-        public activatedRoute: ActivatedRoute,
         private authService: FileUploadeService,
         public loadingController: LoadingController
-    ) { }
+    ) {
+    }
 
     ngOnInit() {
         this.registerData.fcm_registration_id = localStorage.getItem('fcm_registration_id');
     }
 
     getFiles(): FileLikeObject[] {
-        return this.fileUploader.queue.map((fileItem) => {
-            return fileItem.file;
-        });
+        if (this.fileUploader.queue.length > 1) {
+            this.fileUploader.removeFromQueue(this.fileUploader.queue[0]);
+        } else {
+            return this.fileUploader.queue.map((fileItem) => {
+                return fileItem.file;
+            });
+        }
     }
 
     async userRegister() {
-        const loading = await this.loadingController.create({
-            message: 'Please wait...',
-            spinner: 'bubbles',
-            translucent: true
-        });
-
-        await loading.present();
         const files = this.getFiles();
-        const requests = [];
-        files.forEach((file) => {
-            const formData = new FormData();
-            formData.append('image', file.rawFile, file.name);
-            formData.append('name', this.registerData.name);
-            formData.append('phone', this.registerData.phone);
-            formData.append('password', this.registerData.password);
-            formData.append('role', this.registerData.role);
-
-            requests.push(this.authService.registerServes(formData));
-
-        });
-
-        concat(...requests).subscribe(
-            async response => {
-                await loading.dismiss();
-                this.result = response;
-                if (this.result.error) {
-                    alert(`Message: ${this.result.message}`);
-                } else {
-                    this.toLogin();
-                }
-            },
-            async err => {
-                await loading.dismiss();
-                const errs = JSON.parse(err.responseText);
-                console.log('serve Error: ', errs);
+        if (files.length === 0) {
+            alert('Profile Image Required Please choose an image');
+        } else {
+            const loading = await this.loadingController.create({
+                message: 'Please wait...',
+                spinner: 'bubbles',
+                translucent: true
             });
+
+            await loading.present();
+            const requests = [];
+            files.forEach((file) => {
+                const formData = new FormData();
+                formData.append('image', file.rawFile, file.name);
+                formData.append('name', this.registerData.name);
+                formData.append('phone', this.registerData.phone);
+                formData.append('password', this.registerData.password);
+                formData.append('role', this.registerData.role);
+
+                requests.push(this.authService.registerServes(formData));
+
+            });
+
+            concat(...requests).subscribe(
+                async response => {
+                    await loading.dismiss();
+                    this.result = response;
+                    if (this.result.error) {
+                        alert(`Message: ${this.result.message}`);
+                    } else {
+                        this.presentToast(this.result.message);
+                        this.toLogin();
+                    }
+                },
+                async err => {
+                    await loading.dismiss();
+                    const errs = JSON.parse(err.responseText);
+                    console.log('serve Error: ', errs);
+                });
+        }
     }
 
-    async presentToast(message) {
+    async presentToast(messageRes) {
         const toast = await this.toastController.create({
-            message: message,
+            message: messageRes,
             duration: 3000,
-            color: 'primary',
+            color: 'success',
             position: 'middle'
         });
         toast.present();
-        this.route.navigate(['/'])
+        this.route.navigate(['/']);
     }
 
     async toLogin() {

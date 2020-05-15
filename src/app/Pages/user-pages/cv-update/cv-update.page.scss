@@ -7,7 +7,6 @@
   z-index: -1;
 }
 .fileInput   label {
-  font-size: xx-large;
   color: #717171;
   background-color: white;
   display: inline-block;
@@ -16,29 +15,41 @@
   border: 1px solid #ccc;
   cursor: pointer;
 }
-ion-icon {
-  zoom: 1.8;
-  padding: 3px;
+
+.image-upload>input {
+  display: none;
+  margin-left: 25%;
 }
 
-.input{
-  border: #006599;
-    border-top-color: #006599;
-    border-top-style: solid;
-    border-top-width: medium;
-    border-right-color: #006599;
-    border-right-style: solid;
-    border-right-width: medium;
-    border-bottom-color: #006599;
-    border-bottom-style: solid;
-    border-bottom-width: medium;
-    border-left-color: #006599;
-    border-left-style: solid;
-    border-left-width: medium;
-    border-image-outset: 0;
-    border-image-repeat: stretch;
-    border-image-slice: 100%;
-    border-image-source: solid;
-    border-image-width: 1;
-border-bottom-style: solid;
+label.filebutton {
+  width:120px;
+  height:90px;
+  overflow:hidden;
+  position:relative;
+  background-color:#ccc;
+  border-radius: 50%;
+
+  // border-bottom-left-radius: 40px;
+  // border-bottom-right-radius: 40px;
+  // border-top-left-radius: 40px;
+  // border-top-right-radius: 40px;
+}
+
+img {
+  border-radius: 50%;
+}
+label span input {
+  z-index: 999;
+  line-height: 0;
+  font-size: 50px;
+  position: absolute;
+  top: -2px;
+  left: -700px;
+  opacity: 0;
+  filter: alpha(opacity = 0);
+  -ms-filter: "alpha(opacity=0)";
+  cursor: pointer;
+  _cursor: hand;
+  margin: 0;
+  padding:0;
 }

@@ -43,14 +43,11 @@
             </ion-grid>
         </ion-card-header>
         <ion-card-content>
-            <!--            <ion-avatar slot="start">-->
-            <!--                <img src="assets/images/2.jpg">-->
-            <!--            </ion-avatar>-->
             <p>Order #: {{request.id}}</p>
-            <h2>We Need: {{request.specialties.medical.name}}</h2>
+            <h2>We Need: <b>{{request.specialties.medical.name}}</b></h2>
             <h3>Specialized in: {{request.specialties.name}}</h3>
-            <p>start at: {{request.start_time}}</p>
-            <p>work hours: {{request.number_of_hour}}</p>
+            <p>start at: <b>{{request.start_time}}</b></p>
+            <p>work hours: <b>{{request.number_of_hour}}</b></p>
         </ion-card-content>
     </ion-card>
 
@@ -60,9 +57,9 @@
             <!--            <ion-card-title>Info</ion-card-title>-->
             <ion-card-subtitle>The request a Accept by:</ion-card-subtitle>
             <ion-card-content>
-                <h1>Doctor: {{request.accept_request.doctor.name}}</h1>
+                <h1>Doctor: <b>{{request.accept_request.doctor.name}}</b></h1>
                 <ion-button block expand="block" href="tel:{{request.accept_request.doctor.phone}}">
-                    Phone:{{request.accept_request.doctor.phone}}
+                    Phone: <b>{{request.accept_request.doctor.phone}}</b>
                     <ion-icon name="call-outline"></ion-icon>
                 </ion-button>
 
@@ -70,9 +67,9 @@
                     <ion-icon name="person-circle-outline"></ion-icon>
                     Doctor Profile
                 </ion-button>
-                <ion-button (click)="openPdf(request.accept_request.doctor.employ.cv)" expand="block">
+                <ion-button [href]="request.accept_request.doctor.employ.cv" target="_blank" expand="block">
                     <ion-icon name="document-attach"></ion-icon>
-                    Doctor PDF CV
+                    Download Doctor CV
                 </ion-button>
             </ion-card-content>
         </div>

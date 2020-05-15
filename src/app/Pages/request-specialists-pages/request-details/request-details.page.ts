@@ -5,7 +5,8 @@ import {RequestsService} from '../../../Service/requests.service';
 import {Requests} from '../../../Models/requests';
 import {DoctorePage} from '../../user-pages/doctore/doctore.page';
 import {FinishRequestComponent} from '../../../components/finish-request/finish-request.component';
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+
+// import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @Component({
     selector: 'app-request-details',
@@ -48,7 +49,7 @@ export class RequestDetailsPage implements OnInit {
         public router: Router,
         private modalController: ModalController,
         public route: ActivatedRoute,
-        private iab: InAppBrowser,
+        // private iab: InAppBrowser,
         private requestServe: RequestsService,
         public popoverCtrl: PopoverController
     ) {
@@ -205,15 +206,15 @@ export class RequestDetailsPage implements OnInit {
         return await modal.present();
     }
 
-    openPdf(url) {
-        const browser = this.iab.create(url);
-
-        browser.on('loadstop').subscribe(event => {
-            browser.insertCSS({code: 'body{color: red;'});
-        });
-
-        browser.close();
-    }
+    // openPdf(url) {
+    //     const browser = this.iab.create(url);
+    //
+    //     browser.on('loadstop').subscribe(event => {
+    //         browser.insertCSS({code: 'body{color: red;'});
+    //     });
+    //
+    //     browser.close();
+    // }
 
     async requestDone(ev: any) {
         const popover = await this.popoverCtrl.create({
@@ -226,7 +227,7 @@ export class RequestDetailsPage implements OnInit {
         });
         popover.onDidDismiss()
             .then((result) => {
-                console.log(result.data);
+                console.log(result);
                 this.requestData();
             });
         return await popover.present();
