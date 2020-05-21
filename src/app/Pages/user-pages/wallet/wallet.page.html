@@ -1,34 +1,33 @@
-<ion-header [translucent]="true">
-    <ion-toolbar>
+
+<ion-header class="flat">
+    <ion-toolbar class="colored">
         <ion-buttons slot="start">
             <ion-button expand="block" routerDirection="backward" routerLink="/tabs/setting">
                 <ion-icon color="light" name="arrow-back-outline"></ion-icon>
             </ion-button>
         </ion-buttons>
-        <ion-title class="ion-text-center">
-            My Wallet
-        </ion-title>
+        <ion-title color="light" class="ion-text-center">Wallet</ion-title>
+        <ion-buttons slot="end">
+            <ion-button color="light">
+                <ion-icon color="light" name="apps"></ion-icon>
+            </ion-button>
+        </ion-buttons>
     </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-    <div class="card">
-        <div class="card-body">
-            <ion-item>
-                My Balance
-                <span class="wallet-outline" slot="end"> {{data?.balance}}</span>
-            </ion-item>
-
-            <div>
-                <p class="text-d-purple"> Buy More</p>
-                <ion-button expand="full" href="tel:{{0114847667}}">Call
-                    <ion-icon name="call"></ion-icon>
-                </ion-button>
-                <ion-button (click)="bokApp()" color="danger" expand="full">Bok
-                    <ion-icon name="card"></ion-icon>
-                </ion-button>
-
-            </div>
+<ion-content>
+    <div class="header__extended">
+        <div class="total">
+            <div class="label">Total balance</div>
+            <div class="value"> {{data?.balance}}</div>
+            <!--            <div class="balance">+ $3968,00</div>-->
         </div>
     </div>
+    <p class="text-d-purple"> Buy More</p>
+    <ion-button expand="full" href="tel:{{0114847667}}"> &nbsp; Call
+        <ion-icon name="call"></ion-icon>
+    </ion-button>
+    <ion-button (click)="bokApp()" color="danger" expand="full"> &nbsp; mBok
+        <ion-icon name="card"></ion-icon>
+    </ion-button>
+
 </ion-content>

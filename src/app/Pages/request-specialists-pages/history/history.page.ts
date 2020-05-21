@@ -47,6 +47,7 @@ export class HistoryPage implements OnInit {
     }
 
     doRefresh(event) {
+        this.result = null;
         this.getHistory();
 
         setTimeout(() => {
@@ -62,22 +63,16 @@ export class HistoryPage implements OnInit {
                 .subscribe(
                     res => {
                         this.result = res;
-                        // this.requestsData = this.result.data;
                         this.perPage = this.result.per_page;
                         this.totalData = this.result.total;
                         this.totalPage = this.result.total_pages;
-                        let Rlength = this.result.data.length;
-                        for (let i = 0; i < Rlength; i++) {
+                        const length = this.result.data.length;
+                        for (let i = 0; i < length; i++) {
                             this.historyData.push(this.result.data[i]);
                         }
                     }),
                 event.target.complete();
-        }, 1000);
+        }, 2000);
 
-    }
-
-
-    goTo() {
-        this.router.navigate(['new-new-request']);
     }
 }

@@ -27,19 +27,17 @@
             </ion-avatar>
             <ion-label>
                 <h3>Create by: DR. {{emergency?.user?.name}}</h3>
-                <!--                <p>{{item.dob}}</p>-->
             </ion-label>
         </ion-item>
 
         <ion-card-content>
-            <h2>Name: {{emergency?.name}}</h2>
-            <h3>Type: {{emergency?.type}}</h3>
-            <h3> Price : {{emergency?.price_per_day}}</h3>
+            <p>Name: {{emergency?.name}}</p>
+            <p>Type: {{emergency?.type}}</p>
+            <p> Price : {{emergency?.price_per_day}}</p>
             <p>Address: {{emergency?.address}}</p>
             <p>contact: {{emergency?.contact}}</p>
             <p>Post at: {{emergency?.created_at}}</p>
             <p>Last update at: {{emergency?.updated_at}}</p>
-
         </ion-card-content>
         <ion-row>
             <ion-col class="ion-no-padding" size="6">

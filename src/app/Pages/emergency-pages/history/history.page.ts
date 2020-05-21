@@ -72,7 +72,4 @@ export class HistoryPage implements OnInit {
 
   }
 
-  goTo() {
-    this.router.navigate(['/emergency-new-request']);
-  }
 }

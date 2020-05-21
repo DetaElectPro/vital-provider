@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {WalletService} from '../../../Service/wallet.service';
-// import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {LoadingController} from '@ionic/angular';
 
 @Component({
@@ -14,7 +13,6 @@ export class WalletPage implements OnInit {
     private errorMesg: any;
 
     constructor(
-        // public iab: InAppBrowser,
         private loadingController: LoadingController,
         private walletServ: WalletService
     ) {
@@ -46,8 +44,6 @@ export class WalletPage implements OnInit {
     }
 
     bokApp() {
-        // this.iab.create('android-app://com.mode.bok.ui', '_system');
-
         window.open('android-app://com.mode.bok.ui', '_system');
     }
 }

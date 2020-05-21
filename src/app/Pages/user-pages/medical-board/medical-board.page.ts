@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {MedicalBoard} from '../../../Models/medical-board';
-import {LoadingController} from '@ionic/angular';
-import {AuthService} from '../../../Service/auth.service';
-import {formatDate} from '@angular/common';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { MedicalBoard } from '../../../Models/medical-board';
+import { LoadingController, ToastController } from '@ionic/angular';
+import { AuthService } from '../../../Service/auth.service';
+import { formatDate } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-medical-board',
@@ -28,7 +28,8 @@ export class MedicalBoardPage implements OnInit {
     constructor(
         private router: Router,
         private loadingController: LoadingController,
-        private medicalServ: AuthService
+        private medicalServ: AuthService,
+        public toastController: ToastController
     ) {
     }
 
@@ -54,34 +55,45 @@ export class MedicalBoardPage implements OnInit {
                 (await loading).dismiss();
                 this.dataResult = data;
                 if (this.dataResult.success) {
-                    this.router.navigate(['/']);
+                    this.router.navigate(['/tabs/home']);
                 } else {
-                    alert('error try again');
+                    this.errorToast('error try agai');
                 }
             }, (async err => {
                 (await loading).dismiss();
+                this.errorToast(JSON.stringify(err));
                 console.log(err);
             }));
     }
 
     async getMedicalFiled() {
         const loading = this.loadingController.create({
-            spinner: null,
+            spinner: 'bubbles',
             message: 'Please wait...',
             translucent: true,
         });
         (await loading).present();
         this.medicalServ.medicalFiledService()
             .subscribe(async data => {
-                    (await loading).dismiss();
-                    this.specialtiesList = data;
-                    this.specialtiesList = this.specialtiesList.data;
-                },
+                (await loading).dismiss();
+                this.specialtiesList = data;
+                this.specialtiesList = this.specialtiesList.data;
+            },
                 async err => {
                     console.log(err);
                     (await loading).dismiss();
-
+                    this.errorToast(JSON.stringify(err));
                 });
+    }
+
+    async errorToast(messageRes) {
+        const toast = await this.toastController.create({
+            message: messageRes,
+            duration: 5000,
+            color: 'danger',
+            position: 'middle',
+        });
+        toast.present();
     }
 
     // portChange(event: {

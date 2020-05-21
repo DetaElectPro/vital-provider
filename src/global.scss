@@ -27,13 +27,25 @@ ion-toolbar {
   --color: var(--ion-color-light);
 }
 
-.item.sc-ion-label-ios-h, .item .sc-ion-label-ios-h {
-  font-size: small;
+.alert-radio-label.sc-ion-alert-md {
+  white-space: pre-line !important;
 }
 
-.item.sc-ion-label-md-h, .item .sc-ion-label-md-h {
-  font-size: small;
+.alert-radio-label.sc-ion-alert-ios {
+  white-space: pre-line !important;
 }
+
+.sc-ion-alert-md-h {
+  --min-width: 275px !important;
+}
+
+//.item.sc-ion-label-ios-h, .item .sc-ion-label-ios-h {
+//  font-size: small;
+//}
+//
+//.item.sc-ion-label-md-h, .item .sc-ion-label-md-h {
+//  font-size: small;
+//}
 
 
 $transparent: transparent;

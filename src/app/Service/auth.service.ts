@@ -63,6 +63,9 @@ export class AuthService {
     logout() {
         this.http.post(`${this.url}logout`, localStorage.getItem('token'));
         this.storage.remove('userInfo');
+        this.storage.set('userInfo', null);
+        this.storage.set('token', null);
+        localStorage.setItem('token', null);
         return this.storage.remove('token').then(res => {
             console.log('logOut: ', res);
             localStorage.removeItem('token');

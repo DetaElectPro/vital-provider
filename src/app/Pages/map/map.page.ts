@@ -46,7 +46,7 @@ export class MapPage implements OnInit {
         });
 
         // In setView add latLng and zoom
-        this.map = new Map('mapId').setView([15.59, 32.54], 10);
+        this.map = new Map('mapId').setView([15.59, 32.54], 12);
         tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'DetaTech',
         }).addTo(this.map);
@@ -69,7 +69,7 @@ export class MapPage implements OnInit {
 
     /** Remove map when we have multiple map object */
     ionViewWillLeave() {
-        this.map.remove();
+        // this.map.remove();
     }
 
 }

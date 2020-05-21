@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../../Service/auth.service';
-import { Router } from '@angular/router';
-import { LoadingController } from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {AuthService} from '../../../Service/auth.service';
+import {Router} from '@angular/router';
+import {LoadingController, NavController, ToastController} from '@ionic/angular';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { LoadingController } from '@ionic/angular';
     styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-    loginData = { phone: null, password: null, role: 3, fcm_registration_id: null };
+    loginData = {phone: null, password: null, role: 3, fcm_registration_id: null};
     usersData: any = [];
     showPass = false;
     passIcon = 'eye-outline';
@@ -19,7 +19,9 @@ export class LoginPage implements OnInit {
     constructor(
         private authServe: AuthService,
         private router: Router,
-        public loadingController: LoadingController
+        private navCtrl: NavController,
+        public loadingController: LoadingController,
+        public toastController: ToastController
     ) {
     }
 
@@ -41,13 +43,17 @@ export class LoginPage implements OnInit {
                 await loading.dismiss();
                 this.usersData = response;
                 if (this.usersData.error) {
-                    alert('error data');
+                    await loading.dismiss();
+                    this.errorToast(this.usersData.message);
                 } else {
                     if (this.usersData.user.status === 1) {
+                        this.navCtrl.setDirection('root');
                         this.router.navigate(['/medical-board']);
+                        this.passToast(this.usersData.message);
                     }
                     if (this.usersData.user.status === 2 || this.usersData.user.status === 3) {
-                        this.router.navigate(['/']);
+                        this.navCtrl.navigateRoot('/tabs/home', {animationDirection: 'forward'});
+                        this.passToast(this.usersData.message);
                     }
                 }
             })
@@ -55,6 +61,26 @@ export class LoginPage implements OnInit {
                 await loading.dismiss();
                 console.log('serve Error: ', err);
             });
+    }
+
+    async errorToast(messageRes) {
+        const toast = await this.toastController.create({
+            message: messageRes,
+            duration: 5000,
+            color: 'danger',
+            position: 'middle',
+        });
+        toast.present();
+    }
+
+    async passToast(messageRes) {
+        const toast = await this.toastController.create({
+            message: messageRes,
+            duration: 5000,
+            color: 'success',
+            position: 'middle',
+        });
+        toast.present();
     }
 
     showPassword() {

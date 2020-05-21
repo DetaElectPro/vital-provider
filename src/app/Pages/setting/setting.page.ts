@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Storage } from '@ionic/storage';
-import { AuthService } from '../../Service/auth.service';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Storage} from '@ionic/storage';
+import {AuthService} from '../../Service/auth.service';
+import {Router} from '@angular/router';
+
 // import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
@@ -16,7 +17,6 @@ export class SettingPage implements OnInit {
 
     constructor(
         private storage: Storage,
-        // private iab: InAppBrowser,
         private authServ: AuthService,
         private route: Router) {
     }
@@ -26,6 +26,8 @@ export class SettingPage implements OnInit {
             .then(res => {
                 console.log('logOut:', res);
                 this.route.navigate(['/']);
+                this.storage.clear();
+                localStorage.clear();
 
             })
             .catch(err => {
@@ -45,18 +47,12 @@ export class SettingPage implements OnInit {
             });
     }
 
+
     openPrivacyPolicy() {
-    //     const browser = this.iab.create('https://vital-helth.com/privacy_policy');
-    //
+        window.open('https://vital-helth.com/privacy-policy', '_blank');
     }
 
     openTermsAndConditions() {
-        // const browser = this.iab.create('https://vital-helth.com/terms_and_conditions');
-        // browser.on('loadstop').subscribe(event => {
-        //         console.log('sus: ', event);
-        //     },
-        //     error => {
-        //         console.log('error: ', error);
-        //     });
+        window.open('https://vital-helth.com/terms-and-conditions', '_blank');
     }
 }

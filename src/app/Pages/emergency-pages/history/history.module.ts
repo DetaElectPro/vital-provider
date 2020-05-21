@@ -7,7 +7,6 @@ import { IonicModule } from '@ionic/angular';
 
 import { HistoryPage } from './history.page';
 import {RouterModule} from '@angular/router';
-import {EmergencyTabsComponentModule} from '../../../components/emergency-tabs/emergency-tabs.module';
 
 @NgModule({
     imports: [
@@ -15,7 +14,6 @@ import {EmergencyTabsComponentModule} from '../../../components/emergency-tabs/e
         FormsModule,
         IonicModule,
         RouterModule.forChild([{path: '', component: HistoryPage}]),
-        EmergencyTabsComponentModule,
     ],
   declarations: [HistoryPage]
 })

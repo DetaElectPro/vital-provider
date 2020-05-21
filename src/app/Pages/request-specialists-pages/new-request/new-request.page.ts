@@ -155,8 +155,4 @@ export class NewRequestPage implements OnInit {
         });
         toast.present();
     }
-
-    goTo() {
-        this.router.navigate(['history']);
-    }
 }
