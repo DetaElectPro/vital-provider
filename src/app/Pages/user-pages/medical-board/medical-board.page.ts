@@ -4,6 +4,7 @@ import { LoadingController, ToastController } from '@ionic/angular';
 import { AuthService } from '../../../Service/auth.service';
 import { formatDate } from '@angular/common';
 import { Router } from '@angular/router';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-medical-board',
@@ -12,6 +13,7 @@ import { Router } from '@angular/router';
 })
 export class MedicalBoardPage implements OnInit {
 
+    MedicalForm: FormGroup;
 
     MedicalBoard: MedicalBoard = {
         address: '',
@@ -24,13 +26,24 @@ export class MedicalBoardPage implements OnInit {
     };
     specialtiesList: any;
     private dataResult: any;
-
     constructor(
         private router: Router,
         private loadingController: LoadingController,
         private medicalServ: AuthService,
         public toastController: ToastController
     ) {
+        this.MedicalForm = new FormGroup({
+            medical_registration_number: new FormControl('', [Validators.required,
+                Validators.minLength(5), Validators.maxLength(12)]),
+            registration_date: new FormControl('', [Validators.required]),
+            graduation_date: new FormControl('', [Validators.required]),
+            medical_field_id: new FormControl('', [Validators.required]),
+            address: new FormControl('', [Validators.required,
+                Validators.minLength(5), Validators.maxLength(90)]),
+            years_of_experience: new FormControl('', [Validators.required,
+                Validators.minLength(1), Validators.maxLength(2)]),
+            birth_of_date: new FormControl('', [Validators.required]),
+        });
     }
 
     ngOnInit() {
@@ -57,7 +70,7 @@ export class MedicalBoardPage implements OnInit {
                 if (this.dataResult.success) {
                     this.router.navigate(['/tabs/home']);
                 } else {
-                    this.errorToast('error try agai');
+                    this.errorToast('error try again');
                 }
             }, (async err => {
                 (await loading).dismiss();

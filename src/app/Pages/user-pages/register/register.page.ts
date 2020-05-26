@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Router, ActivatedRoute, NavigationExtras} from '@angular/router';
-import {LoadingController, ToastController} from '@ionic/angular';
+import {Router, NavigationExtras} from '@angular/router';
+import {AlertController, LoadingController, ToastController} from '@ionic/angular';
 import {FileUploader, FileLikeObject} from 'ng2-file-upload';
 import {FileUploadeService} from 'src/app/Service/file-uploade.service';
 import {concat} from 'rxjs';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
     selector: 'app-register',
@@ -17,6 +18,7 @@ export class RegisterPage implements OnInit {
     result: any;
     showPass = false;
     passIcon = 'eye-outline';
+    RegisterForm: FormGroup;
 
 
     public fileUploader: FileUploader = new FileUploader({});
@@ -24,9 +26,22 @@ export class RegisterPage implements OnInit {
     constructor(
         private route: Router,
         public toastController: ToastController,
+        public alertController: AlertController,
         private authService: FileUploadeService,
         public loadingController: LoadingController
     ) {
+        this.RegisterForm = new FormGroup({
+            image: new FormControl('', [Validators.nullValidator]),
+            name: new FormControl('', [Validators.required,
+                Validators.pattern('^[a-zA-Z ]+[a-zA-Z ]*$'),
+                Validators.minLength(6), Validators.maxLength(50)]),
+            phone: new FormControl('', [Validators.required,
+                Validators.pattern('(^9\\d{8}$)|(^1\\d{8}$)'),
+                Validators.minLength(9), Validators.maxLength(9)]),
+            password: new FormControl('', [Validators.required,
+                Validators.minLength(6), Validators.maxLength(25)]),
+        });
+
     }
 
     ngOnInit() {
@@ -44,46 +59,51 @@ export class RegisterPage implements OnInit {
     }
 
     async userRegister() {
-        const files = this.getFiles();
-        if (files.length === 0) {
-            alert('Profile Image Required Please choose an image');
+        const phone = String(this.registerData.phone).charAt(0);
+        if (phone === '0') {
+            this.errorAlert(`The phone number field can't start with 0`);
         } else {
-            const loading = await this.loadingController.create({
-                message: 'Please wait...',
-                spinner: 'bubbles',
-                translucent: true
-            });
-
-            await loading.present();
-            const requests = [];
-            files.forEach((file) => {
-                const formData = new FormData();
-                formData.append('image', file.rawFile, file.name);
-                formData.append('name', this.registerData.name);
-                formData.append('phone', this.registerData.phone);
-                formData.append('password', this.registerData.password);
-                formData.append('role', this.registerData.role);
-
-                requests.push(this.authService.registerServes(formData));
-
-            });
-
-            concat(...requests).subscribe(
-                async response => {
-                    await loading.dismiss();
-                    this.result = response;
-                    if (this.result.error) {
-                        alert(`Message: ${this.result.message}`);
-                    } else {
-                        this.presentToast(this.result.message);
-                        this.toLogin();
-                    }
-                },
-                async err => {
-                    await loading.dismiss();
-                    const errs = JSON.parse(err.responseText);
-                    console.log('serve Error: ', errs);
+            const files = this.getFiles();
+            if (files.length === 0) {
+                alert('Profile Image Required Please choose an image');
+            } else {
+                const loading = await this.loadingController.create({
+                    message: 'Please wait...',
+                    spinner: 'bubbles',
+                    translucent: true
                 });
+
+                await loading.present();
+                const requests = [];
+                files.forEach((file) => {
+                    const formData = new FormData();
+                    formData.append('image', file.rawFile, file.name);
+                    formData.append('name', this.registerData.name);
+                    formData.append('phone', this.registerData.phone);
+                    formData.append('password', this.registerData.password);
+                    formData.append('role', this.registerData.role);
+
+                    requests.push(this.authService.registerServes(formData));
+
+                });
+
+                concat(...requests).subscribe(
+                    async response => {
+                        await loading.dismiss();
+                        this.result = response;
+                        if (this.result.error) {
+                            alert(`Message: ${this.result.message}`);
+                        } else {
+                            this.presentToast(this.result.message);
+                            this.toLogin();
+                        }
+                    },
+                    async err => {
+                        await loading.dismiss();
+                        const errs = JSON.parse(err.responseText);
+                        console.log('serve Error: ', errs);
+                    });
+            }
         }
     }
 
@@ -114,5 +134,17 @@ export class RegisterPage implements OnInit {
         } else {
             this.passIcon = 'eye-outline';
         }
+    }
+
+    async errorAlert(messageRes) {
+        const alert = await this.alertController.create({
+            header: 'Alert',
+            cssClass: 'error-alert',
+            message: `<b>${messageRes}</b>`,
+            animated: true,
+            buttons: ['OK']
+        });
+
+        await alert.present();
     }
 }

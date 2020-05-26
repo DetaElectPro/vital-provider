@@ -1,60 +1,174 @@
 <ion-header>
     <ion-toolbar>
-       <ion-title class="ion-text-center">medical board Info</ion-title>
+        <ion-title class="ion-text-center">Medical board Info</ion-title>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-item>
-        <ion-label position="floating">MedicalBoard Registration number</ion-label>
-        <ion-input [(ngModel)]="MedicalBoard.medical_registration_number" max="20" min="6" type="text"></ion-input>
-    </ion-item>
 
-    <ion-item>
-        <ion-label color="primary">Registration Date</ion-label>
-        <ion-datetime [(ngModel)]="MedicalBoard.registration_date" displayFormat="YYYY-MM-DD" max="2020-12-01" min="1989-06-04"
-                      pickerFormat="YYYY MM DD"
-                      placeholder="Select Date"></ion-datetime>
+    <form novalidate (ngSubmit)="medicalBsaveData()" [formGroup]="MedicalForm">
 
-    </ion-item>
-    <ion-item>
-        <ion-label color="primary">Graduation date</ion-label>
-        <ion-datetime [(ngModel)]="MedicalBoard.graduation_date" displayFormat="YYYY-MM-DD" max="2020-12-01" min="1989-06-04"
-                      pickerFormat="YYYY MM DD"
-                      placeholder="Select Date"></ion-datetime>
+        <ion-item>
+            <ion-label position="floating">MedicalBoard Registration number:</ion-label>
+            <ion-input type="number"
+                       [(ngModel)]="MedicalBoard.medical_registration_number"
+                       formControlName="medical_registration_number"
+                       [class.error1]="!MedicalForm.controls.medical_registration_number.valid && MedicalForm.controls.medical_registration_number.dirty"></ion-input>
+        </ion-item>
 
-    </ion-item>
+        <ion-item no-lines
+                  *ngIf="( MedicalForm.get('medical_registration_number').hasError('minlength') || MedicalForm.get('medical_registration_number').hasError('maxlength') ||MedicalForm.get('medical_registration_number').hasError('pattern') ||MedicalForm.get('medical_registration_number').hasError('required') ) && MedicalForm.get('medical_registration_number').touched">
+            <div class="error"
+                 *ngIf="MedicalForm.get('medical_registration_number').hasError('medical_registration_number') && MedicalForm.get('medical_registration_number').touched">
+                please enter your medical registration number
+            </div>
+            <div class="error"
+                 *ngIf="MedicalForm.get('medical_registration_number').hasError('minlength') && MedicalForm.get('medical_registration_number').touched">
+                6 number is min number for medical registration number
+            </div>
+            <div class="error"
+                 *ngIf="MedicalForm.get('medical_registration_number').hasError('maxlength') && MedicalForm.get('medical_registration_number').touched">
+                12 number is max number for medical registration number
+            </div>
+            <div class="error"
+                 *ngIf="MedicalForm.get('medical_registration_number').hasError('pattern') && MedicalForm.get('medical_registration_number').touched">
+                Just number, (1-9)
+            </div>
+        </ion-item>
 
-    <ion-item>
-        <ion-label color="primary">Specialties</ion-label>
-        <ionic-selectable
-                [(ngModel)]="MedicalBoard.medical_field_id"
-                [canSearch]="true"
-                [items]="specialtiesList"
-                itemTextField="name"
-                itemValueField="id">
-        </ionic-selectable>
-    </ion-item>
+        <ion-item>
+            <ion-label position="floating">Registration Date:</ion-label>
+            <ion-datetime [(ngModel)]="MedicalBoard.registration_date" displayFormat="YYYY-MM-DD" max="2020-12-01"
+                          min="1989-06-04"
+                          formControlName="registration_date"
+                          [class.error1]="!MedicalForm.controls.registration_date.valid && MedicalForm.controls.registration_date.dirty"
+                          pickerFormat="YYYY MM DD"
+                          placeholder="Select Date"></ion-datetime>
+        </ion-item>
+
+        <ion-item no-lines
+                  *ngIf="( MedicalForm.get('registration_date').hasError('minlength') || MedicalForm.get('registration_date').hasError('maxlength') ||MedicalForm.get('registration_date').hasError('pattern') ||MedicalForm.get('registration_date').hasError('required') ) && MedicalForm.get('registration_date').touched">
+            <div class="error"
+                 *ngIf="MedicalForm.get('registration_date').hasError('registration_date') && MedicalForm.get('registration_date').touched">
+                please enter your registration_date
+            </div>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Graduation Date:</ion-label>
+            <ion-datetime [(ngModel)]="MedicalBoard.graduation_date" displayFormat="YYYY-MM-DD" max="2020-12-01"
+                          min="1989-06-04"
+                          formControlName="graduation_date"
+                          [class.error1]="!MedicalForm.controls.graduation_date.valid && MedicalForm.controls.graduation_date.dirty"
+                          pickerFormat="YYYY MM DD"
+                          placeholder="Select Date"></ion-datetime>
+        </ion-item>
+
+        <ion-item no-lines
+                  *ngIf="( MedicalForm.get('graduation_date').hasError('minlength') || MedicalForm.get('graduation_date').hasError('maxlength') ||MedicalForm.get('graduation_date').hasError('pattern') ||MedicalForm.get('graduation_date').hasError('required') ) && MedicalForm.get('graduation_date').touched">
+            <div class="error"
+                 *ngIf="MedicalForm.get('graduation_date').hasError('graduation_date') && MedicalForm.get('graduation_date').touched">
+                please enter your graduation_date
+            </div>
+        </ion-item>
 
 
-    <ion-item>
-        <ion-label position="floating">Years of Experience</ion-label>
-        <ion-input [(ngModel)]="MedicalBoard.years_of_experience" type="number"></ion-input>
-    </ion-item>
-    <br>
+        <ion-item>
+            <ion-label color="primary">Specialties</ion-label>
+            <ionic-selectable
+                    [(ngModel)]="MedicalBoard.medical_field_id"
+                    [canSearch]="true"
+                    [items]="specialtiesList"
+                    itemTextField="name"
+                    itemValueField="id"
+                    formControlName="medical_field_id"
+                    [class.error1]="!MedicalForm.controls.medical_field_id.valid && MedicalForm.controls.medical_field_id.dirty">
+            </ionic-selectable>
+        </ion-item>
 
-    <ion-label color="secondary">Other Information</ion-label>
-    <ion-item>
-        <ion-label color="tertiary" position="floating">Address</ion-label>
-        <ion-input [(ngModel)]="MedicalBoard.address" type="text"></ion-input>
-    </ion-item>
+        <ion-item no-lines
+                  *ngIf="( MedicalForm.get('medical_field_id').hasError('minlength') || MedicalForm.get('medical_field_id').hasError('maxlength') ||MedicalForm.get('medical_field_id').hasError('pattern') ||MedicalForm.get('medical_field_id').hasError('required') ) && MedicalForm.get('medical_field_id').touched">
+            <div class="error"
+                 *ngIf="MedicalForm.get('medical_field_id').hasError('medical_field_id') && MedicalForm.get('medical_field_id').touched">
+                Please Select your medical Specialties
+            </div>
+        </ion-item>
 
-    <ion-item>
-        <ion-label color="tertiary">Date of birth</ion-label>
-        <ion-datetime [(ngModel)]="MedicalBoard.birth_of_date" displayFormat="YYYY-MM-DD" max="2005-12-01" min="1960-06-04"
-                      pickerFormat="YYYY MM DD"
-                      placeholder="Select Date"></ion-datetime>
-    </ion-item>
+        <ion-item>
+            <ion-label position="floating">Years of Experience:</ion-label>
+            <ion-input type="number"
+                       [(ngModel)]="MedicalBoard.years_of_experience"
+                       formControlName="years_of_experience"
+                       [class.error1]="!MedicalForm.controls.years_of_experience.valid && MedicalForm.controls.years_of_experience.dirty"></ion-input>
+        </ion-item>
 
-    <ion-button (click)="medicalBsaveData()" expand="block">SAVE</ion-button>
+        <ion-item no-lines
+                  *ngIf="( MedicalForm.get('years_of_experience').hasError('minlength') || MedicalForm.get('years_of_experience').hasError('maxlength') ||MedicalForm.get('years_of_experience').hasError('pattern') ||MedicalForm.get('years_of_experience').hasError('required') ) && MedicalForm.get('years_of_experience').touched">
+            <div class="error"
+                 *ngIf="MedicalForm.get('years_of_experience').hasError('years_of_experience') && MedicalForm.get('years_of_experience').touched">
+                please enter your years of experience
+            </div>
+            <div class="error"
+                 *ngIf="MedicalForm.get('years_of_experience').hasError('minlength') && MedicalForm.get('years_of_experience').touched">
+                1 number is min numbers for years_of_experience
+            </div>
+            <div class="error"
+                 *ngIf="MedicalForm.get('years_of_experience').hasError('maxlength') && MedicalForm.get('years_of_experience').touched">
+                1 number is max numbers for years_of_experience
+            </div>
+            <div class="error"
+                 *ngIf="MedicalForm.get('years_of_experience').hasError('pattern') && MedicalForm.get('years_of_experience').touched">
+                Just number, (1-9)
+            </div>
+        </ion-item>
+
+
+        <br>
+        <hr style="border: #0d0d0d; font-size: 2px">
+
+        <ion-label color="secondary">Other Information</ion-label>
+
+        <ion-item>
+            <ion-label position="floating">Address:</ion-label>
+            <ion-input type="text"
+                       [(ngModel)]="MedicalBoard.address"
+                       formControlName="address"
+                       [class.error1]="!MedicalForm.controls.address.valid && MedicalForm.controls.address.dirty"></ion-input>
+        </ion-item>
+
+        <ion-item no-lines
+                  *ngIf="( MedicalForm.get('address').hasError('minlength') || MedicalForm.get('address').hasError('maxlength') ||MedicalForm.get('address').hasError('pattern') ||MedicalForm.get('address').hasError('required') ) && MedicalForm.get('address').touched">
+            <div class="error"
+                 *ngIf="MedicalForm.get('address').hasError('address') && MedicalForm.get('address').touched">
+                please enter your address
+            </div>
+            <div class="error"
+                 *ngIf="MedicalForm.get('address').hasError('minlength') && MedicalForm.get('address').touched">
+                6 char is min character for address
+            </div>
+            <div class="error"
+                 *ngIf="MedicalForm.get('address').hasError('maxlength') && MedicalForm.get('address').touched">
+                50 char is max character for address
+            </div>
+        </ion-item>
+
+        <ion-item>
+            <ion-label position="floating">Date of Birth:</ion-label>
+            <ion-datetime [(ngModel)]="MedicalBoard.birth_of_date" displayFormat="YYYY-MM-DD" max="2005-12-01"
+                          min="1960-06-04"
+                          formControlName="birth_of_date"
+                          [class.error1]="!MedicalForm.controls.birth_of_date.valid && MedicalForm.controls.birth_of_date.dirty"
+                          pickerFormat="YYYY MM DD"
+                          placeholder="Select Date"></ion-datetime>
+        </ion-item>
+
+        <ion-item no-lines
+                  *ngIf="( MedicalForm.get('birth_of_date').hasError('minlength') || MedicalForm.get('birth_of_date').hasError('maxlength') ||MedicalForm.get('birth_of_date').hasError('pattern') ||MedicalForm.get('birth_of_date').hasError('required') ) && MedicalForm.get('birth_of_date').touched">
+            <div class="error"
+                 *ngIf="MedicalForm.get('birth_of_date').hasError('birth_of_date') && MedicalForm.get('birth_of_date').touched">
+                please enter your date
+            </div>
+        </ion-item>
+        <ion-button [disabled]="MedicalForm.invalid" type="submit" expand="block">SAVE</ion-button>
+    </form>
 </ion-content>

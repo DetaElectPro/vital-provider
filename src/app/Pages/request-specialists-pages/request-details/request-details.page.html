@@ -92,7 +92,13 @@
             </ion-button>
         </div>
 
-        <div *ngIf="request.status == 2 || request.status ==1">
+        <div *ngIf="request.status ==2">
+            <ion-button (click)="userRequestCancel()" color="danger" expand="block">
+                Cancel {{request.accept_request.doctor.name}} Request
+            </ion-button>
+        </div>
+
+        <div *ngIf="request.status == 1">
 
             <ion-button (click)="requestCancel()" color="danger" expand="block">
                 <ion-icon name="thumbs-down"></ion-icon>

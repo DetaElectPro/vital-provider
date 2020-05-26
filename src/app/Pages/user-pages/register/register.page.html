@@ -8,41 +8,113 @@
 
     <ion-card>
         <ion-card-content>
-            <ion-item class="image-upload" style="margin-left: 25%;">
-                <input [uploader]="fileUploader" accept="image/*" ng2FileSelect type="file" id="file"
-                       class="fileInput"/>
-                <label class="filebutton" for="file">
-                    <img src="assets/images/profile.png">
-                </label>
-                <p>pic Profile Image</p>
-            </ion-item>
+
+            <form novalidate (ngSubmit)="userRegister()" [formGroup]="RegisterForm">
+                <ion-item class="image-upload" style="margin-left: 25%;">
+                    <input [uploader]="fileUploader" accept="image/*" ng2FileSelect type="file" id="file"
+                           class="fileInput"/>
+                    <label class="filebutton" for="file">
+                        <img src="assets/images/profile.png">
+                    </label>
+                    <p>pic Profile Image</p>
+                </ion-item>
+
+                <ion-item>
+                    <ion-label position="floating">Full Name:</ion-label>
+                    <ion-input type="text" maxlength="50" minlength="6"
+                               [(ngModel)]="registerData.name"
+                               formControlName="name"
+                               [class.error1]="!RegisterForm.controls.name.valid && RegisterForm.controls.name.dirty"></ion-input>
+                </ion-item>
+
+                <ion-item no-lines
+                          *ngIf="( RegisterForm.get('name').hasError('minlength') || RegisterForm.get('name').hasError('maxlength') ||RegisterForm.get('name').hasError('pattern') ||RegisterForm.get('name').hasError('required') ) && RegisterForm.get('name').touched">
+                    <div class="error"
+                         *ngIf="RegisterForm.get('name').hasError('name') && RegisterForm.get('name').touched">
+                        please enter your name
+                    </div>
+                    <div class="error"
+                         *ngIf="RegisterForm.get('name').hasError('minlength') && RegisterForm.get('name').touched">
+                        6 char is min character for name
+                    </div>
+                    <div class="error"
+                         *ngIf="RegisterForm.get('name').hasError('maxlength') && RegisterForm.get('name').touched">
+                        50 char is max character for name
+                    </div>
+                    <div class="error"
+                         *ngIf="RegisterForm.get('name').hasError('pattern') && RegisterForm.get('name').touched">
+                        Just character, (a-z) (ا-ي)
+                    </div>
+                </ion-item>
 
 
-            <ion-item>
-                <ion-label position="floating">Full name</ion-label>
-                <ion-input [(ngModel)]="registerData.name" max="20" min="6" type="text"></ion-input>
-            </ion-item>
+                <ion-item>
+                    <ion-label position="floating">Phone number:</ion-label>
+                    <ion-input type="number" maxlength="9" minlength="9"
+                               [(ngModel)]="registerData.phone"
+                               formControlName="phone"
+                               [class.error1]="!RegisterForm.controls.phone.valid && RegisterForm.controls.phone.dirty"></ion-input>
+                    <h3 slot="start">+249</h3>
+                </ion-item>
 
-            <ion-item>
-                <ion-label position="floating">Phone</ion-label>
-                <ion-input [(ngModel)]="registerData.phone" max="20" min="6" type="text"></ion-input>
-            </ion-item>
+                <ion-item no-lines
+                          *ngIf="( RegisterForm.get('phone').hasError('minlength') || RegisterForm.get('phone').hasError('maxlength') ||RegisterForm.get('phone').hasError('pattern') ||RegisterForm.get('phone').hasError('required') ) && RegisterForm.get('phone').touched">
+                    <div class="error"
+                         *ngIf="RegisterForm.get('phone').hasError('phone') && RegisterForm.get('phone').touched">
+                        please enter phone number
+                    </div>
+                    <div class="error"
+                         *ngIf="RegisterForm.get('phone').hasError('minlength') && RegisterForm.get('phone').touched">
+                        9 number is min for phone number
+                    </div>
+                    <div class="error"
+                         *ngIf="RegisterForm.get('phone').hasError('maxlength') && RegisterForm.get('phone').touched">
+                        9 number is max for phone number
+                    </div>
+                    <div class="error"
+                         *ngIf="RegisterForm.get('phone').hasError('pattern') && RegisterForm.get('phone').touched">
+                        Just numbers, starting with a (1 or 9)
+                    </div>
+                </ion-item>
 
-            <ion-item>
-                <ion-label position="floating">Password</ion-label>
-                <ion-input [(ngModel)]="registerData.password" [type]="showPass? 'text': 'password'"
-                           placeholder="Password"></ion-input>
-                <ion-icon (click)="showPassword()" [name]="passIcon" slot="end"></ion-icon>
-            </ion-item>
 
+                <ion-item>
+                    <ion-input [(ngModel)]="registerData.password" [type]="showPass? 'text': 'password'"
+                               placeholder="Password"
+                               formControlName="password"
+                               [class.error1]="!RegisterForm.controls.password.valid && RegisterForm.controls.password.dirty"></ion-input>
+                    <ion-icon (click)="showPassword()" [name]="passIcon" slot="end"></ion-icon>
+                </ion-item>
 
-            <ion-button (click)="userRegister()" expand="block">Registration</ion-button>
+                <ion-item no-lines
+                          *ngIf="( RegisterForm.get('password').hasError('minlength') || RegisterForm.get('password').hasError('maxlength') ||RegisterForm.get('password').hasError('pattern') ||RegisterForm.get('password').hasError('required') ) && RegisterForm.get('password').touched">
+                    <div class="error"
+                         *ngIf="RegisterForm.get('password').hasError('password') && RegisterForm.get('password').touched">
+                        please enter password
+                    </div>
+                    <div class="error"
+                         *ngIf="RegisterForm.get('password').hasError('minlength') && RegisterForm.get('password').touched">
+                        6 char is min character for password
+                    </div>
+                    <div class="error"
+                         *ngIf="RegisterForm.get('password').hasError('maxlength') && RegisterForm.get('password').touched">
+                        30 char is min character for password
+                    </div>
+                    <div class="error"
+                         *ngIf="RegisterForm.get('password').hasError('pattern') && RegisterForm.get('password').touched">
+                    </div>
+                </ion-item>
 
+                <ion-button [disabled]="RegisterForm.invalid" type="submit" expand="block">Registration</ion-button>
+
+            </form>
         </ion-card-content>
 
-
-        <p class="ion-text-center" style="text-align: center;margin: 15%;">Do yo have a account?<a href="login"><b
+        <p class="ion-text-center" style="text-align: center;margin: 15%;">do yo have a account?<a
+                href="/login"><b
                 class="ion-text-center">Login Now</b></a></p>
-
     </ion-card>
+    <h2 *ngIf="fileUploader.queue.length">Your Select a image</h2>
+
+
 </ion-content>

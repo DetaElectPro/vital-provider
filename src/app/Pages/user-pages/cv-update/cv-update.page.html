@@ -32,7 +32,7 @@
         <ion-button expand="full" [disabled]="requestDataForm.invalid" type="submit">Update Cv file</ion-button>
     </form>
 
-    <ion-button [href]="userInfo?.employ?.cv" target="_blank" expand="block">
+    <ion-button [disabled]="!userInfo?.employ?.cv" [href]="userInfo?.employ?.cv" target="_blank" expand="block">
         <ion-icon name="document-attach"></ion-icon>
         Download your CV
     </ion-button>

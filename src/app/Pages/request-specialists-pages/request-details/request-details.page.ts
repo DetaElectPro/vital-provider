@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AlertController, LoadingController, ModalController, PopoverController} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController, PopoverController, ToastController} from '@ionic/angular';
 import {RequestsService} from '../../../Service/requests.service';
 import {Requests} from '../../../Models/requests';
 import {DoctorePage} from '../../user-pages/doctore/doctore.page';
@@ -49,7 +49,7 @@ export class RequestDetailsPage implements OnInit {
         public router: Router,
         private modalController: ModalController,
         public route: ActivatedRoute,
-        // private iab: InAppBrowser,
+        public toastController: ToastController,
         private requestServe: RequestsService,
         public popoverCtrl: PopoverController
     ) {
@@ -73,7 +73,7 @@ export class RequestDetailsPage implements OnInit {
             await loading.present();
             await this.requestServe.getRequestById(this.requestId)
                 .subscribe(res => {
-                    this.result = res;
+                    console.log(this.result = res);
                     this.request = this.result.data;
                     loading.dismiss();
                 }, err => {
@@ -113,6 +113,7 @@ export class RequestDetailsPage implements OnInit {
     async cancelRequest() {
         const loading = this.loadingController.create({
             message: 'Please wait...',
+            spinner: 'bubbles',
             translucent: true,
         });
         (await loading).present();
@@ -121,15 +122,17 @@ export class RequestDetailsPage implements OnInit {
                     (await loading).dismiss();
                     this.acceptRes = res;
                     if (this.acceptRes.accept) {
-                        alert('ok');
+                        this.presentToast('request cancel');
                     } else {
-                        alert('error');
+                        this.errorToast('server error try again');
                     }
 
                 },
                 async error => {
                     (await loading).dismiss();
                     this.acceptRes = error;
+                    this.errorToast('server error try again');
+
                     console.log(this.acceptRes);
                 }
             );
@@ -206,16 +209,6 @@ export class RequestDetailsPage implements OnInit {
         return await modal.present();
     }
 
-    // openPdf(url) {
-    //     const browser = this.iab.create(url);
-    //
-    //     browser.on('loadstop').subscribe(event => {
-    //         browser.insertCSS({code: 'body{color: red;'});
-    //     });
-    //
-    //     browser.close();
-    // }
-
     async requestDone(ev: any) {
         const popover = await this.popoverCtrl.create({
             component: FinishRequestComponent,
@@ -240,5 +233,54 @@ export class RequestDetailsPage implements OnInit {
             console.log('Async operation has ended');
             event.target.complete();
         }, 2000);
+    }
+
+    async userRequestCancel() {
+        const loading = this.loadingController.create({
+            message: 'Please wait...',
+            spinner: 'bubbles',
+            translucent: true,
+        });
+        (await loading).present();
+        this.requestServe.cancelRequestByAdminToUser(this.requestId)
+            .subscribe(async res => {
+                    (await loading).dismiss();
+                    this.acceptRes = res;
+                    if (this.acceptRes.accept) {
+                        this.presentToast('request cancel');
+                    } else {
+                        this.errorToast('server error try again');
+                    }
+
+                },
+                async error => {
+                    (await loading).dismiss();
+                    this.acceptRes = error;
+                    this.errorToast('server error try again');
+
+                    console.log(this.acceptRes);
+                }
+            );
+    }
+
+
+    async presentToast(messge) {
+        const toast = await this.toastController.create({
+            message: messge,
+            duration: 3000,
+            color: 'primary',
+            position: 'middle'
+        });
+        toast.present();
+    }
+
+    async errorToast(messge) {
+        const toast = await this.toastController.create({
+            message: messge,
+            duration: 3000,
+            color: 'danger',
+            position: 'middle'
+        });
+        toast.present();
     }
 }

@@ -27,9 +27,9 @@
 
     <ion-grid>
         <ion-row>
-            <ion-col>Title</ion-col>
-            <ion-col>Status</ion-col>
-            <ion-col>Date</ion-col>
+            <ion-col class="bgcolor">Title</ion-col>
+            <ion-col class="bgcolor">Status</ion-col>
+            <ion-col class="bgcolor">Date</ion-col>
         </ion-row>
         <ion-row *ngFor="let item of historyData">
             <ion-col routerLink="/request-details/{{item.id}}">{{item.name}}</ion-col>
@@ -42,6 +42,8 @@
             </ion-col>
             <ion-col *ngIf="item.status ==3">
                 <ion-button color="success" size="small">In progress</ion-button>
+            </ion-col>   <ion-col *ngIf="item.status ==4">
+                <ion-button color="danger" size="small">Cancel</ion-button>
             </ion-col>
             <ion-col *ngIf="item.status ==6">
                 <ion-button color="secondary" size="small">Finished</ion-button>

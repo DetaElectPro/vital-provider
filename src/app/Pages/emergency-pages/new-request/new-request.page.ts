@@ -30,6 +30,7 @@ export class NewRequestPage implements OnInit {
             message: 'Please wait...',
             spinner: 'dots'
         });
+        await loading.present();
         this.emergencyServ.addEmergency(this.requestData)
             .subscribe(async res => {
                     await loading.dismiss();

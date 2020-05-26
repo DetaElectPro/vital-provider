@@ -62,6 +62,10 @@ export class RequestsService {
         return this.http.get(`${this.Url}cancelRequestByAdmin/${id}`);
     }
 
+    public cancelRequestByAdminToUser(id) {
+        return this.http.get(`${this.Url}cancelRequestByAdminToUser/${id}`);
+    }
+
     public acceptRequestByAdminAndDone(id, data) {
         return this.http.post(`${this.Url}acceptRequestAndDone/${id}`, data);
     }

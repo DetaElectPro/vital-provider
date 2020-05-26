@@ -25,13 +25,13 @@ export class HomePage implements OnInit {
     }
 
     ngOnInit() {
-        this.storage.get('userInfo')
-            .then(res => {
-                this.userInfo = res;
-            })
-            .catch(err => {
-                console.log(err);
-            });
+        // this.storage.get('userInfo')
+        //     .then(res => {
+        //         this.userInfo = res;
+        //     })
+        //     .catch(err => {
+        //         console.log(err);
+        //     });
         this.getDashboardData();
         this.updateFcmToken();
     }
@@ -56,7 +56,9 @@ export class HomePage implements OnInit {
         };
         this.userServ.updateFcmToken(data)
             .subscribe(response => {
-                // console.log('res: ', response);
+                this.userInfo = response;
+                this.userInfo = this.userInfo.user;
+                console.log('res: ', response);
                 // if (this.response.status === true) {
                 // } else {
                 //     alert('filed');
@@ -66,14 +68,14 @@ export class HomePage implements OnInit {
             });
     }
 
-
-    slide_next() {
-        this.slide3.slideNext();
-    }
-
-    slide_prev() {
-        this.slide3.slidePrev();
-    }
+    //
+    // slide_next() {
+    //     this.slide3.slideNext();
+    // }
+    //
+    // slide_prev() {
+    //     this.slide3.slidePrev();
+    // }
 
     async ambulanceActionSheet() {
         const actionSheet = await this.actionSheetController.create({
@@ -146,6 +148,13 @@ export class HomePage implements OnInit {
         const actionSheet = await this.actionSheetController.create({
             header: 'Requests Services',
             buttons: [{
+                text: 'new requests',
+                icon: 'list-circle-outline',
+                handler: () => {
+                    this.router.navigate(['/emergency-request']);
+                }
+            },
+                {
                 text: 'Browse new requests',
                 icon: 'list-circle-outline',
                 handler: () => {
@@ -155,15 +164,13 @@ export class HomePage implements OnInit {
                 text: 'History',
                 icon: 'document-attach-outline',
                 handler: () => {
-                    // this.router.navigate(['/emergency-pages-history']);
-                    alert('available soon');
+                    this.router.navigate(['/emergency-pages-history']);
                 }
             }, {
                 text: 'Cancel',
                 icon: 'close',
                 role: 'cancel',
                 handler: () => {
-                    console.log('Cancel clicked');
                 }
             }]
         });

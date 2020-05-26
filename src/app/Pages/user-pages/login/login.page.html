@@ -17,24 +17,69 @@
 
     <ion-card>
         <ion-card-content>
-            <ion-item>
-                <ion-label position="floating">Phone</ion-label>
-                <ion-input [(ngModel)]="loginData.phone" max="20" min="6" type="text"></ion-input>
-            </ion-item>
+            <form novalidate (ngSubmit)="userLogin()" [formGroup]="LoginForm">
 
-            <ion-item>
-                <ion-input [(ngModel)]="loginData.password" [type]="showPass? 'text': 'password'"
-                           placeholder="Password"></ion-input>
-                <ion-icon (click)="showPassword()" [name]="passIcon" slot="end"></ion-icon>
-            </ion-item>
+                <ion-item>
+                    <h3 slot="start">+249</h3>
+                    <ion-label position="floating">Phone number:</ion-label>
+                    <ion-input type="number" maxlength="9" minlength="9"
+                               [(ngModel)]="loginData.phone"
+                               formControlName="phone"
+                               [class.error1]="!LoginForm.controls.phone.valid && LoginForm.controls.phone.dirty"></ion-input>
+                </ion-item>
+
+                <ion-item no-lines
+                          *ngIf="( LoginForm.get('phone').hasError('minlength') || LoginForm.get('phone').hasError('maxlength') ||LoginForm.get('phone').hasError('pattern') ||LoginForm.get('phone').hasError('required') ) && LoginForm.get('phone').touched">
+                    <div class="error"
+                         *ngIf="LoginForm.get('phone').hasError('phone') && LoginForm.get('phone').touched">
+                        please enter phone number
+                    </div>
+                    <div class="error"
+                         *ngIf="LoginForm.get('phone').hasError('minlength') && LoginForm.get('phone').touched">
+                        9 number is min for phone number
+                    </div>
+                    <div class="error"
+                         *ngIf="LoginForm.get('phone').hasError('maxlength') && LoginForm.get('phone').touched">
+                        9 number is max for phone number
+                    </div>
+                    <div class="error"
+                         *ngIf="LoginForm.get('phone').hasError('pattern') && LoginForm.get('phone').touched">
+                        Just numbers, starting with a (1 or 9)
+                    </div>
+                </ion-item>
 
 
-            <!-- <ion-item>
-                <ion-label position="floating">Password</ion-label>
-                <ion-input [(ngModel)]="loginData.password" max="20" min="6" type="password"></ion-input>
-            </ion-item> -->
+                <ion-item>
+                    <ion-input [(ngModel)]="loginData.password" [type]="showPass? 'text': 'password'"
+                               placeholder="Password"
+                               formControlName="password"
+                               [class.error1]="!LoginForm.controls.password.valid && LoginForm.controls.password.dirty"></ion-input>
+                    <ion-icon (click)="showPassword()" [name]="passIcon" slot="end"></ion-icon>
+                </ion-item>
 
-            <ion-button (click)="userLogin()" expand="block">Login</ion-button>
+                <ion-item no-lines
+                          *ngIf="( LoginForm.get('password').hasError('minlength') || LoginForm.get('password').hasError('maxlength') ||LoginForm.get('password').hasError('pattern') ||LoginForm.get('password').hasError('required') ) && LoginForm.get('password').touched">
+                    <div class="error"
+                         *ngIf="LoginForm.get('password').hasError('password') && LoginForm.get('password').touched">
+                        please enter password
+                    </div>
+                    <div class="error"
+                         *ngIf="LoginForm.get('password').hasError('minlength') && LoginForm.get('password').touched">
+                        6 char is min character for password
+                    </div>
+                    <div class="error"
+                         *ngIf="LoginForm.get('password').hasError('maxlength') && LoginForm.get('password').touched">
+                        30 char is min character for password
+                    </div>
+                    <div class="error"
+                         *ngIf="LoginForm.get('password').hasError('pattern') && LoginForm.get('password').touched">
+                    </div>
+                </ion-item>
+
+                <ion-button [disabled]="LoginForm.invalid" type="submit" expand="block">Login</ion-button>
+
+            </form>
+
 
         </ion-card-content>
 
@@ -47,6 +92,6 @@
 
     </ion-card>
 
-    <p class="ion-text-center" style="color: red"> V 1.1</p>
+    <p class="ion-text-center" style="color: red"> V 1.2</p>
 
 </ion-content>

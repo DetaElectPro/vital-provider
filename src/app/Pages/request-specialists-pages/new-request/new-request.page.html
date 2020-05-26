@@ -31,6 +31,18 @@
                 </ion-input>
             </ion-item>
 
+            <ion-item no-lines
+                      *ngIf="( requestDataForm.get('name').hasError('minlength') ||requestDataForm.get('name').hasError('required') ) && requestDataForm.get('name').touched">
+                <div class="error"
+                     *ngIf="requestDataForm.get('name').hasError('name') && requestDataForm.get('name').touched">
+                    please enter Hospital name
+                </div>
+
+                <div class="error"
+                     *ngIf="requestDataForm.get('name').hasError('minlength') && requestDataForm.get('name').touched">
+                    6 char is min character for name
+                </div>
+            </ion-item>
 
             <ion-item>
                 <ion-label color="primary">Start at</ion-label>

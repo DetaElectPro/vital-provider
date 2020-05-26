@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { NewRequestModel } from '../../../Models/new-request';
-import { MedicalBoard } from '../../../Models/medical-board';
-import { IonicSelectableComponent } from 'ionic-selectable';
-import { AuthService } from '../../../Service/auth.service';
-import { Router } from '@angular/router';
-import { LoadingController, ModalController, ToastController } from '@ionic/angular';
-import { MapPage } from '../../map/map.page';
-import { RequestsService } from '../../../Service/requests.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { formatDate } from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {NewRequestModel} from '../../../Models/new-request';
+import {IonicSelectableComponent} from 'ionic-selectable';
+import {AuthService} from '../../../Service/auth.service';
+import {Router} from '@angular/router';
+import {AlertController, LoadingController, ModalController, ToastController} from '@ionic/angular';
+import {MapPage} from '../../map/map.page';
+import {RequestsService} from '../../../Service/requests.service';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {formatDate} from '@angular/common';
 
 @Component({
     selector: 'app-new-request',
@@ -31,15 +30,6 @@ export class NewRequestPage implements OnInit {
 
     };
     requestDataForm: FormGroup;
-    MedicalBoard: MedicalBoard = {
-        address: '',
-        birth_of_date: '',
-        graduation_date: '',
-        medical_field_id: null,
-        medical_registration_number: '',
-        registration_date: '',
-        years_of_experience: null
-    };
     specialtiesList: any;
     dataReturned: any;
     errorMessage: any;
@@ -51,10 +41,11 @@ export class NewRequestPage implements OnInit {
         private requestServ: RequestsService,
         private router: Router,
         public toastController: ToastController,
+        public alertController: AlertController,
         private loadingController: LoadingController,
     ) {
         this.requestDataForm = new FormGroup({
-            name: new FormControl('', [Validators.required, Validators.minLength(1)]),
+            name: new FormControl('', [Validators.required, Validators.minLength(6)]),
             end_time: new FormControl('', [Validators.required, Validators.minLength(1)]),
             start_time: new FormControl('', [Validators.required, Validators.minLength(1)]),
             number_of_hour: new FormControl('', [Validators.required, Validators.minLength(1)]),
@@ -78,10 +69,10 @@ export class NewRequestPage implements OnInit {
         (await loading).present();
         this.medicalServ.medicalFiledService()
             .subscribe(async data => {
-                this.specialtiesList = data;
-                this.specialtiesList = this.specialtiesList.data;
-                (await loading).dismiss();
-            },
+                    this.specialtiesList = data;
+                    this.specialtiesList = this.specialtiesList.data;
+                    (await loading).dismiss();
+                },
                 async err => {
                     console.log(err);
                     (await loading).dismiss();
@@ -116,43 +107,59 @@ export class NewRequestPage implements OnInit {
     }
 
     async sendRequest() {
-        const loading = this.loadingController.create({
-            message: 'Please wait...',
-            translucent: true,
-        });
-        (await loading).present();
-        this.requestData.longitude = this.dataReturned.lng;
-        this.requestData.latitude = this.dataReturned.lat;
-        this.requestData.address = this.dataReturned.address;
-        this.requestData.start_time = formatDate(this.requestData.start_time, 'yyyy-MM-dd', 'en_US');
-        this.requestData.end_time = formatDate(this.requestData.end_time, 'yyyy-MM-dd', 'en_US');
-        this.requestServ.createRequest(this.requestData)
-            .subscribe(async res => {
-                (await loading).dismiss();
-                console.log('response: ', this.requrstResult = res);
-                if (this.requrstResult.success) {
-                    this.presentToast(this.requrstResult.message);
-                    this.router.navigate(['/history']);
-                } else {
-                    this.presentToast(this.requrstResult.message);
-                }
+        if (!this.requestData.address) {
+            this.errorAlert('please pick location and address');
+        } else {
+            const loading = this.loadingController.create({
+                message: 'Please wait...',
+                translucent: true,
+                spinner: 'bubbles'
+            });
+            (await loading).present();
+            this.requestData.longitude = this.dataReturned.lng;
+            this.requestData.latitude = this.dataReturned.lat;
+            this.requestData.address = this.dataReturned.address;
+            this.requestData.start_time = formatDate(this.requestData.start_time, 'yyyy-MM-dd', 'en_US');
+            this.requestData.end_time = formatDate(this.requestData.end_time, 'yyyy-MM-dd', 'en_US');
+            this.requestServ.createRequest(this.requestData)
+                .subscribe(async res => {
+                        (await loading).dismiss();
+                        console.log('response: ', this.requrstResult = res);
+                        if (this.requrstResult.success) {
+                            this.presentToast(this.requrstResult.message);
+                            this.router.navigate(['/history']);
+                        } else {
+                            this.presentToast(this.requrstResult.message);
+                        }
 
-            },
-                async error1 => {
-                    (await loading).dismiss();
-                    console.log('Error: ', this.errorMessage = error1);
-                    this.requrstResult('error try again');
-                });
+                    },
+                    async error1 => {
+                        (await loading).dismiss();
+                        console.log('Error: ', this.errorMessage = error1);
+                        this.requrstResult('error try again');
+                    });
+        }
     }
 
-
-    async presentToast(messge) {
+    async presentToast(messageRes) {
         const toast = await this.toastController.create({
-            message: messge,
+            message: messageRes,
             duration: 3000,
             color: 'primary',
             position: 'middle'
         });
         toast.present();
+    }
+
+    async errorAlert(messageRes) {
+        const alert = await this.alertController.create({
+            header: 'Alert',
+            cssClass: 'error-alert',
+            message: messageRes,
+            animated: true,
+            buttons: ['OK']
+        });
+
+        await alert.present();
     }
 }

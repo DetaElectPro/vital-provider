@@ -47,6 +47,12 @@ ion-toolbar {
 //  font-size: small;
 //}
 
+.error-alert .alert-wrapper {
+  background: #E91E63;
+}
+.error-alert .alert-message {
+  color: #FFFFFF;
+}
 
 $transparent: transparent;
 
