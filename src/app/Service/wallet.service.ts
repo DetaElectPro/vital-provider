@@ -1,14 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {timeout} from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 export class WalletService {
 
-    // Url = 'http://localhost:8000/api/';
-    // Url = 'http://192.168.2.6:8000/api/';
     Url = 'https://api.vital-helth.com/api/';
 
     constructor(
@@ -20,7 +19,9 @@ export class WalletService {
      * Return my Point as observable
      */
     public getBalanceService(): Observable<any> {
-        return this.http.get(`${this.Url}wallets`);
+        return this.http.get(`${this.Url}wallets`).pipe(
+            timeout(40000)
+        );
     }
 
 }

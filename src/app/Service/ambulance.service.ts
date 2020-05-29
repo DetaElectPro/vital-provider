@@ -1,39 +1,41 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {timeout} from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class AmbulanceService {
-  Url = 'https://api.vital-helth.com/api/';
-  token = `Bearer ${localStorage.getItem('token')}`;
-  myHeaders: any;
+    Url = 'https://api.vital-helth.com/api/';
 
-  constructor(
-      private http: HttpClient,
-  ) {
-    this.myHeaders = {
-      headers: new HttpHeaders()
-          .set('Content-Type', 'application/json')
-          .set('Authorization', this.token)
-    };
-  }
+    constructor(
+        private http: HttpClient,
+    ) {
+    }
 
-  public ambulanceRequestService(data) {
-    return this.http.post(`${this.Url}ambulances`, data);
-  }
+    public ambulanceRequestService(data) {
+        return this.http.post(`${this.Url}ambulances`, data).pipe(
+            timeout(40000)
+        );
+    }
 
-  public getAmbulanceService(page): Observable<any> {
-    return this.http.get(`${this.Url}ambulances?page=${page}`);
-  }
+    public getAmbulanceService(page): Observable<any> {
+        return this.http.get(`${this.Url}ambulances?page=${page}`).pipe(
+            timeout(40000)
+        );
+    }
 
-  public getAmbulanceByIdService(id): Observable<any> {
-    return this.http.get(`${this.Url}ambulances/${id}`);
-  }
+    public getAmbulanceByIdService(id): Observable<any> {
+        return this.http.get(`${this.Url}ambulances/${id}`).pipe(
+            timeout(40000)
+        );
+    }
 
-  public cancelRequestByUser(id): Observable<any> {
-    return this.http.delete(`${this.Url}ambulances/${id}`);
-  }
+    public cancelRequestByUser(id): Observable<any> {
+        return this.http.delete(`${this.Url}ambulances/${id}`).pipe(
+            timeout(40000)
+        );
+    }
 }

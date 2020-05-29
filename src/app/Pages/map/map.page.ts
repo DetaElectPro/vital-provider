@@ -12,7 +12,7 @@ export class MapPage implements OnInit {
     map: Map;
     myLatLng: any;
     newMarker: any;
-    locData = {address: '', lat: 0.0, lng: 0.0};
+    locData = {address: null, lat: 0.0, lng: 0.0};
 
     constructor(
         private modalController: ModalController,
@@ -46,7 +46,7 @@ export class MapPage implements OnInit {
         });
 
         // In setView add latLng and zoom
-        this.map = new Map('mapId').setView([15.59, 32.54], 12);
+        this.map = new Map('mapId').setView([15.59, 32.54], 20);
         tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: 'DetaTech',
         }).addTo(this.map);

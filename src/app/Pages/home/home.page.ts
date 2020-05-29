@@ -1,8 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../Service/auth.service';
 import {ActionSheetController} from '@ionic/angular';
 import {Router} from '@angular/router';
-import {Storage} from '@ionic/storage';
 
 @Component({
     selector: 'app-tab1',
@@ -10,14 +9,13 @@ import {Storage} from '@ionic/storage';
     styleUrls: ['home.page.scss']
 })
 export class HomePage implements OnInit {
-    @ViewChild('slide', {static: false}) slide3: any;
+    // @ViewChild('slide', {static: false}) slide3: any;
 
     response: any;
-    dateSlide: any;
     userInfo: any;
 
     constructor(
-        private storage: Storage,
+        // private storage: Storage,
         private userServ: AuthService,
         private router: Router,
         public actionSheetController: ActionSheetController
@@ -58,7 +56,6 @@ export class HomePage implements OnInit {
             .subscribe(response => {
                 this.userInfo = response;
                 this.userInfo = this.userInfo.user;
-                console.log('res: ', response);
                 // if (this.response.status === true) {
                 // } else {
                 //     alert('filed');

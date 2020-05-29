@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Platform} from '@ionic/angular';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
-import {catchError, tap} from 'rxjs/operators';
+import {catchError, tap, timeout} from 'rxjs/operators';
 
 const TOKEN_KEY = 'token';
 
@@ -112,25 +112,12 @@ export class AuthService {
         });
     }
 
-    registerServes(userData) {
-        return new Promise((resolve, reject) => {
-            this.http.post(this.url + 'auth/register', JSON.stringify(userData), {
-                headers: new HttpHeaders().set('Content-Type', 'application/json'),
-            })
-                .subscribe(res => {
-                    resolve(res);
-                }, (err) => {
-                    reject(err);
-                });
-        });
-    }
-
-
     medicalBoardService(boardData): Observable<any> {
         return this.http.post<any>(this.url + 'employs', boardData)
             .pipe(
                 tap(_ => this.log('fetched MedicalBord')),
-                catchError(this.handleError('postMedicalBord', []))
+                catchError(this.handleError('postMedicalBord', [])),
+                timeout(10)
             );
     }
 
@@ -139,7 +126,9 @@ export class AuthService {
      * Return list of Requests as observable
      */
     public medicalFiledService(): Observable<any> {
-        return this.http.get(this.url + 'medical_specialties');
+        return this.http.get(this.url + 'medical_specialties').pipe(
+            timeout(40000)
+        );
     }
 
     public checkUserService(): Observable<any> {

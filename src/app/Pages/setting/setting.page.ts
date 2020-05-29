@@ -40,7 +40,7 @@ export class SettingPage implements OnInit {
     ngOnInit() {
         this.storage.get('userInfo')
             .then(res => {
-                console.log('user: ', this.userInfo = res);
+                this.userInfo = res;
             })
             .catch(erro => {
                 alert(erro);

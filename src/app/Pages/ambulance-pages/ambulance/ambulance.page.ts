@@ -37,7 +37,7 @@ export class AmbulancePage implements OnInit {
 
     leafletMap() {
         // In setView add latLng and zoom
-        this.map = new Map('mapId').setView([15.59, 32.54], 13);
+        this.map = new Map('mapId').setView([15.59, 32.54], 20);
         tileLayer('https://{s}.tile.osm.org/{z}/{x}/{y}.png', {
             attribution: 'DetaTech',
         }).addTo(this.map);
@@ -76,6 +76,8 @@ export class AmbulancePage implements OnInit {
     async sendRequest() {
         const loading = await this.loadingController.create({
             message: 'Please wait...',
+            animated: true,
+            spinner: 'bubbles'
         });
         await loading.present();
         this.requesServ.ambulanceRequestService(this.locData)

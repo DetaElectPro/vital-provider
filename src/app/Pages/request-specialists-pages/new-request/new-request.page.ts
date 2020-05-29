@@ -18,15 +18,15 @@ export class NewRequestPage implements OnInit {
 
     requrstResult: any;
     requestData: NewRequestModel = {
-        address: '',
-        end_time: '',
+        address: null,
+        end_time: null,
         latitude: null,
         longitude: null,
         medical_id: null,
-        name: '',
+        name: null,
         number_of_hour: null,
         price: null,
-        start_time: ''
+        start_time: null
 
     };
     requestDataForm: FormGroup;
@@ -107,13 +107,14 @@ export class NewRequestPage implements OnInit {
     }
 
     async sendRequest() {
-        if (!this.requestData.address) {
+        if (this.requestData.address === null || this.requestData.address === '') {
             this.errorAlert('please pick location and address');
         } else {
             const loading = this.loadingController.create({
                 message: 'Please wait...',
                 translucent: true,
-                spinner: 'bubbles'
+                spinner: 'bubbles',
+                duration: 30
             });
             (await loading).present();
             this.requestData.longitude = this.dataReturned.lng;
